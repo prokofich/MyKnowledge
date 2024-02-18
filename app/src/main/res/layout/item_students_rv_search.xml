@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:id="@+id/id_item_students_rv_search"
+        android:layout_height="150dp"
+        android:layout_margin="10dp"
+        android:background="@drawable/background_tv_account"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/image_account"
+            app:layout_constraintEnd_toStartOf="@id/id_item_students_rv_search_tv_last_name"
+            android:id="@+id/id_item_students_rv_search_iv"
+            app:layout_constraintHeight_percent="0.6"
+            app:layout_constraintWidth_percent="0.25"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/id_item_students_rv_search_tv_status"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:id="@+id/id_item_students_rv_search_tv_status"
+            app:layout_constraintWidth_percent="0.25"
+            app:layout_constraintHeight_percent="0.2"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:text="Ученик"
+            android:background="@drawable/background_tv_predmet"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/id_item_students_rv_search_iv"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/id_item_students_rv_search_tv_last_name"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textStyle="bold|italic"
+            android:textSize="18sp"
+            android:background="@drawable/background_tv_name"
+            android:text="Прокофьев"
+            app:layout_constraintBottom_toTopOf="@id/id_item_students_rv_search_tv_first_name"
+            android:id="@+id/id_item_students_rv_search_tv_last_name"
+            app:layout_constraintWidth_percent="0.6"
+            app:layout_constraintHeight_percent="0.2"
+            app:layout_constraintStart_toEndOf="@id/id_item_students_rv_search_iv"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textStyle="bold|italic"
+            android:textSize="18sp"
+            android:background="@drawable/background_tv_name"
+            android:text="Никита"
+            app:layout_constraintBottom_toTopOf="@id/id_item_students_rv_search_tv_klass"
+            android:id="@+id/id_item_students_rv_search_tv_first_name"
+            app:layout_constraintWidth_percent="0.6"
+            app:layout_constraintHeight_percent="0.2"
+            app:layout_constraintStart_toEndOf="@id/id_item_students_rv_search_iv"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/id_item_students_rv_search_tv_last_name"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:background="@drawable/background_tv_predmet"
+            android:text="9 класс"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:id="@+id/id_item_students_rv_search_tv_klass"
+            app:layout_constraintWidth_percent="0.6"
+            app:layout_constraintHeight_percent="0.2"
+            app:layout_constraintStart_toEndOf="@id/id_item_students_rv_search_iv"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/id_item_students_rv_search_tv_first_name"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

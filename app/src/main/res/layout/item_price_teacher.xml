@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="140dp"
+        android:background="@drawable/background_tv_account"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_margin="5dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:textSize="15sp"
+            android:text="Название дисциплины:"
+            android:id="@+id/id_item_price_tv_title_name"
+            app:layout_constraintWidth_percent="0.5"
+            app:layout_constraintHeight_percent="0.25"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/id_item_price_tv_title_price"
+            app:layout_constraintBottom_toTopOf="@id/id_item_price_et_name"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <EditText
+            android:id="@+id/id_item_price_et_name"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:hint="дисциплина"
+            android:gravity="center"
+            android:textColorHint="#313331"
+            android:textColor="@color/white"
+            android:textStyle="bold|italic"
+            app:layout_constraintTop_toBottomOf="@id/id_item_price_tv_title_name"
+            app:layout_constraintWidth_percent="0.5"
+            app:layout_constraintHeight_percent="0.3"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/id_item_price_button_redact"
+            app:layout_constraintEnd_toStartOf="@id/id_item_price_et_price"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:textSize="15sp"
+            app:layout_constraintStart_toEndOf="@id/id_item_price_tv_title_name"
+            android:text="Цена(руб/час):"
+            android:id="@+id/id_item_price_tv_title_price"
+            app:layout_constraintWidth_percent="0.3"
+            app:layout_constraintHeight_percent="0.25"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/id_item_price_et_name"
+            app:layout_constraintEnd_toStartOf="@id/id_item_price_iv_delete"/>
+
+        <EditText
+            android:id="@+id/id_item_price_et_price"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:hint="цена"
+            android:gravity="center"
+            android:textColorHint="#313331"
+            android:textColor="@color/white"
+            android:textStyle="bold|italic"
+            app:layout_constraintTop_toBottomOf="@id/id_item_price_tv_title_name"
+            app:layout_constraintWidth_percent="0.3"
+            app:layout_constraintHeight_percent="0.3"
+            app:layout_constraintStart_toEndOf="@id/id_item_price_et_name"
+            app:layout_constraintBottom_toTopOf="@id/id_item_price_button_redact"
+            app:layout_constraintEnd_toStartOf="@id/id_item_price_iv_delete"/>
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/image_delete_2"
+            android:id="@+id/id_item_price_iv_delete"
+            app:layout_constraintWidth_percent="0.1"
+            app:layout_constraintHeight_percent="0.3"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toEndOf="@id/id_item_price_et_price"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:text="редактировать"
+            style="@style/LoginButtonMenuStyle"
+            app:layout_constraintTop_toBottomOf="@id/id_item_price_et_name"
+            android:id="@+id/id_item_price_button_redact"
+            app:layout_constraintWidth_percent="0.4"
+            app:layout_constraintHeight_percent="0.2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

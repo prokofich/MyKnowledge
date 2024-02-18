@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_host"
+    app:startDestination="@id/loginFragment">
+
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.my.knowledge.view.fragments.LoginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_loginFragment_to_registrationFragment"
+            app:destination="@id/registrationFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_teacherMenuFragment"
+            app:destination="@id/teacherMenuFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_studentMenuFragment"
+            app:destination="@id/studentMenuFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/registrationFragment"
+        android:name="com.my.knowledge.view.fragments.RegistrationFragment"
+        android:label="fragment_registration"
+        tools:layout="@layout/fragment_registration" >
+        <action
+            android:id="@+id/action_registrationFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_registrationFragment_to_teacherMenuFragment"
+            app:destination="@id/teacherMenuFragment" />
+        <action
+            android:id="@+id/action_registrationFragment_to_studentMenuFragment"
+            app:destination="@id/studentMenuFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/teacherMenuFragment"
+        android:name="com.my.knowledge.view.fragments.TeacherMenuFragment"
+        android:label="fragment_teacher_menu"
+        tools:layout="@layout/fragment_teacher_menu" >
+        <action
+            android:id="@+id/action_teacherMenuFragment_to_accountTeacherFragment"
+            app:destination="@id/accountTeacherFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/accountTeacherFragment"
+        android:name="com.my.knowledge.view.fragments.AccountTeacherFragment"
+        android:label="fragment_account_teacher"
+        tools:layout="@layout/fragment_account_teacher" >
+        <action
+            android:id="@+id/action_accountTeacherFragment_to_teacherMenuFragment"
+            app:destination="@id/teacherMenuFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/studentMenuFragment"
+        android:name="com.my.knowledge.view.fragments.StudentMenuFragment"
+        android:label="fragment_student_menu"
+        tools:layout="@layout/fragment_student_menu" />
+</navigation>

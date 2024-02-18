@@ -1,0 +1,360 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/image_doska_new"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".view.fragments.AccountTeacherFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:id="@+id/id_account_teacher_cs"
+        android:background="#3c9867"
+        app:layout_constraintWidth_percent="0.95"
+        app:layout_constraintHeight_percent="0.25"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/image_account"
+            app:layout_constraintEnd_toStartOf="@id/id_account_tv_last_name"
+            android:id="@+id/id_account_iv_photo"
+            app:layout_constraintHeight_percent="0.6"
+            app:layout_constraintWidth_percent="0.25"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/id_account_tv_status"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:text="Прокофьев"
+            android:textSize="25sp"
+            android:background="@drawable/background_tv_name"
+            app:layout_constraintBottom_toTopOf="@id/id_account_tv_first_name"
+            android:id="@+id/id_account_tv_last_name"
+            app:layout_constraintWidth_percent="0.55"
+            app:layout_constraintHeight_percent="0.25"
+            app:layout_constraintStart_toEndOf="@id/id_account_iv_photo"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:text="Никита"
+            android:textSize="25sp"
+            android:background="@drawable/background_tv_name"
+            app:layout_constraintBottom_toTopOf="@id/id_account_teacher_tv_redact"
+            android:id="@+id/id_account_tv_first_name"
+            app:layout_constraintWidth_percent="0.55"
+            app:layout_constraintHeight_percent="0.25"
+            app:layout_constraintStart_toEndOf="@id/id_account_iv_photo"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/id_account_tv_last_name"/>
+
+        <TextView
+            android:id="@+id/id_account_teacher_tv_redact"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:text="редактировать"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:textSize="15sp"
+            app:layout_constraintWidth_percent="0.3"
+            app:layout_constraintHeight_percent="0.15"
+            app:layout_constraintEnd_toEndOf="@id/id_account_tv_first_name"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/id_account_tv_first_name"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:text="Учитель"
+            android:textSize="20sp"
+            android:background="@drawable/background_tv_predmet"
+            android:id="@+id/id_account_tv_status"
+            app:layout_constraintHeight_percent="0.15"
+            app:layout_constraintStart_toStartOf="@id/id_account_iv_photo"
+            app:layout_constraintEnd_toEndOf="@id/id_account_iv_photo"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/id_account_iv_photo"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@id/id_account_teacher_cs"
+        app:layout_constraintBottom_toTopOf="@id/id_account_teacher_cs_exit">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="5dp"
+                android:background="@color/white"
+                app:layout_constraintTop_toTopOf="@id/id_account_teacher_tv_title_1"
+                app:layout_constraintBottom_toBottomOf="@id/id_account_teacher_tv_title_1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/id_account_teacher_tv_title_1"/>
+
+            <TextView
+                android:id="@+id/id_account_teacher_tv_title_1"
+                android:layout_width="0dp"
+                android:layout_height="30dp"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:text="О себе:"
+                android:textStyle="italic"
+                android:textSize="22sp"
+                android:layout_marginTop="10dp"
+                app:layout_constraintWidth_percent="0.2"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="5dp"
+                android:background="@color/white"
+                app:layout_constraintTop_toTopOf="@id/id_account_teacher_tv_title_1"
+                app:layout_constraintBottom_toBottomOf="@id/id_account_teacher_tv_title_1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/id_account_teacher_tv_title_1"/>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/id_account_teacher_cs_my_desc"
+                android:background="@drawable/background_cs_login_white"
+                android:layout_margin="10dp"
+                app:layout_constraintTop_toBottomOf="@id/id_account_teacher_tv_title_1">
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="15dp"
+                    android:layout_margin="10dp"
+                    android:gravity="center"
+                    android:textSize="15sp"
+                    android:hint="нажмите ИЗМЕНИТЬ,чтобы отредактировать текст"
+                    android:textStyle="italic|bold"
+                    android:textColor="@color/black"
+                    android:textColorHint="#313331"
+                    android:id="@+id/id_account_teacher_tv_my_desc"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:layout_height="wrap_content"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                android:layout_width="0dp"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:text="изменить"
+                android:layout_height="20dp"
+                android:textSize="17sp"
+                android:id="@+id/id_account_teacher_tv_redact1"
+                app:layout_constraintWidth_percent="0.3"
+                android:layout_marginEnd="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/id_account_teacher_cs_my_desc"/>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="5dp"
+                android:background="@color/white"
+                app:layout_constraintTop_toTopOf="@id/id_account_teacher_tv_title_2"
+                app:layout_constraintBottom_toBottomOf="@id/id_account_teacher_tv_title_2"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/id_account_teacher_tv_title_2"/>
+
+            <TextView
+                android:id="@+id/id_account_teacher_tv_title_2"
+                android:layout_width="0dp"
+                android:layout_height="30dp"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:text="Опыт работы:"
+                android:textStyle="italic"
+                android:textSize="22sp"
+                android:layout_marginTop="10dp"
+                app:layout_constraintWidth_percent="0.37"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/id_account_teacher_tv_redact1"/>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="5dp"
+                android:background="@color/white"
+                app:layout_constraintTop_toTopOf="@id/id_account_teacher_tv_title_2"
+                app:layout_constraintBottom_toBottomOf="@id/id_account_teacher_tv_title_2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/id_account_teacher_tv_title_2"/>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/id_account_teacher_cs_opit_raboti"
+                android:background="@drawable/background_cs_login_white"
+                android:layout_margin="10dp"
+                app:layout_constraintTop_toBottomOf="@id/id_account_teacher_tv_title_2">
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="15dp"
+                    android:layout_margin="10dp"
+                    android:gravity="center"
+                    android:textSize="15sp"
+                    android:hint="нажмите ИЗМЕНИТЬ,чтобы отредактировать текст"
+                    android:textStyle="italic|bold"
+                    android:textColor="@color/black"
+                    android:textColorHint="#313331"
+                    android:id="@+id/id_account_teacher_tv_opit_raboti"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:layout_height="wrap_content"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                android:layout_width="0dp"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:text="изменить"
+                android:layout_height="20dp"
+                android:textSize="17sp"
+                android:id="@+id/id_account_teacher_tv_redact2"
+                app:layout_constraintWidth_percent="0.3"
+                android:layout_marginEnd="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/id_account_teacher_cs_opit_raboti"/>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="5dp"
+                android:background="@color/white"
+                app:layout_constraintTop_toTopOf="@id/id_account_teacher_tv_title_3"
+                app:layout_constraintBottom_toBottomOf="@id/id_account_teacher_tv_title_3"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/id_account_teacher_tv_title_3"/>
+
+            <TextView
+                android:id="@+id/id_account_teacher_tv_title_3"
+                android:layout_width="0dp"
+                android:layout_height="30dp"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:text="Моё образование:"
+                android:textStyle="italic"
+                android:textSize="22sp"
+                android:layout_marginTop="10dp"
+                app:layout_constraintWidth_percent="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/id_account_teacher_tv_redact2"/>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="5dp"
+                android:background="@color/white"
+                app:layout_constraintTop_toTopOf="@id/id_account_teacher_tv_title_3"
+                app:layout_constraintBottom_toBottomOf="@id/id_account_teacher_tv_title_3"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/id_account_teacher_tv_title_3"/>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/id_account_teacher_cs_education"
+                android:background="@drawable/background_cs_login_white"
+                android:layout_margin="10dp"
+                app:layout_constraintTop_toBottomOf="@id/id_account_teacher_tv_title_3">
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="15dp"
+                    android:layout_margin="10dp"
+                    android:gravity="center"
+                    android:textSize="15sp"
+                    android:hint="нажмите ИЗМЕНИТЬ,чтобы отредактировать текст"
+                    android:textStyle="italic|bold"
+                    android:textColor="@color/black"
+                    android:textColorHint="#313331"
+                    android:id="@+id/id_account_teacher_tv_education"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:layout_height="wrap_content"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                android:layout_width="0dp"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:text="изменить"
+                android:layout_height="20dp"
+                android:textSize="17sp"
+                android:id="@+id/id_account_teacher_tv_redact3"
+                app:layout_constraintWidth_percent="0.3"
+                android:layout_marginEnd="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/id_account_teacher_cs_education"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="#3c9867"
+        android:id="@+id/id_account_teacher_cs_exit"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHeight_percent="0.07">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/id_account_teacher_button_back"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:text="назад"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:textSize="15sp"
+            style="@style/LoginButtonMenuStyle"
+            app:layout_constraintWidth_percent="0.3"
+            app:layout_constraintHeight_percent="0.8"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
