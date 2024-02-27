@@ -34,12 +34,10 @@ class AccountTeacherFragment : Fragment() {
         repository = Repository()
 
         val accountTeacherViewModel = ViewModelProvider(this)[AccountTeacherViewModel::class.java]
-
         accountTeacherViewModel.getMyInfoTeacher(sharedPreferences?.getUserId())
 
         accountTeacherViewModel.infoMyAccount.observe(viewLifecycleOwner){ data ->
             showMyInfo(data)
-            //repository?.showToast(data.toString(),requireContext())
         }
 
     }

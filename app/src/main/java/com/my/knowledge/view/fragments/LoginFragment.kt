@@ -40,8 +40,6 @@ class LoginFragment : Fragment() {
 
         val loginViewModel = ViewModelProvider(this)[LoginViewModel::class.java]
 
-        repository?.showToast(SharedPreferences(requireContext()).getUserId(),requireContext())
-
         // попытка входа в аккаунт
         binding?.idLoginButtonInput?.setOnClickListener {
             binding?.idLoginPb?.isVisible = true

@@ -38,7 +38,7 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginEnd="10sp"
-            style="@style/ButtonMenuStyle"
+            style="@style/LoginButtonMenuStyle"
             android:text="настройки"
             android:textColor="@color/white"
             android:textStyle="bold"
@@ -58,9 +58,9 @@
         android:layout_marginTop="10dp"
         android:id="@+id/id_menu_teacher_iv_star"
         android:layout_marginEnd="10dp"
-        android:background="@drawable/image_star"
-        app:layout_constraintWidth_percent="0.1"
-        app:layout_constraintHeight_percent="0.05"
+        android:background="@drawable/zvezda2"
+        app:layout_constraintWidth_percent="0.08"
+        app:layout_constraintHeight_percent="0.04"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/id_menu_teachers_cs_1"/>
 
@@ -103,15 +103,15 @@
                 android:layout_height="0dp"
                 android:id="@+id/id_menu_teacher_button_my_account"
                 android:text="профиль"
-                style="@style/ButtonMenuStyle"
-                android:textColor="@color/white"
+                style="@style/ButtonMenuNewStyle"
+                android:textColor="#246b45"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toStartOf="@id/id_menu_teacher_tv_my_account"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintWidth_percent="0.3"
-                app:layout_constraintHeight_percent="0.6"/>
+                app:layout_constraintHeight_percent="0.7"/>
 
             <TextView
                 android:layout_width="0dp"
@@ -146,16 +146,16 @@
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:id="@+id/id_menu_teacher_button_table"
-                style="@style/ButtonMenuStyle"
+                style="@style/ButtonMenuNewStyle"
                 android:text="расписание"
-                android:textColor="@color/white"
+                android:textColor="#246b45"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/id_menu_teacher_tv_table"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintWidth_percent="0.3"
-                app:layout_constraintHeight_percent="0.6"/>
+                app:layout_constraintHeight_percent="0.7"/>
 
             <TextView
                 android:layout_width="0dp"
@@ -190,16 +190,16 @@
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:id="@+id/id_menu_teacher_button_my_students"
-                style="@style/ButtonMenuStyle"
+                style="@style/ButtonMenuNewStyle"
                 android:text="ученики"
-                android:textColor="@color/white"
+                android:textColor="#246b45"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toStartOf="@id/id_menu_teacher_tv_my_students"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintWidth_percent="0.3"
-                app:layout_constraintHeight_percent="0.6"/>
+                app:layout_constraintHeight_percent="0.7"/>
 
             <TextView
                 android:layout_width="0dp"
@@ -234,16 +234,16 @@
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:id="@+id/id_menu_teacher_button_price_list"
-                style="@style/ButtonMenuStyle"
+                style="@style/ButtonMenuNewStyle"
                 android:text="прайс-лист"
-                android:textColor="@color/white"
+                android:textColor="#246b45"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/id_menu_teacher_tv_price_list"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintWidth_percent="0.3"
-                app:layout_constraintHeight_percent="0.6"/>
+                app:layout_constraintHeight_percent="0.7"/>
 
             <TextView
                 android:layout_width="0dp"
@@ -278,16 +278,16 @@
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:id="@+id/id_menu_teacher_button_search"
-                style="@style/ButtonMenuStyle"
+                style="@style/ButtonMenuNewStyle"
                 android:text="поиск"
-                android:textColor="@color/white"
+                android:textColor="#246b45"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toStartOf="@id/id_menu_teacher_tv_search"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintWidth_percent="0.3"
-                app:layout_constraintHeight_percent="0.6"/>
+                app:layout_constraintHeight_percent="0.7"/>
 
             <TextView
                 android:layout_width="0dp"
@@ -322,16 +322,16 @@
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:id="@+id/id_menu_teacher_button_news"
-                style="@style/ButtonMenuStyle"
+                style="@style/ButtonMenuNewStyle"
                 android:text="новости"
-                android:textColor="@color/white"
+                android:textColor="#246b45"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/id_menu_teacher_tv_news"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintWidth_percent="0.3"
-                app:layout_constraintHeight_percent="0.6"/>
+                app:layout_constraintHeight_percent="0.7"/>
 
             <TextView
                 android:layout_width="0dp"
@@ -366,16 +366,16 @@
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:id="@+id/id_menu_teacher_button_notes"
-                style="@style/ButtonMenuStyle"
+                style="@style/ButtonMenuNewStyle"
                 android:text="заметки"
-                android:textColor="@color/white"
+                android:textColor="#246b45"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toStartOf="@id/id_menu_teacher_tv_notes"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintWidth_percent="0.3"
-                app:layout_constraintHeight_percent="0.6"/>
+                app:layout_constraintHeight_percent="0.7"/>
 
             <TextView
                 android:layout_width="0dp"
@@ -401,7 +401,7 @@
             android:id="@+id/id_menu_teacher_cs_10"
             android:background="@drawable/background_cs_menu_white"
             app:layout_constraintHeight_percent="0.1"
-            app:layout_constraintBottom_toTopOf="@id/id_menu_teacher_cs_9"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/id_menu_teacher_cs_8">
@@ -410,16 +410,16 @@
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:id="@+id/id_menu_teacher_button_games"
-                style="@style/ButtonMenuStyle"
+                style="@style/ButtonMenuNewStyle"
                 android:text="игры"
-                android:textColor="@color/white"
+                android:textColor="#246b45"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/id_menu_teacher_tv_games"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintWidth_percent="0.3"
-                app:layout_constraintHeight_percent="0.6"/>
+                app:layout_constraintHeight_percent="0.7"/>
 
             <TextView
                 android:layout_width="0dp"
@@ -439,33 +439,7 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginBottom="5dp"
-            android:id="@+id/id_menu_teacher_cs_9"
-            app:layout_constraintWidth_percent="0.4"
-            app:layout_constraintHeight_percent="0.08"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent">
 
-                <androidx.appcompat.widget.AppCompatButton
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    style="@style/ButtonMenuStyle"
-                    android:text="выйти"
-                    android:textStyle="bold"
-                    android:textColor="@color/white"
-                    android:id="@+id/id_menu_teacher_button_exit"
-                    app:layout_constraintHeight_percent="0.8"
-                    app:layout_constraintWidth_percent="0.9"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"/>
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

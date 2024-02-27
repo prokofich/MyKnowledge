@@ -23,6 +23,7 @@ class SplashFragment : Fragment() {
     private var binding: FragmentSplashBinding? = null
     private var sharedPreferences:SharedPreferences? = null
     private var repository:Repository? = null
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
