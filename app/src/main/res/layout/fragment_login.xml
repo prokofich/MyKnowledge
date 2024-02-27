@@ -8,7 +8,7 @@
     tools:context=".view.fragments.LoginFragment">
 
     <TextView
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_marginTop="20dp"
         android:text="My Knowledge"
@@ -17,7 +17,6 @@
         android:textColor="@color/white"
         android:fontFamily="@font/architects_daughter"
         android:id="@+id/id_login_tv_title"
-        app:layout_constraintWidth_percent="0.9"
         app:layout_constraintHeight_percent="0.12"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -25,7 +24,7 @@
 
     <View
         android:layout_width="0dp"
-        android:layout_height="4dp"
+        android:layout_height="3dp"
         android:background="@color/white"
         app:layout_constraintStart_toStartOf="@id/id_login_tv_title"
         app:layout_constraintEnd_toEndOf="@id/id_login_tv_title"
@@ -37,7 +36,7 @@
         android:background="@drawable/background_cs_login_white"
         android:id="@+id/id_login_cs_input_data"
         app:layout_constraintWidth_percent="0.8"
-        app:layout_constraintHeight_percent="0.4"
+        app:layout_constraintHeight_percent="0.3"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -48,13 +47,14 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:gravity="center"
+            android:backgroundTint="@color/white"
             android:textStyle="bold|italic"
             android:hint="введите вашу почту"
             android:textColor="@color/white"
             android:textColorHint="#313331"
             app:layout_constraintBottom_toTopOf="@id/id_login_et_password"
             app:layout_constraintWidth_percent="0.9"
-            app:layout_constraintHeight_percent="0.2"
+            app:layout_constraintHeight_percent="0.3"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>
@@ -65,58 +65,25 @@
             android:layout_height="0dp"
             android:textColor="@color/white"
             android:gravity="center"
+            android:backgroundTint="@color/white"
             android:textStyle="italic|bold"
             android:hint="введите ваш пароль"
             android:inputType="textPassword"
             android:textColorHint="#313331"
-            app:layout_constraintBottom_toTopOf="@id/id_login_rg"
+            app:layout_constraintBottom_toTopOf="@id/id_login_tv_create_account"
             app:layout_constraintWidth_percent="0.9"
-            app:layout_constraintHeight_percent="0.2"
+            app:layout_constraintHeight_percent="0.3"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/id_login_et_email"/>
 
-        <RadioGroup
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:id="@+id/id_login_rg"
-            android:orientation="horizontal"
-            app:layout_constraintWidth_percent="0.9"
-            app:layout_constraintHeight_percent="0.15"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/id_login_et_password"
-            app:layout_constraintBottom_toTopOf="@id/id_login_tv_create_account">
 
-            <RadioButton
-                android:id="@+id/id_login_rb_teacher"
-                android:layout_width="match_parent"
-                android:text="Учитель"
-                android:layout_weight="1"
-                android:layout_gravity="center"
-                android:textStyle="bold"
-                android:gravity="center"
-                android:textColor="@color/white"
-                android:layout_height="30dp"/>
-
-            <RadioButton
-                android:id="@+id/id_login_rb_student"
-                android:layout_width="match_parent"
-                android:layout_weight="1"
-                android:text="Ученик"
-                android:textColor="@color/white"
-                android:layout_gravity="center"
-                android:textStyle="bold"
-                android:gravity="center"
-                android:layout_height="30dp"/>
-
-        </RadioGroup>
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:id="@+id/id_login_tv_create_account"
-            app:layout_constraintHeight_percent="0.15"
+            app:layout_constraintHeight_percent="0.2"
             android:text="создать аккаунт"
             android:gravity="center"
             android:textColor="@color/white"
@@ -125,7 +92,7 @@
             app:layout_constraintWidth_percent="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/id_login_rg"
+            app:layout_constraintTop_toBottomOf="@id/id_login_et_password"
             app:layout_constraintBottom_toBottomOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

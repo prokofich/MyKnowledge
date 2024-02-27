@@ -1,18 +1,31 @@
 package com.my.knowledge.model.database
 
+import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.firestore.toObject
 import com.my.knowledge.model.constant.ERROR
+import com.my.knowledge.model.constant.STUDENT
 import com.my.knowledge.model.modelData.ModelUser
 import com.my.knowledge.model.constant.Students
 import com.my.knowledge.model.constant.TEACHER
 import com.my.knowledge.model.constant.Teachers
+import com.my.knowledge.model.constant.Teachers_and_Students
 import com.my.knowledge.model.modelData.ModelTeacher
+import io.grpc.Context
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
 
 class Firestore {
+
+    // проверка для безлогинового входа
+    fun checkOpenAccount():Boolean{
+        val firestoreAuth = FirebaseAuth.getInstance()
+        return firestoreAuth.currentUser!=null
+    }
 
     // функция регистрации пользователя
     suspend fun createAccount(email:String,password:String):String{
@@ -41,23 +54,44 @@ class Firestore {
             "myDescription" to "","experience" to "","education" to "","myRating" to ""
         )
 
+        firestore.collection(Teachers_and_Students).document(modelUser.userId).set(primaryData) // отправка данных в общую базу
+
         if(modelUser.status == TEACHER){
-            firestore.collection(Teachers).document(modelUser.userId).set(primaryData)
+            firestore.collection(Teachers).document(modelUser.userId).set(primaryData) // отправка данных в базу учителей
         }else{
-            firestore.collection(Students).document(modelUser.userId).set(primaryData)
+            firestore.collection(Students).document(modelUser.userId).set(primaryData) // отправка данных в базу учеников
         }
+
     }
 
     // функция входа в аккаунт
-    suspend fun loginInAccount(email: String,password: String):Boolean{
+    suspend fun loginInAccount(email: String,password: String):String{
         return suspendCoroutine { continuation ->
             val firestoreAuth = FirebaseAuth.getInstance()
             firestoreAuth.signInWithEmailAndPassword(email,password)
                 .addOnCompleteListener { task ->
                     if(task.isSuccessful){
-                        continuation.resume(true) // успешный вход в аккаунт
+
+                        val userId = task.result?.user?.uid
+                        if(userId != null){
+                            val firestore = FirebaseFirestore.getInstance()
+                            firestore.collection(Teachers_and_Students).document(userId)
+                                .get()
+                                .addOnSuccessListener {
+                                    val typeUser = it.data?.get("status").toString()
+                                    if(typeUser != ""){
+                                        continuation.resume(typeUser) // успешный вход в аккаунт учителя или студента
+                                    }else{
+                                        continuation.resume(ERROR) // ошибка входа
+                                    }
+                                }
+                                .addOnFailureListener {
+                                    continuation.resume(ERROR) // ошибка входа
+                                }
+                        }
+
                     }else{
-                        continuation.resume(false) // ошибка при входе в аккаунт
+                        continuation.resume(ERROR) // ошибка входа
                     }
                 }
         }
@@ -70,19 +104,24 @@ class Firestore {
             val firestore = FirebaseFirestore.getInstance()
             firestore.collection(Teachers).document(idTeacher)
                 .get()
-                .addOnSuccessListener { task ->
+                .addOnSuccessListener{
 
+                    var teacher = ModelTeacher()
+                    teacher.education = it.data?.get("education").toString()
+                    teacher.experience = it.data?.get("experience").toString()
+                    teacher.last_name = it.data?.get("last_name").toString()
+                    teacher.first_name = it.data?.get("first_name").toString()
+                    teacher.myDescription = it.data?.get("myDescription").toString()
+                    teacher.myRating = it.data?.get("myRating").toString()
+                    teacher.status = it.data?.get("status").toString()
+                    teacher.user_id = it.data?.get("user_id").toString()
 
-                        var modelTeacher = task.toObject(ModelTeacher::class.java)
-
-                        if(modelTeacher!=null){
-                            continuation.resume(modelTeacher)
-                        }else{
-                            continuation.resume(ModelTeacher("","","","","","","",""))
-                        }
-
+                    if(it.data?.get("first_name") != ""){
+                        continuation.resume(teacher)
+                    }
 
                 }
+
         }
     }
 

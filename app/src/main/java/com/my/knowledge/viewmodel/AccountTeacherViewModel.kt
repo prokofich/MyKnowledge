@@ -17,9 +17,9 @@ class AccountTeacherViewModel:ViewModel() {
 
     fun getMyInfoTeacher(idTeacher:String?){
         viewModelScope.launch(Dispatchers.IO) {
-            if(idTeacher != null){
+            if(idTeacher != null) {
                 val answer = repository.getMyInfoTeacher(idTeacher)
-                withContext(Dispatchers.Main){
+                withContext(Dispatchers.Main) {
                     infoMyAccount.value = answer
                 }
             }

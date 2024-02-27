@@ -12,3 +12,6 @@ const val STUDENT = "ученик"
 
 const val Teachers = "Teachers"
 const val Students = "Students"
+const val Teachers_and_Students = "Students and Teachers"
+
+const val USER_TYPE = "USER_TYPE"

@@ -12,12 +12,12 @@ class LoginViewModel:ViewModel() {
 
     private val repository = Repository()
 
-    val isLogin: MutableLiveData<Boolean> = MutableLiveData()
+    val isLogin: MutableLiveData<String> = MutableLiveData()
     val isCorrectInputData: MutableLiveData<String> = MutableLiveData()
 
     // функция проверки правильности данных
-    fun checkInputDataInLogin(email:String?,password:String?,status:String?){
-        isCorrectInputData.value = repository.checkInputDataInLogin(email, password, status)
+    fun checkInputDataInLogin(email:String?,password:String?){
+        isCorrectInputData.value = repository.checkInputDataInLogin(email, password)
     }
 
     // функция входа в аккаунт

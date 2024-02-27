@@ -4,5 +4,11 @@
     android:shape="rectangle">
     <corners android:radius="20dp" />
     <solid android:color="#112513"/>
+    <gradient
+        android:startColor="#163919"
+        android:endColor="#112513"
+        android:type="linear"
+        android:angle="90">
+    </gradient>
 
 </shape>

@@ -16,13 +16,18 @@ class Repository{
         MAIN?.closeApplication()
     }
 
+    // функция проверки безлогинового входа
+    fun checkOpenAccount():Boolean{
+        return Firestore().checkOpenAccount()
+    }
+
     // функция регистрации пользователя
     suspend fun createAccount(email:String,password:String):String{
         return Firestore().createAccount(email,password)
     }
 
     // функция входа в аккаунт
-    suspend fun loginInAccount(email:String,password:String):Boolean{
+    suspend fun loginInAccount(email:String,password:String):String{
         return Firestore().loginInAccount(email,password)
     }
 
@@ -68,8 +73,8 @@ class Repository{
     }
 
     // функция проверки правильности введенных данных для входа в аккаунт
-    fun checkInputDataInLogin(email:String?,password:String?,status:String?):String{
-        return if(email!="" && password!="" && status!=""){
+    fun checkInputDataInLogin(email:String?,password:String?):String{
+        return if(email!="" && password!=""){
             CORRECT
         }else{
             "вы заполнили не все поля"

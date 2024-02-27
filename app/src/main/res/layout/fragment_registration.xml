@@ -8,7 +8,7 @@
     tools:context=".view.fragments.RegistrationFragment">
 
     <TextView
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_marginTop="20dp"
         android:text="Регистрация"
@@ -17,7 +17,6 @@
         android:textSize="30sp"
         android:textColor="@color/white"
         android:id="@+id/id_reg_tv_title"
-        app:layout_constraintWidth_percent="0.5"
         app:layout_constraintHeight_percent="0.08"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -32,6 +31,7 @@
         android:textColorHint="#313331"
         android:hint="введите вашу почту"
         android:id="@+id/id_reg_et_email"
+        android:backgroundTint="@color/white"
         app:layout_constraintBottom_toTopOf="@id/id_reg_et_password"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -48,6 +48,7 @@
         android:textColorHint="#313331"
         android:textStyle="bold|italic"
         android:hint="введите ваш пароль"
+        android:backgroundTint="@color/white"
         android:id="@+id/id_reg_et_password"
         app:layout_constraintBottom_toTopOf="@id/id_reg_et_first_name"
         app:layout_constraintStart_toStartOf="parent"
@@ -64,6 +65,7 @@
         android:textColor="@color/white"
         android:hint="введите ваше имя"
         android:textStyle="bold|italic"
+        android:backgroundTint="@color/white"
         android:id="@+id/id_reg_et_first_name"
         app:layout_constraintBottom_toTopOf="@id/id_reg_et_last_name"
         app:layout_constraintStart_toStartOf="parent"
@@ -81,6 +83,7 @@
         android:textStyle="bold|italic"
         android:id="@+id/id_reg_et_last_name"
         android:textColorHint="#313331"
+        android:backgroundTint="@color/white"
         app:layout_constraintBottom_toTopOf="@id/id_reg_rg"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -95,7 +98,7 @@
         android:id="@+id/id_reg_rg"
         app:layout_constraintBottom_toTopOf="@id/id_reg_button_registration"
         app:layout_constraintWidth_percent="0.8"
-        app:layout_constraintHeight_percent="0.1"
+        app:layout_constraintHeight_percent="0.08"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/id_reg_et_last_name">
@@ -110,8 +113,8 @@
             android:buttonTint="#614aff"
             android:textColor="@color/white"
             android:textSize="20sp"
-            android:text="Я - Учитель"
-            android:layout_height="40sp"/>
+            android:text="Я - учитель"
+            android:layout_height="match_parent"/>
 
         <RadioButton
             android:id="@+id/id_reg_rb_student"
@@ -122,8 +125,8 @@
             android:gravity="center"
             android:textColor="@color/white"
             android:textSize="20sp"
-            android:text="Я - Ученик"
-            android:layout_height="40sp"/>
+            android:text="Я - ученик"
+            android:layout_height="match_parent"/>
 
     </RadioGroup>
 

@@ -16,6 +16,7 @@ import com.my.knowledge.databinding.FragmentLoginBinding
 import com.my.knowledge.model.constant.CORRECT
 import com.my.knowledge.model.constant.STUDENT
 import com.my.knowledge.model.constant.TEACHER
+import com.my.knowledge.model.database.SharedPreferences
 import com.my.knowledge.viewmodel.LoginViewModel
 
 class LoginFragment : Fragment() {
@@ -23,7 +24,6 @@ class LoginFragment : Fragment() {
     private var binding: FragmentLoginBinding? = null
     private var alertDialog:AlertDialog? = null
     private var repository: Repository? = null
-    private var statusUser:String? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,28 +40,31 @@ class LoginFragment : Fragment() {
 
         val loginViewModel = ViewModelProvider(this)[LoginViewModel::class.java]
 
+        repository?.showToast(SharedPreferences(requireContext()).getUserId(),requireContext())
+
         // попытка входа в аккаунт
         binding?.idLoginButtonInput?.setOnClickListener {
             binding?.idLoginPb?.isVisible = true
 
             loginViewModel.checkInputDataInLogin(
                 binding?.idLoginEtEmail?.text.toString(),
-                binding?.idLoginEtPassword?.text.toString(),
-                statusUser
+                binding?.idLoginEtPassword?.text.toString()
             )
         }
 
         loginViewModel.isLogin.observe(viewLifecycleOwner){ data ->
             binding?.idLoginPb?.isVisible = false
-            if(data){
-                if(statusUser == TEACHER){
-                    MAIN?.navController?.navigate(R.id.action_loginFragment_to_teacherMenuFragment) // переход в аккаунт учителя
-                }else{
-                    MAIN?.navController?.navigate(R.id.action_loginFragment_to_studentMenuFragment) // переход в аккаунт ученика
-                }
+            if(data == TEACHER){
+                SharedPreferences(requireContext()).setTypeUserInLastSession(TEACHER)
+                MAIN?.navController?.navigate(R.id.action_loginFragment_to_teacherMenuFragment) // переход в аккаунт учителя
             }else{
-                repository?.showToast("ошибка входа",requireContext())
-                binding!!.idLoginTvError.text = "ошибка при входе"
+                if(data == STUDENT){
+                    SharedPreferences(requireContext()).setTypeUserInLastSession(STUDENT)
+                    MAIN?.navController?.navigate(R.id.action_loginFragment_to_studentMenuFragment) // переход в аккаунт ученика
+                }else{
+                    repository?.showToast("ошибка входа",requireContext())
+                    binding!!.idLoginTvError.text = "ошибка при входе"
+                }
             }
         }
 
@@ -84,14 +87,6 @@ class LoginFragment : Fragment() {
         // выход из приложения
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner){
             exitTheApplication()
-        }
-
-        binding?.idLoginRg?.setOnCheckedChangeListener { _, checkedId ->
-            @Suppress("KotlinConstantConditions")
-            when (checkedId) {
-                binding?.idLoginRbTeacher?.id -> { statusUser = TEACHER }
-                binding?.idLoginRbStudent?.id -> { statusUser = STUDENT }
-            }
         }
 
     }

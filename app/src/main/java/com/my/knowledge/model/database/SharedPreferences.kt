@@ -4,8 +4,9 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.preference.PreferenceManager
 import com.my.knowledge.model.constant.USER_ID
+import com.my.knowledge.model.constant.USER_TYPE
 
-class SharedPreferences(private val context: Context) {
+class SharedPreferences(context: Context) {
 
     private var sharedPreferences:SharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
 
@@ -21,6 +22,16 @@ class SharedPreferences(private val context: Context) {
         return sharedPreferences.getString(USER_ID,"").toString()
     }
 
+    // функция проверки типа пользователя при последней сессии
+    fun getTypeUserInLastSession():String{
+        return sharedPreferences.getString(USER_TYPE,"").toString()
+    }
 
+    // функция установки типа пользователя в последней сессии
+    fun setTypeUserInLastSession(userType:String){
+        sharedPreferences.edit()
+            .putString(USER_TYPE,userType)
+            .apply()
+    }
 
 }
