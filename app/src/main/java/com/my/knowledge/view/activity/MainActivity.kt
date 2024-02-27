@@ -21,6 +21,7 @@ class MainActivity : AppCompatActivity() {
         //установка полноэкранного режима
         window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN)
 
+        // установка контроллера для навигации
         navController = Navigation.findNavController(this, R.id.id_nav_host)
 
     }

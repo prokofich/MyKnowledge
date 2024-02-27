@@ -66,5 +66,14 @@
         <action
             android:id="@+id/action_splashFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_splashFragment_to_registrationFragment"
+            app:destination="@id/registrationFragment" />
+        <action
+            android:id="@+id/action_splashFragment_to_studentMenuFragment"
+            app:destination="@id/studentMenuFragment" />
+        <action
+            android:id="@+id/action_splashFragment_to_teacherMenuFragment"
+            app:destination="@id/teacherMenuFragment" />
     </fragment>
 </navigation>
