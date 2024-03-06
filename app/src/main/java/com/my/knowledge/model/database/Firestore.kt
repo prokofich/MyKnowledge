@@ -51,9 +51,9 @@ class Firestore {
 
             val firestore = FirebaseFirestore.getInstance()
             var data = hashMapOf("first_name" to firstName,"last_name" to lastName)
-            firestore.collection(Teachers).document(idUser).set(data)
+            firestore.collection(Teachers).document(userId).set(data)
                 .addOnSuccessListener {
-                    firestore.collection(Teachers_and_Students).document(idUser).set(data)
+                    firestore.collection(Teachers_and_Students).document(userId).set(data)
                         .addOnSuccessListener {
                             continuation.resume(true) // данные успешно сохранены
                         }

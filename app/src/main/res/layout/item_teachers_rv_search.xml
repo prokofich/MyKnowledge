@@ -33,14 +33,14 @@
             app:layout_constraintHeight_percent="0.2"
             android:gravity="center"
             android:textStyle="bold"
-            android:textColor="#246b45"
+            android:textColor="@color/white"
             android:text="Учитель"
             android:textSize="16sp"
             android:layout_margin="10dp"
-            android:background="@drawable/background_tv_predmet"
+            android:background="@drawable/background_tv_2"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/id_item_teachers_rv_search_iv"
-            app:layout_constraintBottom_toBottomOf="parent"
+
             app:layout_constraintEnd_toStartOf="@id/id_item_teachers_rv_search_tv_last_name"/>
 
         <TextView
@@ -79,9 +79,11 @@
             android:layout_width="0dp"
             android:minHeight="30dp"
             android:layout_height="wrap_content"
-            android:background="@drawable/background_tv_predmet_2"
+            android:background="@drawable/background_tv_2"
             android:id="@+id/id_item_teachers_rv_search_tv_predmeti"
             app:layout_constraintWidth_percent="0.6"
+            android:layout_marginBottom="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@id/id_item_teachers_rv_search_iv"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/id_item_teachers_rv_search_tv_status">
@@ -89,7 +91,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:gravity="center"
-                android:textColor="#246b45"
+                android:textColor="@color/white"
                 android:textStyle="bold"
                 android:textSize="16sp"
                 android:text="математика + физика"
