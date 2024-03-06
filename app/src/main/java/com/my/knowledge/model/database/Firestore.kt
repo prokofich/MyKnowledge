@@ -3,6 +3,7 @@ package com.my.knowledge.model.database
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.firestoreSettings
 import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.firestore.toObject
 import com.my.knowledge.model.constant.ERROR
@@ -42,6 +43,51 @@ class Firestore {
                     }
                 }
         }
+    }
+
+    // функция сохранения имени и фамилии
+    suspend fun setFirstAnsLastName(firstName:String,lastName:String,userId:String):Boolean{
+        return suspendCoroutine { continuation ->
+
+            val firestore = FirebaseFirestore.getInstance()
+            var data = hashMapOf("first_name" to firstName,"last_name" to lastName)
+            firestore.collection(Teachers).document(idUser).set(data)
+                .addOnSuccessListener {
+                    firestore.collection(Teachers_and_Students).document(idUser).set(data)
+                        .addOnSuccessListener {
+                            continuation.resume(true) // данные успешно сохранены
+                        }
+                        .addOnFailureListener {
+                            continuation.resume(false) // ошибка при сохранении данных
+                        }
+                }
+                .addOnFailureListener {
+                    continuation.resume(false) // ошибка при сохранении данных
+                }
+
+        }
+    }
+
+    suspend fun setDataFromMyProfile(dataFromProfile:String,typeDataFromProfile:String,userId:String):Boolean{
+        return suspendCoroutine { continuation ->
+
+            val firestore = FirebaseFirestore.getInstance()
+            var data = hashMapOf(typeDataFromProfile to dataFromProfile)
+            firestore.collection(Teachers).document(userId).set(data)
+                .addOnSuccessListener {
+                    firestore.collection(Teachers_and_Students).document(userId).set(data)
+                        .addOnSuccessListener {
+                            continuation.resume(true)
+                        }
+                        .addOnFailureListener {
+                            continuation.resume(false)
+                        }
+                }
+                .addOnFailureListener {
+                    continuation.resume(false)
+                }
+        }
+
     }
 
     // функция отправки первичных данных после успешной регистрации

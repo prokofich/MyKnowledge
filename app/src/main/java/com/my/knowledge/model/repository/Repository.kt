@@ -21,6 +21,16 @@ class Repository{
         return Firestore().checkOpenAccount()
     }
 
+    // функция сохранения данных из профиля учителя
+    suspend fun setDataFromMyProfile(dataFromProfile:String,typeDataFromProfile:String,userId:String):Boolean{
+        return Firestore().setDataFromMyProfile(dataFromProfile, typeDataFromProfile, userId)
+    }
+
+    // функция сохранения имени и фамилии
+    suspend fun setFirstAndLastName(firstName:String,lastName:String,userId:String):Boolean{
+        return Firestore().setFirstAnsLastName(firstName, lastName, userId)
+    }
+
     // функция регистрации пользователя
     suspend fun createAccount(email:String,password:String):String{
         return Firestore().createAccount(email,password)

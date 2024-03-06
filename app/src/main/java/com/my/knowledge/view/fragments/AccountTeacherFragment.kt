@@ -40,6 +40,56 @@ class AccountTeacherFragment : Fragment() {
             showMyInfo(data)
         }
 
+        accountTeacherViewModel.isSuccessfull.observe(viewLifecycleOwner){ data ->
+            if(data){
+                repository?.showToast("данные успешно сохранены",requireContext())
+            }else{
+                repository?.showToast("ошибка,данные не сохранены",requireContext())
+            }
+        }
+
+        // разрешение на редактирование имени и фамилии
+        binding?.idAccountTeacherTvRedact?.setOnClickListener {
+            if(binding?.idAccountTeacherTvRedact?.text == "редактировать"){
+                openOrClosedEditTextForName(true) // открытие для редактирования
+                binding?.idAccountTeacherTvRedact?.text = "сохранить"
+            }else{
+                openOrClosedEditTextForName(false) // закрытие перед сохранением
+                binding?.idAccountTeacherTvRedact?.text = "редактировать"
+
+                accountTeacherViewModel.setFirstAndLastName(
+                    binding?.idAccountTvFirstName?.text.toString(),
+                    binding?.idAccountTvLastName?.text.toString(),
+                    sharedPreferences?.getUserId()
+                )
+
+            }
+        }
+
+        // изменение описания учителя
+        binding?.idAccountTeacherTvRedact1?.setOnClickListener {
+            if(binding?.idAccountTeacherTvRedact1?.text == "редактировать"){
+                openOrClosedEditText1(true) // открытие для редактирования
+                binding?.idAccountTeacherTvRedact1?.text = "сохранить"
+            }else{
+                openOrClosedEditText1(false)
+                binding?.idAccountTeacherTvRedact1?.text = "редактировать"
+
+
+
+            }
+        }
+
+        // изменение опыта работы
+        binding?.idAccountTeacherTvRedact2?.setOnClickListener {
+
+        }
+
+        // изменение образования
+        binding?.idAccountTeacherTvRedact3?.setOnClickListener {
+
+        }
+
     }
 
     // очистка биндинга при очистке вью
@@ -50,12 +100,33 @@ class AccountTeacherFragment : Fragment() {
 
     // функция показа основной информации в профиле учителя
     private fun showMyInfo(modelTeacher:ModelTeacher){
-        binding?.idAccountTvLastName?.text = modelTeacher.last_name
-        binding?.idAccountTvFirstName?.text = modelTeacher.first_name
+        binding?.idAccountTvLastName?.setText(modelTeacher.last_name)
+        binding?.idAccountTvFirstName?.setText(modelTeacher.first_name)
         binding?.idAccountTvStatus?.text = modelTeacher.status
         binding?.idAccountTeacherTvMyDesc?.setText(modelTeacher.myDescription)
         binding?.idAccountTeacherTvOpitRaboti?.setText(modelTeacher.experience)
         binding?.idAccountTeacherTvEducation?.setText(modelTeacher.education)
+    }
+
+    // функция открытия/закрытия для редактирования поля ввода
+    private fun openOrClosedEditTextForName(flag:Boolean){
+        binding?.idAccountTvFirstName?.isEnabled = flag
+        binding?.idAccountTvLastName?.isEnabled = flag
+    }
+
+    // функция открытия/закрытия для редактирования поля ввода
+    private fun openOrClosedEditText1(flag: Boolean){
+        binding?.idAccountTeacherTvMyDesc?.isEnabled = flag
+    }
+
+    // функция открытия/закрытия для редактирования поля ввода
+    private fun openOrClosedEditText2(flag: Boolean){
+        binding?.idAccountTeacherTvOpitRaboti?.isEnabled = flag
+    }
+
+    // функция открытия/закрытия для редактирования поля ввода
+    private fun openOrClosedEditText3(flag: Boolean){
+        binding?.idAccountTeacherTvEducation?.isEnabled = flag
     }
 
 }
