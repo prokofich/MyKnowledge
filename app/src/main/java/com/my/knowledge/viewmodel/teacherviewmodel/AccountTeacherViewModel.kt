@@ -17,7 +17,7 @@ class AccountTeacherViewModel:ViewModel() {
     val infoMyAccount: MutableLiveData<ModelTeacher> = MutableLiveData()
     val isSuccessfull:MutableLiveData<Boolean> = MutableLiveData()
 
-    fun getMyInfoTeacher(idTeacher:String?){
+    /*fun getMyInfoTeacher(idTeacher:String?){
         viewModelScope.launch(Dispatchers.IO) {
             if(idTeacher != null) {
                 val answer = repository.getMyInfoTeacher(idTeacher)
@@ -26,7 +26,7 @@ class AccountTeacherViewModel:ViewModel() {
                 }
             }
         }
-    }
+    }*/
 
     fun setFirstAndLastName(firstName:String,lastName:String,userId:String?){
         viewModelScope.launch(Dispatchers.IO) {

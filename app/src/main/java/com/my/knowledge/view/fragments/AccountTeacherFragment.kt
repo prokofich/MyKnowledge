@@ -5,10 +5,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.my.knowledge.R
+import androidx.activity.addCallback
 import androidx.lifecycle.ViewModelProvider
 import com.my.knowledge.databinding.FragmentAccountTeacherBinding
+import com.my.knowledge.model.constant.MAIN
 import com.my.knowledge.model.database.sharedpreferences.SharedPreferences
-import com.my.knowledge.model.modelData.ModelTeacher
 import com.my.knowledge.model.repository.Repository
 import com.my.knowledge.viewmodel.teacherviewmodel.AccountTeacherViewModel
 
@@ -32,12 +34,9 @@ class AccountTeacherFragment : Fragment() {
         sharedPreferences = SharedPreferences(requireContext())
         repository = Repository()
 
-        val accountTeacherViewModel = ViewModelProvider(this)[AccountTeacherViewModel::class.java]
-        accountTeacherViewModel.getMyInfoTeacher(sharedPreferences?.getUserId())
+        showMyInfoTeacher()
 
-        accountTeacherViewModel.infoMyAccount.observe(viewLifecycleOwner){ data ->
-            showMyInfo(data)
-        }
+        val accountTeacherViewModel = ViewModelProvider(this)[AccountTeacherViewModel::class.java]
 
         accountTeacherViewModel.isSuccessfull.observe(viewLifecycleOwner){ data ->
             if(data){
@@ -56,6 +55,11 @@ class AccountTeacherFragment : Fragment() {
                 openOrClosedEditTextForName(false) // закрытие перед сохранением
                 binding?.idAccountTeacherTvRedact?.text = "редактировать"
 
+                // сохранение на телефон в xml
+                sharedPreferences?.saveFirstNameTeacher(binding?.idAccountTvFirstName?.text.toString())
+                sharedPreferences?.saveLastNameTeacher(binding?.idAccountTvLastName?.text.toString())
+
+                // сохранение в Firestore
                 accountTeacherViewModel.setFirstAndLastName(
                     binding?.idAccountTvFirstName?.text.toString(),
                     binding?.idAccountTvLastName?.text.toString(),
@@ -75,6 +79,10 @@ class AccountTeacherFragment : Fragment() {
                 openOrClosedEditText1(false)
                 binding?.idAccountTeacherTvRedact1?.text = "изменить"
 
+                // сохранение на телефон в xml
+                sharedPreferences?.saveDescriptionTeacher(binding?.idAccountTeacherTvMyDesc?.text.toString())
+
+                // сохранение в Firestore
                 accountTeacherViewModel.setDataFromMyProfile(
                     binding?.idAccountTeacherTvMyDesc?.text.toString(),
                     "myDescription",
@@ -94,6 +102,10 @@ class AccountTeacherFragment : Fragment() {
                 openOrClosedEditText2(false)
                 binding?.idAccountTeacherTvRedact2?.text = "изменить"
 
+                // сохранение на телефон в xml
+                sharedPreferences?.saveExperienceTeacher(binding?.idAccountTeacherTvOpitRaboti?.text.toString())
+
+                // сохранение в Firestore
                 accountTeacherViewModel.setDataFromMyProfile(
                     binding?.idAccountTeacherTvOpitRaboti?.text.toString(),
                     "experience",
@@ -113,6 +125,10 @@ class AccountTeacherFragment : Fragment() {
                 openOrClosedEditText3(false)
                 binding?.idAccountTeacherTvRedact3?.text = "изменить"
 
+                // сохранение на телефон в xml
+                sharedPreferences?.saveEducationTeacher(binding?.idAccountTeacherTvEducation?.text.toString())
+
+                // сохранение в Firestore
                 accountTeacherViewModel.setDataFromMyProfile(
                     binding?.idAccountTeacherTvEducation?.text.toString(),
                     "education",
@@ -120,6 +136,16 @@ class AccountTeacherFragment : Fragment() {
                 )
 
             }
+        }
+
+        // выход в меню учителя
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner){
+            MAIN?.navController?.navigate(R.id.action_accountTeacherFragment_to_teacherMenuFragment)
+        }
+
+        // выход в меню учителя
+        binding?.idAccountTeacherButtonBack?.setOnClickListener {
+            MAIN?.navController?.navigate(R.id.action_accountTeacherFragment_to_teacherMenuFragment)
         }
 
     }
@@ -131,34 +157,33 @@ class AccountTeacherFragment : Fragment() {
     }
 
     // функция показа основной информации в профиле учителя
-    private fun showMyInfo(modelTeacher:ModelTeacher){
-        binding?.idAccountTvLastName?.setText(modelTeacher.last_name)
-        binding?.idAccountTvFirstName?.setText(modelTeacher.first_name)
-        binding?.idAccountTvStatus?.text = modelTeacher.status
-        binding?.idAccountTeacherTvMyDesc?.setText(modelTeacher.myDescription)
-        binding?.idAccountTeacherTvOpitRaboti?.setText(modelTeacher.experience)
-        binding?.idAccountTeacherTvEducation?.setText(modelTeacher.education)
+    private fun showMyInfoTeacher(){
+        binding?.idAccountTvLastName?.setText(sharedPreferences?.getLastNameTeacher())
+        binding?.idAccountTvFirstName?.setText(sharedPreferences?.getFirstNameTeacher())
+        binding?.idAccountTeacherTvMyDesc?.setText(sharedPreferences?.getDescriptionTeacher())
+        binding?.idAccountTeacherTvOpitRaboti?.setText(sharedPreferences?.getExperienceTeacher())
+        binding?.idAccountTeacherTvEducation?.setText(sharedPreferences?.getEducationTeacher())
     }
 
     // функция открытия/закрытия для редактирования поля ввода
-    private fun openOrClosedEditTextForName(flag:Boolean){
-        binding?.idAccountTvFirstName?.isEnabled = flag
-        binding?.idAccountTvLastName?.isEnabled = flag
+    private fun openOrClosedEditTextForName(isOpen:Boolean){
+        binding?.idAccountTvFirstName?.isEnabled = isOpen
+        binding?.idAccountTvLastName?.isEnabled = isOpen
     }
 
     // функция открытия/закрытия для редактирования поля ввода
-    private fun openOrClosedEditText1(flag: Boolean){
-        binding?.idAccountTeacherTvMyDesc?.isEnabled = flag
+    private fun openOrClosedEditText1(isOpen: Boolean){
+        binding?.idAccountTeacherTvMyDesc?.isEnabled = isOpen
     }
 
     // функция открытия/закрытия для редактирования поля ввода
-    private fun openOrClosedEditText2(flag: Boolean){
-        binding?.idAccountTeacherTvOpitRaboti?.isEnabled = flag
+    private fun openOrClosedEditText2(isOpen: Boolean){
+        binding?.idAccountTeacherTvOpitRaboti?.isEnabled = isOpen
     }
 
     // функция открытия/закрытия для редактирования поля ввода
-    private fun openOrClosedEditText3(flag: Boolean){
-        binding?.idAccountTeacherTvEducation?.isEnabled = flag
+    private fun openOrClosedEditText3(isOpen: Boolean){
+        binding?.idAccountTeacherTvEducation?.isEnabled = isOpen
     }
 
 }
