@@ -1,22 +1,17 @@
-package com.my.knowledge.model.database
+package com.my.knowledge.model.database.firebase
 
-import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.firestoreSettings
-import com.google.firebase.firestore.ktx.toObject
-import com.google.firebase.firestore.toObject
+import com.google.firebase.firestore.SetOptions
 import com.my.knowledge.model.constant.ERROR
-import com.my.knowledge.model.constant.STUDENT
 import com.my.knowledge.model.modelData.ModelUser
 import com.my.knowledge.model.constant.Students
 import com.my.knowledge.model.constant.TEACHER
 import com.my.knowledge.model.constant.Teachers
 import com.my.knowledge.model.constant.Teachers_and_Students
+import com.my.knowledge.model.constant.Teachers_price_list
+import com.my.knowledge.model.database.Room.entity.PriceListEntity
 import com.my.knowledge.model.modelData.ModelTeacher
-import io.grpc.Context
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
 
@@ -50,10 +45,10 @@ class Firestore {
         return suspendCoroutine { continuation ->
 
             val firestore = FirebaseFirestore.getInstance()
-            var data = hashMapOf("first_name" to firstName,"last_name" to lastName)
-            firestore.collection(Teachers).document(userId).set(data)
+            val data = hashMapOf("first_name" to firstName,"last_name" to lastName)
+            firestore.collection(Teachers).document(userId).set(data, SetOptions.merge())
                 .addOnSuccessListener {
-                    firestore.collection(Teachers_and_Students).document(userId).set(data)
+                    firestore.collection(Teachers_and_Students).document(userId).set(data,SetOptions.merge())
                         .addOnSuccessListener {
                             continuation.resume(true) // данные успешно сохранены
                         }
@@ -72,16 +67,35 @@ class Firestore {
         return suspendCoroutine { continuation ->
 
             val firestore = FirebaseFirestore.getInstance()
-            var data = hashMapOf(typeDataFromProfile to dataFromProfile)
-            firestore.collection(Teachers).document(userId).set(data)
+            val data = hashMapOf(typeDataFromProfile to dataFromProfile)
+            firestore.collection(Teachers).document(userId).set(data, SetOptions.merge())
                 .addOnSuccessListener {
-                    firestore.collection(Teachers_and_Students).document(userId).set(data)
+                    firestore.collection(Teachers_and_Students).document(userId).set(data, SetOptions.merge())
                         .addOnSuccessListener {
                             continuation.resume(true)
                         }
                         .addOnFailureListener {
                             continuation.resume(false)
                         }
+                }
+                .addOnFailureListener {
+                    continuation.resume(false)
+                }
+        }
+
+    }
+
+    // функция отправки данных из прайс листа
+    suspend fun setDataInPriceList(item:PriceListEntity,userId: String):Boolean{
+        return suspendCoroutine { continuation ->
+
+            val firestore = FirebaseFirestore.getInstance()
+
+            val data = item.toHashMap()
+
+            firestore.collection(Teachers_price_list).document(userId).set(data, SetOptions.merge())
+                .addOnSuccessListener {
+                    continuation.resume(true)
                 }
                 .addOnFailureListener {
                     continuation.resume(false)
@@ -152,7 +166,7 @@ class Firestore {
                 .get()
                 .addOnSuccessListener{
 
-                    var teacher = ModelTeacher()
+                    val teacher = ModelTeacher()
                     teacher.education = it.data?.get("education").toString()
                     teacher.experience = it.data?.get("experience").toString()
                     teacher.last_name = it.data?.get("last_name").toString()

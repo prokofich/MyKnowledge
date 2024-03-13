@@ -9,11 +9,10 @@ import androidx.activity.addCallback
 import androidx.lifecycle.ViewModelProvider
 import com.my.knowledge.R
 import com.my.knowledge.databinding.FragmentSplashBinding
-import com.my.knowledge.databinding.FragmentTeacherMenuBinding
 import com.my.knowledge.model.constant.MAIN
 import com.my.knowledge.model.constant.STUDENT
 import com.my.knowledge.model.constant.TEACHER
-import com.my.knowledge.model.database.SharedPreferences
+import com.my.knowledge.model.database.sharedpreferences.SharedPreferences
 import com.my.knowledge.model.repository.Repository
 import com.my.knowledge.viewmodel.SplashViewModel
 
@@ -21,7 +20,7 @@ import com.my.knowledge.viewmodel.SplashViewModel
 class SplashFragment : Fragment() {
 
     private var binding: FragmentSplashBinding? = null
-    private var sharedPreferences:SharedPreferences? = null
+    private var sharedPreferences: SharedPreferences? = null
     private var repository:Repository? = null
 
     override fun onCreateView(

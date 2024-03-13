@@ -5,18 +5,17 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import com.my.knowledge.databinding.FragmentAccountTeacherBinding
-import com.my.knowledge.model.database.SharedPreferences
+import com.my.knowledge.model.database.sharedpreferences.SharedPreferences
 import com.my.knowledge.model.modelData.ModelTeacher
 import com.my.knowledge.model.repository.Repository
-import com.my.knowledge.viewmodel.AccountTeacherViewModel
+import com.my.knowledge.viewmodel.teacherviewmodel.AccountTeacherViewModel
 
 class AccountTeacherFragment : Fragment() {
 
     private var binding: FragmentAccountTeacherBinding? = null
-    private var sharedPreferences:SharedPreferences? = null
+    private var sharedPreferences: SharedPreferences? = null
     private var repository:Repository? = null
 
     override fun onCreateView(
@@ -68,26 +67,59 @@ class AccountTeacherFragment : Fragment() {
 
         // изменение описания учителя
         binding?.idAccountTeacherTvRedact1?.setOnClickListener {
-            if(binding?.idAccountTeacherTvRedact1?.text == "редактировать"){
+            if(binding?.idAccountTeacherTvRedact1?.text == "изменить"){
                 openOrClosedEditText1(true) // открытие для редактирования
                 binding?.idAccountTeacherTvRedact1?.text = "сохранить"
             }else{
+
                 openOrClosedEditText1(false)
-                binding?.idAccountTeacherTvRedact1?.text = "редактировать"
+                binding?.idAccountTeacherTvRedact1?.text = "изменить"
 
-
+                accountTeacherViewModel.setDataFromMyProfile(
+                    binding?.idAccountTeacherTvMyDesc?.text.toString(),
+                    "myDescription",
+                    sharedPreferences?.getUserId()
+                )
 
             }
         }
 
         // изменение опыта работы
         binding?.idAccountTeacherTvRedact2?.setOnClickListener {
+            if(binding?.idAccountTeacherTvRedact2?.text == "изменить"){
+                openOrClosedEditText2(true) // открытие для редактирования
+                binding?.idAccountTeacherTvRedact2?.text = "сохранить"
+            }else{
 
+                openOrClosedEditText2(false)
+                binding?.idAccountTeacherTvRedact2?.text = "изменить"
+
+                accountTeacherViewModel.setDataFromMyProfile(
+                    binding?.idAccountTeacherTvOpitRaboti?.text.toString(),
+                    "experience",
+                    sharedPreferences?.getUserId()
+                )
+
+            }
         }
 
         // изменение образования
         binding?.idAccountTeacherTvRedact3?.setOnClickListener {
+            if(binding?.idAccountTeacherTvRedact3?.text == "изменить"){
+                openOrClosedEditText3(true) // открытие для редактирования
+                binding?.idAccountTeacherTvRedact3?.text = "сохранить"
+            }else{
 
+                openOrClosedEditText3(false)
+                binding?.idAccountTeacherTvRedact3?.text = "изменить"
+
+                accountTeacherViewModel.setDataFromMyProfile(
+                    binding?.idAccountTeacherTvEducation?.text.toString(),
+                    "education",
+                    sharedPreferences?.getUserId()
+                )
+
+            }
         }
 
     }

@@ -9,4 +9,15 @@ data class ModelUser(
     var lastName:String,
     var status:String,
     var userId:String
-):Parcelable
+):Parcelable{
+
+    fun toHashMap(): HashMap<String, Any?> {
+        return hashMapOf(
+            "id" to firstName,
+            "name" to lastName,
+            "price" to status,
+            "desc" to userId
+        )
+    }
+
+}

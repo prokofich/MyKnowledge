@@ -16,7 +16,6 @@ class RegistrationViewModel:ViewModel() {
     val isRegistration: MutableLiveData<String> = MutableLiveData()
     val isCorrectInputData: MutableLiveData<String> = MutableLiveData()
 
-    // функция создания нового аккаунта
     fun createAccount(email:String,password:String){
         viewModelScope.launch(Dispatchers.IO) {
             val answer = repository.createAccount(email, password)
@@ -26,14 +25,12 @@ class RegistrationViewModel:ViewModel() {
         }
     }
 
-    // функция добавления первичных данных после регистрации
     fun setPrimaryDataAfterRegistration(modelUser: ModelUser){
         viewModelScope.launch(Dispatchers.IO) {
             repository.setPrimaryDataAfterRegistration(modelUser)
         }
     }
 
-    // функция проверки правильности введенных данных
     fun checkInputData(email:String?,password:String?,firstName:String?,lastName:String?,status:String?){
         isCorrectInputData.value = repository.checkInputData(email, password, firstName, lastName, status)
     }

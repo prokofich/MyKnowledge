@@ -5,11 +5,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.my.knowledge.R
 import com.my.knowledge.databinding.FragmentLoginBinding
 import com.my.knowledge.databinding.FragmentRegistrationBinding
 import com.my.knowledge.databinding.FragmentTeacherMenuBinding
 import com.my.knowledge.model.constant.MAIN
+import com.my.knowledge.model.database.sharedpreferences.SharedPreferences
 
 class TeacherMenuFragment : Fragment() {
 
@@ -26,10 +28,18 @@ class TeacherMenuFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        Toast.makeText(requireContext(),SharedPreferences(requireContext()).getUserId(),Toast.LENGTH_SHORT).show()
+
         // переход на мой профиль
         binding?.idMenuTeacherButtonMyAccount?.setOnClickListener {
             MAIN?.navController?.navigate(R.id.action_teacherMenuFragment_to_accountTeacherFragment)
         }
+
+        // переход к прайс-листу
+        binding?.idMenuTeacherButtonPriceList?.setOnClickListener{
+            MAIN?.navController?.navigate(R.id.action_teacherMenuFragment_to_priceListFragment)
+        }
+
 
     }
 

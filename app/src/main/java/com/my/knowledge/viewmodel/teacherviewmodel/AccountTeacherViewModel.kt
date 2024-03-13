@@ -1,4 +1,4 @@
-package com.my.knowledge.viewmodel
+package com.my.knowledge.viewmodel.teacherviewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -12,10 +12,10 @@ import kotlinx.coroutines.withContext
 class AccountTeacherViewModel:ViewModel() {
 
     private val repository = Repository()
+    private val lock = Any()
 
     val infoMyAccount: MutableLiveData<ModelTeacher> = MutableLiveData()
     val isSuccessfull:MutableLiveData<Boolean> = MutableLiveData()
-    val isSuccessfull1:MutableLiveData<Boolean> = MutableLiveData()
 
     fun getMyInfoTeacher(idTeacher:String?){
         viewModelScope.launch(Dispatchers.IO) {
@@ -33,7 +33,9 @@ class AccountTeacherViewModel:ViewModel() {
             if(userId != null){
                 val answer = repository.setFirstAndLastName(firstName, lastName, userId)
                 withContext(Dispatchers.Main){
-                    isSuccessfull.value = answer
+                    synchronized(lock){
+                        isSuccessfull.value = answer
+                    }
                 }
             }
         }
@@ -42,7 +44,12 @@ class AccountTeacherViewModel:ViewModel() {
     fun setDataFromMyProfile(dataFromProfile:String,typeDataFromProfile:String,userId:String?){
         viewModelScope.launch(Dispatchers.IO) {
             if(userId != null){
-                
+                val answer = repository.setDataFromMyProfile(dataFromProfile, typeDataFromProfile, userId)
+                withContext(Dispatchers.Main){
+                    synchronized(lock){
+                        isSuccessfull.value = answer
+                    }
+                }
             }
         }
     }

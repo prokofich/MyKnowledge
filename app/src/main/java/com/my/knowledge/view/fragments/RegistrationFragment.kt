@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import androidx.activity.addCallback
 import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
-import com.my.knowledge.model.database.Firestore
+import com.my.knowledge.model.database.firebase.Firestore
 import com.my.knowledge.model.constant.MAIN
 import com.my.knowledge.R
 import com.my.knowledge.viewmodel.RegistrationViewModel
@@ -19,7 +19,7 @@ import com.my.knowledge.model.constant.CORRECT
 import com.my.knowledge.model.constant.ERROR
 import com.my.knowledge.model.modelData.ModelUser
 import com.my.knowledge.model.repository.Repository
-import com.my.knowledge.model.database.SharedPreferences
+import com.my.knowledge.model.database.sharedpreferences.SharedPreferences
 
 class RegistrationFragment : Fragment() {
 
@@ -27,7 +27,7 @@ class RegistrationFragment : Fragment() {
     private var registrationViewModel: RegistrationViewModel? = null
     private var firestore: Firestore? = null
     private var statusUser:String? = null
-    private var sharedPreferences:SharedPreferences? = null
+    private var sharedPreferences: SharedPreferences? = null
     private var repository: Repository? = null
 
     override fun onCreateView(

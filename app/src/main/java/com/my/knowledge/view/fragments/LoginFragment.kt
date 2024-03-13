@@ -16,7 +16,7 @@ import com.my.knowledge.databinding.FragmentLoginBinding
 import com.my.knowledge.model.constant.CORRECT
 import com.my.knowledge.model.constant.STUDENT
 import com.my.knowledge.model.constant.TEACHER
-import com.my.knowledge.model.database.SharedPreferences
+import com.my.knowledge.model.database.sharedpreferences.SharedPreferences
 import com.my.knowledge.viewmodel.LoginViewModel
 
 class LoginFragment : Fragment() {
@@ -68,7 +68,7 @@ class LoginFragment : Fragment() {
 
         loginViewModel.isCorrectInputData.observe(viewLifecycleOwner){ data ->
             if(data == CORRECT){
-                binding?.idLoginTvTitle?.text = ""
+                binding?.idLoginTvError?.text = ""
                 loginViewModel.loginInAccount(binding?.idLoginEtEmail?.text.toString(),binding?.idLoginEtPassword?.text.toString())
             }else{
                 binding?.idLoginPb?.isVisible = false

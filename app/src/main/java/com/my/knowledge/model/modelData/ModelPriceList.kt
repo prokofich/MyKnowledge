@@ -7,5 +7,5 @@ import kotlinx.parcelize.Parcelize
 data class ModelPriceList(
     var name:String,
     var price:String,
-
+    var desc:String
 ):Parcelable

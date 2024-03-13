@@ -5,7 +5,9 @@ import android.widget.Toast
 import com.my.knowledge.model.modelData.ModelUser
 import com.my.knowledge.model.constant.CORRECT
 import com.my.knowledge.model.constant.MAIN
-import com.my.knowledge.model.database.Firestore
+import com.my.knowledge.model.constant.alfavit
+import com.my.knowledge.model.database.Room.entity.PriceListEntity
+import com.my.knowledge.model.database.firebase.Firestore
 import com.my.knowledge.model.modelData.ModelTeacher
 
 
@@ -21,12 +23,29 @@ class Repository{
         return Firestore().checkOpenAccount()
     }
 
-    // функция сохранения данных из профиля учителя
+    fun checkInputPriceData(name:String,price:String,desc:String):String{
+        return if(name!="" && price!="" && desc!=""){
+            if(price.toSet().intersect(alfavit.toSet()).isEmpty()){
+                "верно"
+            }else{
+                "в поле цены запишите число"
+            }
+        }else{
+            "вы ввели не все данные"
+        }
+    }
+
+    // функция отправки данных из прайс листа в Firestore
+    suspend fun setDataInPriceList(item: PriceListEntity, userId: String):Boolean{
+        return Firestore().setDataInPriceList(item, userId)
+    }
+
+    // функция отправки данных из профиля учителя
     suspend fun setDataFromMyProfile(dataFromProfile:String,typeDataFromProfile:String,userId:String):Boolean{
         return Firestore().setDataFromMyProfile(dataFromProfile, typeDataFromProfile, userId)
     }
 
-    // функция сохранения имени и фамилии
+    // функция отправки имени и фамилии
     suspend fun setFirstAndLastName(firstName:String,lastName:String,userId:String):Boolean{
         return Firestore().setFirstAnsLastName(firstName, lastName, userId)
     }
@@ -52,7 +71,7 @@ class Repository{
     }
 
     // функция показа всплывающего сообщения
-    fun showToast(message:String,context:Context){
+    fun showToast(message:String?,context:Context){
         Toast.makeText(context,message,Toast.LENGTH_SHORT).show()
     }
 
