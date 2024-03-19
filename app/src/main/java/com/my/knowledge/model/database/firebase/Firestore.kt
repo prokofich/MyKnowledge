@@ -90,10 +90,10 @@ class Firestore {
         return suspendCoroutine { continuation ->
 
             val firestore = FirebaseFirestore.getInstance()
-
             val data = item.toHashMap()
 
-            firestore.collection(Teachers_price_list).document(userId).set(data, SetOptions.merge())
+            firestore.collection(Teachers_price_list).document(userId)
+                .collection(item.id.toString()).document(item.id.toString()).set(data, SetOptions.merge())
                 .addOnSuccessListener {
                     continuation.resume(true)
                 }
@@ -101,7 +101,44 @@ class Firestore {
                     continuation.resume(false)
                 }
         }
+    }
 
+    // функция обновления данных из прайс-листа
+    suspend fun updateDataInPriceList(item: PriceListEntity,userId: String):Boolean{
+        return suspendCoroutine { continuation ->
+
+            val firestore = FirebaseFirestore.getInstance()
+            val data = item.toHashMap()
+
+            firestore.collection(Teachers_price_list).document(userId)
+                .collection(item.id.toString()).document(item.id.toString()).update(data)
+                .addOnSuccessListener {
+                    continuation.resume(true)
+                }
+                .addOnFailureListener {
+                    continuation.resume(false)
+                }
+
+        }
+    }
+
+    // функция удаления данных из прайс-листа
+    suspend fun deleteDataInPriceList(item: PriceListEntity,userId: String):Boolean{
+        return suspendCoroutine { continuation ->
+
+            val firestore = FirebaseFirestore.getInstance()
+            val data = item.toHashMap()
+
+            firestore.collection(Teachers_price_list).document(userId)
+                .collection(item.id.toString()).document(item.id.toString()).delete()
+                .addOnSuccessListener {
+                    continuation.resume(true)
+                }
+                .addOnFailureListener {
+                    continuation.resume(false)
+                }
+
+        }
     }
 
     // функция отправки первичных данных после успешной регистрации

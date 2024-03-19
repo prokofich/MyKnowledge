@@ -1,0 +1,431 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/image_doska_new"
+    tools:context=".view.fragments.DaysWeekFragment">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintWidth_percent="0.5"
+        android:background="@drawable/background_cs_menu_white"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_height="0dp"
+        android:text="Расписание:"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:textSize="30sp"
+        android:id="@+id/id_days_week_tv_title"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintHeight_percent="0.07"/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@id/id_days_week_cs_3"
+        app:layout_constraintEnd_toStartOf="@id/id_days_week_cs_2"
+        android:id="@+id/id_days_week_cs_1"
+        app:layout_constraintHeight_percent="0.18"
+        app:layout_constraintWidth_percent="0.5"
+        app:layout_constraintTop_toBottomOf="@id/id_days_week_tv_title"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintHeight_percent="0.85"
+            app:layout_constraintWidth_percent="0.85"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:text="ПН"
+                android:textStyle="bold"
+                android:textSize="40sp"
+                android:textColor="@color/white"
+                style="@style/ButtonStyleDayGreen"
+                android:id="@+id/id_days_week_cs_1_button"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHeight_percent="0.7"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:text="занятий: 0"
+                android:textStyle="italic|bold"
+                android:textSize="18sp"
+                android:background="@drawable/background_tv_day_orange"
+                app:layout_constraintHeight_percent="0.3"
+                android:id="@+id/id_days_week_cs_1_tv_1"
+                app:layout_constraintTop_toBottomOf="@id/id_days_week_cs_1_button"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:id="@+id/id_days_week_cs_2"
+        app:layout_constraintBottom_toTopOf="@id/id_days_week_cs_3"
+        app:layout_constraintStart_toEndOf="@id/id_days_week_cs_1"
+        app:layout_constraintHeight_percent="0.18"
+        app:layout_constraintWidth_percent="0.5"
+        app:layout_constraintTop_toBottomOf="@id/id_days_week_tv_title"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintHeight_percent="0.85"
+            app:layout_constraintWidth_percent="0.85"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:text="ВТ"
+                android:textStyle="bold"
+                android:textSize="40sp"
+                android:textColor="@color/white"
+                style="@style/ButtonStyleDayGreen"
+                android:id="@+id/id_days_week_cs_2_button"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHeight_percent="0.7"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:text="занятий: 0"
+                android:textStyle="italic|bold"
+                android:textSize="18sp"
+                android:background="@drawable/background_tv_day_orange"
+                app:layout_constraintHeight_percent="0.3"
+                android:id="@+id/id_days_week_cs_2_tv_1"
+                app:layout_constraintTop_toBottomOf="@id/id_days_week_cs_2_button"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintEnd_toStartOf="@id/id_days_week_cs_4"
+        android:id="@+id/id_days_week_cs_3"
+        app:layout_constraintBottom_toTopOf="@id/id_days_week_cs_6"
+        app:layout_constraintHeight_percent="0.18"
+        app:layout_constraintWidth_percent="0.5"
+        app:layout_constraintTop_toBottomOf="@id/id_days_week_cs_1"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintHeight_percent="0.85"
+            app:layout_constraintWidth_percent="0.85"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:text="СР"
+                android:textStyle="bold"
+                android:textSize="40sp"
+                android:textColor="@color/white"
+                style="@style/ButtonStyleDayGreen"
+                android:id="@+id/id_days_week_cs_3_button"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHeight_percent="0.7"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:text="занятий: 0"
+                android:textStyle="italic|bold"
+                android:textSize="18sp"
+                android:background="@drawable/background_tv_day_orange"
+                app:layout_constraintHeight_percent="0.3"
+                android:id="@+id/id_days_week_cs_3_tv_1"
+                app:layout_constraintTop_toBottomOf="@id/id_days_week_cs_3_button"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintStart_toEndOf="@id/id_days_week_cs_3"
+        android:id="@+id/id_days_week_cs_4"
+        app:layout_constraintBottom_toTopOf="@id/id_days_week_cs_6"
+        app:layout_constraintHeight_percent="0.18"
+        app:layout_constraintWidth_percent="0.5"
+        app:layout_constraintTop_toBottomOf="@id/id_days_week_cs_1"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintHeight_percent="0.85"
+            app:layout_constraintWidth_percent="0.85"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:text="ЧТ"
+                android:textStyle="bold"
+                android:textSize="40sp"
+                android:textColor="@color/white"
+                style="@style/ButtonStyleDayGreen"
+                android:id="@+id/id_days_week_cs_4_button"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHeight_percent="0.7"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:text="занятий: 0"
+                android:textStyle="italic|bold"
+                android:textSize="18sp"
+                android:background="@drawable/background_tv_day_orange"
+                app:layout_constraintHeight_percent="0.3"
+                android:id="@+id/id_days_week_cs_4_tv_1"
+                app:layout_constraintTop_toBottomOf="@id/id_days_week_cs_4_button"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintEnd_toStartOf="@id/id_days_week_cs_6"
+        android:id="@+id/id_days_week_cs_5"
+        app:layout_constraintBottom_toTopOf="@id/id_days_week_cs_7"
+        app:layout_constraintHeight_percent="0.18"
+        app:layout_constraintWidth_percent="0.5"
+        app:layout_constraintTop_toBottomOf="@id/id_days_week_cs_3"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintHeight_percent="0.85"
+            app:layout_constraintWidth_percent="0.85"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:id="@+id/id_days_week_cs_5_button"
+                app:layout_constraintTop_toTopOf="parent"
+                style="@style/ButtonStyleDayGreen"
+                android:text="ПТ"
+                android:textStyle="bold"
+                android:textSize="40sp"
+                android:textColor="@color/white"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHeight_percent="0.7"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:background="@drawable/background_tv_day_orange"
+                android:layout_height="0dp"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:text="занятий: 0"
+                android:textStyle="italic|bold"
+                android:textSize="18sp"
+                app:layout_constraintHeight_percent="0.3"
+                android:id="@+id/id_days_week_cs_5_tv_1"
+                app:layout_constraintTop_toBottomOf="@id/id_days_week_cs_5_button"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintStart_toEndOf="@id/id_days_week_cs_5"
+        android:id="@+id/id_days_week_cs_6"
+        app:layout_constraintBottom_toTopOf="@id/id_days_week_cs_7"
+        app:layout_constraintHeight_percent="0.18"
+        app:layout_constraintWidth_percent="0.5"
+        app:layout_constraintTop_toBottomOf="@id/id_days_week_cs_3"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintHeight_percent="0.85"
+            app:layout_constraintWidth_percent="0.85"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                style="@style/ButtonStyleDayGreen"
+                android:text="СБ"
+                android:textStyle="bold"
+                android:textSize="40sp"
+                android:textColor="@color/white"
+                android:id="@+id/id_days_week_cs_6_button"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHeight_percent="0.7"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:background="@drawable/background_tv_day_orange"
+                android:layout_height="0dp"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:text="занятий: 0"
+                android:textStyle="italic|bold"
+                android:textSize="18sp"
+                app:layout_constraintHeight_percent="0.3"
+                android:id="@+id/id_days_week_cs_6_tv_1"
+                app:layout_constraintTop_toBottomOf="@id/id_days_week_cs_6_button"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintStart_toStartOf="parent"
+        android:id="@+id/id_days_week_cs_7"
+        app:layout_constraintBottom_toTopOf="@id/id_days_week_button_back"
+        app:layout_constraintHeight_percent="0.18"
+        app:layout_constraintWidth_percent="0.5"
+        app:layout_constraintTop_toBottomOf="@id/id_days_week_cs_6"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintHeight_percent="0.85"
+            app:layout_constraintWidth_percent="0.85"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                style="@style/ButtonStyleDayGreen"
+                android:text="ВС"
+                android:textStyle="bold"
+                android:textSize="40sp"
+                android:textColor="@color/white"
+                android:id="@+id/id_days_week_cs_7_button"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHeight_percent="0.7"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:background="@drawable/background_tv_day_orange"
+                android:layout_height="0dp"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:text="занятий: 0"
+                android:textStyle="italic|bold"
+                android:textSize="18sp"
+                app:layout_constraintHeight_percent="0.3"
+                android:id="@+id/id_days_week_cs_7_tv_1"
+                app:layout_constraintTop_toBottomOf="@id/id_days_week_cs_7_button"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="назад"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:id="@+id/id_days_week_button_back"
+        app:layout_constraintWidth_percent="0.3"
+        app:layout_constraintHeight_percent="0.06"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginBottom="10dp"
+        style="@style/LoginButtonMenuStyle"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

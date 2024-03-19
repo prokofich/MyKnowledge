@@ -39,11 +39,9 @@ class PriceListAdapter(private val interfaceAdapter:PriceListInterface): Recycle
         val textViewPrice = holder.itemView.findViewById<TextView>(R.id.id_item_price_et_price)
         val textViewDescription = holder.itemView.findViewById<TextView>(R.id.id_item_price_et_desc)
 
-        textViewName.text = listPrice[position].id.toString()
+        textViewName.text = listPrice[position].name
         textViewPrice.text = listPrice[position].price
         textViewDescription.text = listPrice[position].desc
-
-
 
     }
 
@@ -69,12 +67,23 @@ class PriceListAdapter(private val interfaceAdapter:PriceListInterface): Recycle
             }else{
                 answer = repository.checkInputPriceData(name.text.toString(), price.text.toString(), description.text.toString())
                 if(answer == "верно"){
-                    interfaceAdapter.savePrice(
-                        PriceListEntity(
-                        name = name.text.toString(),
-                        price = price.text.toString(),
-                        desc = description.text.toString())
-                    )
+
+                    if(listPrice[holder.adapterPosition].id.toInt() == 0){
+                        interfaceAdapter.savePrice(
+                            PriceListEntity(
+                                name = name.text.toString(),
+                                price = price.text.toString(),
+                                desc = description.text.toString())
+                        )
+                    }else{
+                        interfaceAdapter.updatePrice(
+                            PriceListEntity(
+                                id = listPrice[holder.adapterPosition].id,
+                                name = name.text.toString(),
+                                price = price.text.toString(),
+                                desc = description.text.toString())
+                        )
+                    }
 
                     redact.text = "редактировать"
                     delete.isVisible = false
@@ -83,13 +92,21 @@ class PriceListAdapter(private val interfaceAdapter:PriceListInterface): Recycle
                     price.isEnabled = isOpenEditText
                     description.isEnabled = isOpenEditText
 
-                }else{
-                    interfaceAdapter.showToast(answer)
-                }
-
+                }else{ interfaceAdapter.showToast(answer) }
 
             }
 
+        }
+
+        delete.setOnClickListener {
+            interfaceAdapter.showDialog(
+                PriceListEntity(
+                    id = listPrice[holder.adapterPosition].id,
+                    name = name.text.toString(),
+                    price = price.text.toString(),
+                    desc = description.text.toString()
+                )
+            )
         }
 
     }
@@ -100,7 +117,7 @@ class PriceListAdapter(private val interfaceAdapter:PriceListInterface): Recycle
         notifyDataSetChanged()
     }
 
-    fun openOrClosedEditText(isOpen:Boolean){
+    private fun openOrClosedEditText(isOpen:Boolean){
         isOpenEditText = isOpen
     }
 

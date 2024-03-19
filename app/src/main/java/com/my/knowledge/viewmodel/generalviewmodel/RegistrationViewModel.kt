@@ -1,8 +1,9 @@
-package com.my.knowledge.viewmodel
+package com.my.knowledge.viewmodel.generalviewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.my.knowledge.model.database.firebase.repository.FirestoreRepository
 import com.my.knowledge.model.modelData.ModelUser
 import com.my.knowledge.model.repository.Repository
 import kotlinx.coroutines.Dispatchers
@@ -11,6 +12,7 @@ import kotlinx.coroutines.withContext
 
 class RegistrationViewModel:ViewModel() {
 
+    private val firestoreRepository = FirestoreRepository()
     private val repository = Repository()
 
     val isRegistration: MutableLiveData<String> = MutableLiveData()
@@ -18,7 +20,7 @@ class RegistrationViewModel:ViewModel() {
 
     fun createAccount(email:String,password:String){
         viewModelScope.launch(Dispatchers.IO) {
-            val answer = repository.createAccount(email, password)
+            val answer = firestoreRepository.createAccount(email, password)
             withContext(Dispatchers.Main){
                 isRegistration.value = answer
             }
@@ -27,7 +29,7 @@ class RegistrationViewModel:ViewModel() {
 
     fun setPrimaryDataAfterRegistration(modelUser: ModelUser){
         viewModelScope.launch(Dispatchers.IO) {
-            repository.setPrimaryDataAfterRegistration(modelUser)
+            firestoreRepository.setPrimaryDataAfterRegistration(modelUser)
         }
     }
 

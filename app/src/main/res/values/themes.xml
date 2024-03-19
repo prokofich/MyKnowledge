@@ -23,4 +23,8 @@
         <item name="android:background">@drawable/selector_button_2</item>
     </style>
 
+    <style name="ButtonStyleDayGreen">
+        <item name="android:background">@drawable/selector_button_day_green</item>
+    </style>
+
 </resources>

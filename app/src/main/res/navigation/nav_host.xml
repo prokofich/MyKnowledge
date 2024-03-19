@@ -49,6 +49,9 @@
         <action
             android:id="@+id/action_teacherMenuFragment_to_searchUsersFragment"
             app:destination="@id/searchUsersFragment" />
+        <action
+            android:id="@+id/action_teacherMenuFragment_to_daysWeekFragment"
+            app:destination="@id/daysWeekFragment" />
     </fragment>
     <fragment
         android:id="@+id/accountTeacherFragment"
@@ -99,5 +102,26 @@
         <action
             android:id="@+id/action_searchUsersFragment_to_teacherMenuFragment"
             app:destination="@id/teacherMenuFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/daysWeekFragment"
+        android:name="com.my.knowledge.view.fragments.DaysWeekFragment"
+        android:label="fragment_days_week"
+        tools:layout="@layout/fragment_days_week" >
+        <action
+            android:id="@+id/action_daysWeekFragment_to_teacherMenuFragment"
+            app:destination="@id/teacherMenuFragment" />
+        <action
+            android:id="@+id/action_daysWeekFragment_to_tableFragment"
+            app:destination="@id/tableFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/tableFragment"
+        android:name="com.my.knowledge.view.fragments.TableFragment"
+        android:label="fragment_table"
+        tools:layout="@layout/fragment_table" >
+        <action
+            android:id="@+id/action_tableFragment_to_daysWeekFragment"
+            app:destination="@id/daysWeekFragment" />
     </fragment>
 </navigation>

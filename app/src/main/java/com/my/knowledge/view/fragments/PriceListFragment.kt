@@ -1,5 +1,7 @@
 package com.my.knowledge.view.fragments
 
+import android.app.AlertDialog
+import android.content.DialogInterface
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -49,27 +51,32 @@ class PriceListFragment : Fragment(),PriceListInterface {
         priceListViewModel?.getAllPriceList()
 
         priceListViewModel?.priceList?.observe(viewLifecycleOwner){ data ->
-            listPrice = data.toMutableList()
-            priceListAdapter?.setListPrice(listPrice)
+            if(data != null){
+                listPrice = data.toMutableList()
+                priceListAdapter?.setListPrice(listPrice)
+            }
         }
 
         priceListViewModel?.isSuccessful?.observe(viewLifecycleOwner){ data ->
             repository = Repository()
             if(data){
-                repository?.showToast("данные успешно добавлены",requireContext())
+                repository?.showToast("действие успешно выполнено",requireContext())
             }else{
-                repository?.showToast("ошибка при сохранении",requireContext())
+                repository?.showToast("ошибка",requireContext())
             }
         }
 
+        // выход в меню
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner){
             MAIN?.navController?.navigate(R.id.action_priceListFragment_to_teacherMenuFragment)
         }
 
+        // выход в меню
         binding?.idPriceListButtonBack?.setOnClickListener {
             MAIN?.navController?.navigate(R.id.action_priceListFragment_to_teacherMenuFragment)
         }
 
+        // добавление элемента в прокручиваемый список
         binding?.idPriceListButtonAdd?.setOnClickListener {
             listPrice.add(PriceListEntity(name = "", price = "", desc = ""))
             priceListAdapter?.setListPrice(listPrice)
@@ -77,20 +84,56 @@ class PriceListFragment : Fragment(),PriceListInterface {
 
     }
 
-
+    // очистка биндинга при очистке вью
     override fun onDestroyView() {
         super.onDestroyView()
         binding = null
     }
 
+    // функция сохранения новой позиции в прайс-листе
     override fun savePrice(item: PriceListEntity) {
         sharedPreferences = SharedPreferences(requireContext())
-        priceListViewModel?.insertPriceInDatabase(item,sharedPreferences?.getUserId())
+        priceListViewModel?.insertPriceFromDatabase(item,sharedPreferences?.getUserId())
     }
 
+    // функция обновления старой позиции в прайс-листе
+    override fun updatePrice(item: PriceListEntity) {
+        sharedPreferences = SharedPreferences(requireContext())
+        priceListViewModel?.updatePriceFromDatabase(item,sharedPreferences?.getUserId())
+    }
+
+    // функция удаления старой позиции из прайс-листа
+    override fun deletePrice(item: PriceListEntity) {
+        sharedPreferences = SharedPreferences(requireContext())
+        priceListViewModel?.deletePriceFromDatabase(item,sharedPreferences?.getUserId())
+    }
+
+    // функция показа всплывающего сообщения
     override fun showToast(message: String?) {
         repository = Repository()
         repository?.showToast(message,requireContext())
+    }
+
+    // функция показа диалога о подтверждении удаления
+    override fun showDialog(item: PriceListEntity) {
+        val alertDialogBuilder = AlertDialog.Builder(requireContext())
+        alertDialogBuilder.apply {
+            setTitle("Удаление")
+            setMessage("Вы уверены, что хотите удалить этот элемент?")
+            setPositiveButton("Да") { dialogInterface: DialogInterface, _: Int ->
+                if(item.id.toInt() != 0){
+                    deletePrice(item)
+                }else{
+                    listPrice.remove(item)
+                    priceListAdapter?.setListPrice(listPrice)
+                }
+                dialogInterface.dismiss()
+            }
+            setNegativeButton("Нет") { dialogInterface: DialogInterface, _: Int ->
+                dialogInterface.dismiss()
+            }
+        }
+        alertDialogBuilder.create().show()
     }
 
 }

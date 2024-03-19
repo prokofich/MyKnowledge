@@ -11,7 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.my.knowledge.model.database.firebase.Firestore
 import com.my.knowledge.model.constant.MAIN
 import com.my.knowledge.R
-import com.my.knowledge.viewmodel.RegistrationViewModel
+import com.my.knowledge.viewmodel.generalviewmodel.RegistrationViewModel
 import com.my.knowledge.model.constant.STUDENT
 import com.my.knowledge.model.constant.TEACHER
 import com.my.knowledge.databinding.FragmentRegistrationBinding
@@ -72,6 +72,10 @@ class RegistrationFragment : Fragment() {
                 )
 
                 registrationViewModel?.setPrimaryDataAfterRegistration(modelUser)
+
+                sharedPreferences?.saveFirstNameTeacher(binding?.idRegEtFirstName?.text.toString())
+                sharedPreferences?.saveLastNameTeacher(binding?.idRegEtLastName?.text.toString())
+
                 repository?.showToast("вы успешно зарегистрировались!",requireContext())
             }
         }

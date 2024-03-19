@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:id="@+id/id_item_table_cs_1"
+        android:background="@drawable/background_tv_table_green"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <EditText
+            android:inputType="text|textNoSuggestions|textFilter"
+            android:layout_width="match_parent"
+            android:padding="1dp"
+            android:backgroundTint="#3c9867"
+            android:layout_height="wrap_content"
+            android:text="МАТЕМАТИКА"
+            android:maxWidth="300dp"
+            android:textStyle="bold"
+            android:textSize="35sp"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:id="@+id/id_item_time_table"
+            android:gravity="center|start"
+            app:layout_constraintStart_toStartOf="parent"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintWidth_percent="0.9"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:inputType="text|textNoSuggestions|textFilter"
+            android:layout_height="wrap_content"
+            android:gravity="center|start"
+            android:padding="1dp"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:backgroundTint="#3c9867"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:textStyle="bold|italic"
+            android:maxWidth="300dp"
+            android:layout_marginTop="5dp"
+            android:text="студент: никита прокофьев"
+
+            app:layout_constraintTop_toBottomOf="@id/id_item_time_table"
+            app:layout_constraintWidth_percent="0.9"
+            app:layout_constraintHeight_percent="0.3"
+            android:id="@+id/id_item_time_table_et_student"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:gravity="center|start"
+            android:textColor="@color/white"
+            android:textStyle="bold|italic"
+            android:padding="1dp"
+            android:text="цена (Руб):"
+            android:textSize="20sp"
+            android:layout_marginStart="10dp"
+            app:layout_constraintBottom_toBottomOf="@id/id_item_time_table_et_price"
+            android:id="@+id/id_item_time_table_tv_title_price"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintWidth_percent="0.28"
+            app:layout_constraintTop_toTopOf="@id/id_item_time_table_et_price"/>
+
+        <EditText
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:backgroundTint="@color/white"
+            app:layout_constraintWidth_percent="0.3"
+            android:layout_marginBottom="10dp"
+            android:hint="0"
+            android:gravity="center"
+            app:layout_constraintTop_toBottomOf="@id/id_item_time_table_et_student"
+            android:layout_marginTop="5dp"
+            android:textColor="@color/white"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            android:id="@+id/id_item_time_table_et_price"
+            app:layout_constraintStart_toEndOf="@id/id_item_time_table_tv_title_price"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:background="@drawable/background_tv_day_orange"
+        app:layout_constraintTop_toBottomOf="@id/id_item_table_cs_1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:fontFamily="@font/baloo"
+            android:textColor="@color/white"
+            android:text="00"
+            android:textStyle="bold"
+            android:textSize="28sp"
+            android:id="@+id/id_item_time_table_cs_2_tv_time_1_hour"
+            app:layout_constraintHeight_percent="0.8"
+            app:layout_constraintWidth_percent="0.1"
+            android:layout_marginStart="10dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            app:layout_constraintHeight_percent="0.8"
+            app:layout_constraintWidth_percent="0.1"
+            android:gravity="center"
+            android:text=":"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:textSize="25sp"
+            android:id="@+id/id_item_time_table_tv_1"
+            app:layout_constraintTop_toTopOf="@id/id_item_time_table_cs_2_tv_time_1_hour"
+            app:layout_constraintBottom_toBottomOf="@id/id_item_time_table_cs_2_tv_time_1_hour"
+            app:layout_constraintStart_toEndOf="@id/id_item_time_table_cs_2_tv_time_1_hour"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:fontFamily="@font/baloo"
+            android:textColor="@color/white"
+            android:text="00"
+            android:textStyle="bold"
+            android:textSize="28sp"
+            android:id="@+id/id_item_time_table_cs_2_tv_time_1_minute"
+            app:layout_constraintHeight_percent="0.8"
+            app:layout_constraintWidth_percent="0.1"
+            app:layout_constraintStart_toEndOf="@id/id_item_time_table_tv_1"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="3dp"
+            android:layout_marginStart="5dp"
+            app:layout_constraintWidth_percent="0.05"
+            android:background="@color/white"
+            android:id="@+id/id_item_time_table_tv_2"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/id_item_time_table_cs_2_tv_time_1_minute"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:fontFamily="@font/baloo"
+            android:textColor="@color/white"
+            android:text="00"
+            android:textStyle="bold"
+            android:textSize="28sp"
+            android:id="@+id/id_item_time_table_cs_2_tv_time_2_hour"
+            app:layout_constraintHeight_percent="0.8"
+            app:layout_constraintWidth_percent="0.1"
+            android:layout_marginStart="5dp"
+            app:layout_constraintStart_toEndOf="@id/id_item_time_table_tv_2"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            app:layout_constraintHeight_percent="0.8"
+            app:layout_constraintWidth_percent="0.1"
+            android:gravity="center"
+            android:text=":"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:textSize="25sp"
+            android:id="@+id/id_item_time_table_tv_3"
+            app:layout_constraintTop_toTopOf="@id/id_item_time_table_cs_2_tv_time_2_hour"
+            app:layout_constraintBottom_toBottomOf="@id/id_item_time_table_cs_2_tv_time_2_hour"
+            app:layout_constraintStart_toEndOf="@id/id_item_time_table_cs_2_tv_time_2_hour"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:fontFamily="@font/baloo"
+            android:textColor="@color/white"
+            android:text="00"
+            android:textStyle="bold"
+            android:textSize="28sp"
+            android:id="@+id/id_item_time_table_cs_2_tv_time_2_minute"
+            app:layout_constraintHeight_percent="0.8"
+            app:layout_constraintWidth_percent="0.1"
+            app:layout_constraintStart_toEndOf="@id/id_item_time_table_tv_3"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:visibility="gone"
+            android:id="@+id/id_item_time_table_iv_delete"
+            app:layout_constraintHeight_percent="0.8"
+            app:layout_constraintWidth_percent="0.1"
+            android:background="@drawable/image_delete_2"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/id_item_time_table_button_redact"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            style="@style/LoginButtonMenuStyle"
+            android:layout_marginEnd="10dp"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:text="изменить"
+            android:id="@+id/id_item_time_table_button_redact"
+            android:textStyle="bold"
+            app:layout_constraintWidth_percent="0.25"
+            app:layout_constraintHeight_percent="0.5"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

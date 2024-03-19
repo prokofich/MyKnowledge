@@ -14,7 +14,7 @@ import com.my.knowledge.model.constant.STUDENT
 import com.my.knowledge.model.constant.TEACHER
 import com.my.knowledge.model.database.sharedpreferences.SharedPreferences
 import com.my.knowledge.model.repository.Repository
-import com.my.knowledge.viewmodel.SplashViewModel
+import com.my.knowledge.viewmodel.generalviewmodel.SplashViewModel
 
 
 class SplashFragment : Fragment() {

@@ -18,11 +18,7 @@ class Repository{
         MAIN?.closeApplication()
     }
 
-    // функция проверки безлогинового входа
-    fun checkOpenAccount():Boolean{
-        return Firestore().checkOpenAccount()
-    }
-
+    // функция проверки правильности введенных данных
     fun checkInputPriceData(name:String,price:String,desc:String):String{
         return if(name!="" && price!="" && desc!=""){
             if(price.toSet().intersect(alfavit.toSet()).isEmpty()){
@@ -33,41 +29,6 @@ class Repository{
         }else{
             "вы ввели не все данные"
         }
-    }
-
-    // функция отправки данных из прайс листа в Firestore
-    suspend fun setDataInPriceList(item: PriceListEntity, userId: String):Boolean{
-        return Firestore().setDataInPriceList(item, userId)
-    }
-
-    // функция отправки данных из профиля учителя
-    suspend fun setDataFromMyProfile(dataFromProfile:String,typeDataFromProfile:String,userId:String):Boolean{
-        return Firestore().setDataFromMyProfile(dataFromProfile, typeDataFromProfile, userId)
-    }
-
-    // функция отправки имени и фамилии
-    suspend fun setFirstAndLastName(firstName:String,lastName:String,userId:String):Boolean{
-        return Firestore().setFirstAnsLastName(firstName, lastName, userId)
-    }
-
-    // функция регистрации пользователя
-    suspend fun createAccount(email:String,password:String):String{
-        return Firestore().createAccount(email,password)
-    }
-
-    // функция входа в аккаунт
-    suspend fun loginInAccount(email:String,password:String):String{
-        return Firestore().loginInAccount(email,password)
-    }
-
-    // функция добавления первичных данных на сервер после регистрации
-    suspend fun setPrimaryDataAfterRegistration(modelUser: ModelUser){
-        Firestore().setPrimaryDataAfterRegistration(modelUser)
-    }
-
-    // функция получения данных для аккаунта учителя
-    suspend fun getMyInfoTeacher(idTeacher:String):ModelTeacher{
-        return Firestore().getMyInfoTeacher(idTeacher)
     }
 
     // функция показа всплывающего сообщения

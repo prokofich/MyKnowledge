@@ -38,7 +38,7 @@ class AccountTeacherFragment : Fragment() {
 
         val accountTeacherViewModel = ViewModelProvider(this)[AccountTeacherViewModel::class.java]
 
-        accountTeacherViewModel.isSuccessfull.observe(viewLifecycleOwner){ data ->
+        accountTeacherViewModel.isSuccessful.observe(viewLifecycleOwner){ data ->
             if(data){
                 repository?.showToast("данные успешно сохранены",requireContext())
             }else{
@@ -49,13 +49,15 @@ class AccountTeacherFragment : Fragment() {
         // разрешение на редактирование имени и фамилии
         binding?.idAccountTeacherTvRedact?.setOnClickListener {
             if(binding?.idAccountTeacherTvRedact?.text == "редактировать"){
+
                 openOrClosedEditTextForName(true) // открытие для редактирования
                 binding?.idAccountTeacherTvRedact?.text = "сохранить"
+
             }else{
                 openOrClosedEditTextForName(false) // закрытие перед сохранением
                 binding?.idAccountTeacherTvRedact?.text = "редактировать"
 
-                // сохранение на телефон в xml
+                // сохранение на телефон в SharedPreferences
                 sharedPreferences?.saveFirstNameTeacher(binding?.idAccountTvFirstName?.text.toString())
                 sharedPreferences?.saveLastNameTeacher(binding?.idAccountTvLastName?.text.toString())
 
@@ -79,7 +81,7 @@ class AccountTeacherFragment : Fragment() {
                 openOrClosedEditText1(false)
                 binding?.idAccountTeacherTvRedact1?.text = "изменить"
 
-                // сохранение на телефон в xml
+                // сохранение на телефон в SharedPreferences
                 sharedPreferences?.saveDescriptionTeacher(binding?.idAccountTeacherTvMyDesc?.text.toString())
 
                 // сохранение в Firestore
@@ -95,14 +97,16 @@ class AccountTeacherFragment : Fragment() {
         // изменение опыта работы
         binding?.idAccountTeacherTvRedact2?.setOnClickListener {
             if(binding?.idAccountTeacherTvRedact2?.text == "изменить"){
+
                 openOrClosedEditText2(true) // открытие для редактирования
                 binding?.idAccountTeacherTvRedact2?.text = "сохранить"
+
             }else{
 
                 openOrClosedEditText2(false)
                 binding?.idAccountTeacherTvRedact2?.text = "изменить"
 
-                // сохранение на телефон в xml
+                // сохранение на телефон в SharedPreferences
                 sharedPreferences?.saveExperienceTeacher(binding?.idAccountTeacherTvOpitRaboti?.text.toString())
 
                 // сохранение в Firestore
@@ -118,14 +122,16 @@ class AccountTeacherFragment : Fragment() {
         // изменение образования
         binding?.idAccountTeacherTvRedact3?.setOnClickListener {
             if(binding?.idAccountTeacherTvRedact3?.text == "изменить"){
+
                 openOrClosedEditText3(true) // открытие для редактирования
                 binding?.idAccountTeacherTvRedact3?.text = "сохранить"
+
             }else{
 
                 openOrClosedEditText3(false)
                 binding?.idAccountTeacherTvRedact3?.text = "изменить"
 
-                // сохранение на телефон в xml
+                // сохранение на телефон в SharedPreferences
                 sharedPreferences?.saveEducationTeacher(binding?.idAccountTeacherTvEducation?.text.toString())
 
                 // сохранение в Firestore

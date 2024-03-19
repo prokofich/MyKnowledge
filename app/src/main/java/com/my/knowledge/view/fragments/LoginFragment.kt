@@ -17,7 +17,7 @@ import com.my.knowledge.model.constant.CORRECT
 import com.my.knowledge.model.constant.STUDENT
 import com.my.knowledge.model.constant.TEACHER
 import com.my.knowledge.model.database.sharedpreferences.SharedPreferences
-import com.my.knowledge.viewmodel.LoginViewModel
+import com.my.knowledge.viewmodel.generalviewmodel.LoginViewModel
 
 class LoginFragment : Fragment() {
 
