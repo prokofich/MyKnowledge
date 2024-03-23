@@ -61,6 +61,7 @@ class PriceListFragment : Fragment(),PriceListInterface {
             repository = Repository()
             if(data){
                 repository?.showToast("действие успешно выполнено",requireContext())
+                priceListViewModel?.getAllPriceList()
             }else{
                 repository?.showToast("ошибка",requireContext())
             }
@@ -118,14 +119,20 @@ class PriceListFragment : Fragment(),PriceListInterface {
     override fun showDialog(item: PriceListEntity) {
         val alertDialogBuilder = AlertDialog.Builder(requireContext())
         alertDialogBuilder.apply {
+
             setTitle("Удаление")
             setMessage("Вы уверены, что хотите удалить этот элемент?")
+
             setPositiveButton("Да") { dialogInterface: DialogInterface, _: Int ->
                 if(item.id.toInt() != 0){
+
                     deletePrice(item)
+
                 }else{
-                    listPrice.remove(item)
+
+                    listPrice.remove(PriceListEntity(id = 0, name = "", price = "", desc = ""))
                     priceListAdapter?.setListPrice(listPrice)
+
                 }
                 dialogInterface.dismiss()
             }
@@ -133,6 +140,7 @@ class PriceListFragment : Fragment(),PriceListInterface {
                 dialogInterface.dismiss()
             }
         }
+
         alertDialogBuilder.create().show()
     }
 

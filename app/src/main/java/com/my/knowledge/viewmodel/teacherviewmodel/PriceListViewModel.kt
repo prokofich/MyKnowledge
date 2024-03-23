@@ -29,8 +29,10 @@ class PriceListViewModel(application: Application):AndroidViewModel(application)
             databaseRoom = RoomRepository(getApplication()).database
             databaseRoom?.databasePriceListDao()?.insertPrice(item)
 
+            val itemPriceList = databaseRoom?.databasePriceListDao()?.getLastPrice()
+
             if (userId != null){
-                val answer = firestoreRepository.setDataInPriceList(item, userId)
+                val answer = firestoreRepository.setDataInPriceList(itemPriceList!!, userId)
                 withContext(Dispatchers.Main){
                     synchronized(lock){
                         isSuccessful.value = answer

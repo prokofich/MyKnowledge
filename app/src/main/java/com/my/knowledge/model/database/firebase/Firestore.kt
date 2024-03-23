@@ -127,7 +127,6 @@ class Firestore {
         return suspendCoroutine { continuation ->
 
             val firestore = FirebaseFirestore.getInstance()
-            val data = item.toHashMap()
 
             firestore.collection(Teachers_price_list).document(userId)
                 .collection(item.id.toString()).document(item.id.toString()).delete()

@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
-import android.widget.TextView
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.my.knowledge.R
@@ -35,16 +34,17 @@ class PriceListAdapter(private val interfaceAdapter:PriceListInterface): Recycle
 
     override fun onBindViewHolder(holder: PriceListViewHolder, position: Int) {
 
-        val textViewName = holder.itemView.findViewById<TextView>(R.id.id_item_price_et_name)
-        val textViewPrice = holder.itemView.findViewById<TextView>(R.id.id_item_price_et_price)
-        val textViewDescription = holder.itemView.findViewById<TextView>(R.id.id_item_price_et_desc)
+        val editTextViewName = holder.itemView.findViewById<EditText>(R.id.id_item_price_et_name)
+        val editTextViewPrice = holder.itemView.findViewById<EditText>(R.id.id_item_price_et_price)
+        val editTextViewDescription = holder.itemView.findViewById<EditText>(R.id.id_item_price_et_desc)
 
-        textViewName.text = listPrice[position].name
-        textViewPrice.text = listPrice[position].price
-        textViewDescription.text = listPrice[position].desc
+        editTextViewName.setText(listPrice[position].name)
+        editTextViewPrice.setText(listPrice[position].price)
+        editTextViewDescription.setText(listPrice[position].desc)
 
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     override fun onViewAttachedToWindow(holder: PriceListViewHolder) {
         super.onViewAttachedToWindow(holder)
 

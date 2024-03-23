@@ -13,7 +13,6 @@ interface TimeTableDao {
     @Query("SELECT * FROM TimeTableEntity WHERE dayWeek = :dayOfWeek")
     fun getTimeTableByDayOfWeek(dayOfWeek: String): List<TimeTableEntity>
 
-
     @Query("SELECT COUNT(*) FROM TimeTableEntity WHERE dayWeek = :dayOfWeek")
     fun getCountTimeTableByDayOfWeek(dayOfWeek: String): Int
 

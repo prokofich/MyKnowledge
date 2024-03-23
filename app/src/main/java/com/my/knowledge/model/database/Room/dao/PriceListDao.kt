@@ -13,6 +13,9 @@ interface PriceListDao {
     @Query("SELECT * FROM PriceListEntity")
     fun getAllPriceList():List<PriceListEntity>
 
+    @Query("SELECT * FROM PriceListEntity ORDER BY id DESC LIMIT 1")
+    fun getLastPrice(): PriceListEntity
+
     @Delete
     fun deletePrice(item: PriceListEntity)
 
@@ -21,4 +24,5 @@ interface PriceListDao {
 
     @Insert
     fun insertPrice(item: PriceListEntity)
+
 }

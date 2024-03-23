@@ -25,6 +25,9 @@ class TableFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
+
+
         // возврат в меню выбора дня недели
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner){
             MAIN?.navController?.navigate(R.id.action_tableFragment_to_daysWeekFragment)
@@ -34,8 +37,6 @@ class TableFragment : Fragment() {
         binding?.idTableButtonBack?.setOnClickListener {
             MAIN?.navController?.navigate(R.id.action_tableFragment_to_daysWeekFragment)
         }
-
-
 
     }
 
