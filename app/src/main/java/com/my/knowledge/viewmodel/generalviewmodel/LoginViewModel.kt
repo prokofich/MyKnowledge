@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.my.knowledge.model.database.firebase.repository.FirestoreRepository
+import com.my.knowledge.model.modelData.ModelResponseLogin
 import com.my.knowledge.model.repository.Repository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -14,11 +15,11 @@ class LoginViewModel:ViewModel() {
     private val firestoreRepository = FirestoreRepository()
     private val repository = Repository()
 
-    val isLogin: MutableLiveData<String> = MutableLiveData()
+    val isLogin: MutableLiveData<ModelResponseLogin> = MutableLiveData()
     val isCorrectInputData: MutableLiveData<String> = MutableLiveData()
 
-    fun checkInputDataInLogin(email:String?,password:String?){
-        isCorrectInputData.value = repository.checkInputDataInLogin(email, password)
+    fun checkInputDataInLogin(email:String?,password:String?,stateNetwork:Boolean?){
+        isCorrectInputData.value = repository.checkInputDataInLogin(email, password,stateNetwork)
     }
 
     fun loginInAccount(email:String,password:String){

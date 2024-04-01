@@ -42,39 +42,47 @@ class LoginFragment : Fragment() {
 
         // попытка входа в аккаунт
         binding?.idLoginButtonInput?.setOnClickListener {
-            binding?.idLoginPb?.isVisible = true
 
+            showError("")
+            showOrHideProgressBar(true)
             loginViewModel.checkInputDataInLogin(
                 binding?.idLoginEtEmail?.text.toString(),
-                binding?.idLoginEtPassword?.text.toString()
+                binding?.idLoginEtPassword?.text.toString(),
+                MAIN?.getStateNetwork()
             )
+
         }
 
         loginViewModel.isLogin.observe(viewLifecycleOwner){ data ->
-            binding?.idLoginPb?.isVisible = false
-            if(data == TEACHER){
-                SharedPreferences(requireContext()).setTypeUserInLastSession(TEACHER)
-                MAIN?.navController?.navigate(R.id.action_loginFragment_to_teacherMenuFragment) // переход в аккаунт учителя
-            }else{
-                if(data == STUDENT){
-                    SharedPreferences(requireContext()).setTypeUserInLastSession(STUDENT)
-                    MAIN?.navController?.navigate(R.id.action_loginFragment_to_studentMenuFragment) // переход в аккаунт ученика
-                }else{
+
+            SharedPreferences(requireContext()).saveUserId(data.userId)
+            SharedPreferences(requireContext()).setTypeUserInLastSession(data.statusUser)
+            showOrHideProgressBar(false)
+
+            when(data.statusUser){
+                TEACHER -> { MAIN?.navController?.navigate(R.id.action_loginFragment_to_teacherMenuFragment) }
+                STUDENT -> { MAIN?.navController?.navigate(R.id.action_loginFragment_to_studentMenuFragment) }
+                else -> {
                     repository?.showToast("ошибка входа",requireContext())
                     binding!!.idLoginTvError.text = "ошибка при входе"
                 }
             }
+
         }
 
         loginViewModel.isCorrectInputData.observe(viewLifecycleOwner){ data ->
-            if(data == CORRECT){
-                binding?.idLoginTvError?.text = ""
-                loginViewModel.loginInAccount(binding?.idLoginEtEmail?.text.toString(),binding?.idLoginEtPassword?.text.toString())
-            }else{
-                binding?.idLoginPb?.isVisible = false
-                binding?.idLoginTvError?.text = data
-                repository?.showToast(data,requireContext())
+
+            when(data){
+                CORRECT -> {
+                    loginViewModel.loginInAccount(binding?.idLoginEtEmail?.text.toString(),binding?.idLoginEtPassword?.text.toString())
+                }
+                else -> {
+                    showOrHideProgressBar(false)
+                    showError(data)
+                    repository?.showToast(data,requireContext())
+                }
             }
+
         }
 
         // переход к созданию аккаунта
@@ -97,8 +105,8 @@ class LoginFragment : Fragment() {
 
     // функция показа диалогового сообщения о выходе из приложения
     private fun exitTheApplication(){
-        val builder = AlertDialog.Builder(context)
 
+        val builder = AlertDialog.Builder(context)
         builder.setTitle("выход из приложения")
         builder.setMessage("вы точно хотите выйти?")
 
@@ -112,6 +120,17 @@ class LoginFragment : Fragment() {
 
         alertDialog = builder.create()
         alertDialog?.show()
+
+    }
+
+    // функция показа ошибки на экране
+    private fun showError(error:String){
+        binding?.idLoginTvError?.text = error
+    }
+
+    // функция показа или скрытия прогресс бара
+    private fun showOrHideProgressBar(flag:Boolean){
+        binding?.idLoginPb?.isVisible = flag
     }
 
 }

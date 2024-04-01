@@ -243,7 +243,7 @@
             android:id="@+id/id_menu_teacher_cs_6"
             android:background="@drawable/background_tv_account"
             app:layout_constraintHeight_percent="0.1"
-            app:layout_constraintBottom_toTopOf="@id/id_menu_teacher_cs_7"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/id_menu_teacher_cs_5">
@@ -280,96 +280,6 @@
                 app:layout_constraintBottom_toBottomOf="parent"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:id="@+id/id_menu_teacher_cs_7"
-            android:background="@drawable/background_tv_account"
-            app:layout_constraintHeight_percent="0.1"
-            app:layout_constraintBottom_toTopOf="@id/id_menu_teacher_cs_8"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/id_menu_teacher_cs_6">
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:id="@+id/id_menu_teacher_button_news"
-                style="@style/ButtonStyleOrange"
-                android:text="новости"
-                android:textColor="@color/white"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/id_menu_teacher_tv_news"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintWidth_percent="0.3"
-                app:layout_constraintHeight_percent="0.7"/>
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:gravity="center"
-                android:textColor="@color/white"
-                android:textStyle="italic"
-                android:textSize="12sp"
-                android:text="здесь вы можете посмотреть новостную ленту"
-                app:layout_constraintStart_toStartOf="parent"
-                android:id="@+id/id_menu_teacher_tv_news"
-                app:layout_constraintWidth_percent="0.6"
-                app:layout_constraintHeight_percent="0.65"
-                app:layout_constraintEnd_toStartOf="@id/id_menu_teacher_button_news"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"/>
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:id="@+id/id_menu_teacher_cs_8"
-            android:background="@drawable/background_tv_account"
-            app:layout_constraintHeight_percent="0.1"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/id_menu_teacher_cs_7">
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:id="@+id/id_menu_teacher_button_notes"
-                style="@style/ButtonStyleOrange"
-                android:text="заметки"
-                android:textColor="@color/white"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toStartOf="@id/id_menu_teacher_tv_notes"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintWidth_percent="0.3"
-                app:layout_constraintHeight_percent="0.7"/>
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:gravity="center"
-                android:textColor="@color/white"
-                android:textStyle="italic"
-                android:textSize="12sp"
-                android:text="здесь вы можете оставлять любые свои заметки"
-                app:layout_constraintStart_toEndOf="@id/id_menu_teacher_button_notes"
-                android:id="@+id/id_menu_teacher_tv_notes"
-                app:layout_constraintWidth_percent="0.6"
-                app:layout_constraintHeight_percent="0.65"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"/>
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

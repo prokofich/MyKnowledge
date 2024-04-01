@@ -2,6 +2,7 @@ package com.my.knowledge.model.database.firebase.repository
 
 import com.my.knowledge.model.database.Room.entity.PriceListEntity
 import com.my.knowledge.model.database.firebase.Firestore
+import com.my.knowledge.model.modelData.ModelResponseLogin
 import com.my.knowledge.model.modelData.ModelTeacher
 import com.my.knowledge.model.modelData.ModelUser
 
@@ -38,7 +39,7 @@ class FirestoreRepository {
     }
 
     // асинхронная функция входа в аккаунт
-    suspend fun loginInAccount(email:String,password:String):String{
+    suspend fun loginInAccount(email:String,password:String):ModelResponseLogin{
         return Firestore().loginInAccount(email,password)
     }
 

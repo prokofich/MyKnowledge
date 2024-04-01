@@ -10,6 +10,7 @@ import androidx.activity.addCallback
 import androidx.lifecycle.ViewModelProvider
 import com.my.knowledge.databinding.FragmentAccountTeacherBinding
 import com.my.knowledge.model.constant.MAIN
+import com.my.knowledge.model.database.Room.entity.MyAccountEntity
 import com.my.knowledge.model.database.sharedpreferences.SharedPreferences
 import com.my.knowledge.model.repository.Repository
 import com.my.knowledge.viewmodel.teacherviewmodel.AccountTeacherViewModel
@@ -31,12 +32,16 @@ class AccountTeacherFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        sharedPreferences = SharedPreferences(requireContext())
         repository = Repository()
-
-        showMyInfoTeacher()
+        sharedPreferences = SharedPreferences(requireContext())
 
         val accountTeacherViewModel = ViewModelProvider(this)[AccountTeacherViewModel::class.java]
+
+        accountTeacherViewModel.getInfoMyAccount(sharedPreferences?.getUserId().toString())
+
+        accountTeacherViewModel.infoMyAccount.observe(viewLifecycleOwner){ data ->
+            showMyInfoTeacher(data)
+        }
 
         accountTeacherViewModel.isSuccessful.observe(viewLifecycleOwner){ data ->
             if(data){
@@ -57,16 +62,19 @@ class AccountTeacherFragment : Fragment() {
                 openOrClosedEditTextForName(false) // закрытие перед сохранением
                 binding?.idAccountTeacherTvRedact?.text = "редактировать"
 
-                // сохранение на телефон в SharedPreferences
-                sharedPreferences?.saveFirstNameTeacher(binding?.idAccountTvFirstName?.text.toString())
-                sharedPreferences?.saveLastNameTeacher(binding?.idAccountTvLastName?.text.toString())
+                // сохранение в Room
+
 
                 // сохранение в Firestore
-                accountTeacherViewModel.setFirstAndLastName(
-                    binding?.idAccountTvFirstName?.text.toString(),
-                    binding?.idAccountTvLastName?.text.toString(),
-                    sharedPreferences?.getUserId()
-                )
+                if(MAIN?.getStateNetwork() == true){
+                    accountTeacherViewModel.setFirstAndLastName(
+                        binding?.idAccountTvFirstName?.text.toString(),
+                        binding?.idAccountTvLastName?.text.toString(),
+                        sharedPreferences?.getUserId()
+                    )
+                }else{
+                    repository?.showToast("проверьте состояние сети",requireContext())
+                }
 
             }
         }
@@ -81,8 +89,8 @@ class AccountTeacherFragment : Fragment() {
                 openOrClosedEditText1(false)
                 binding?.idAccountTeacherTvRedact1?.text = "изменить"
 
-                // сохранение на телефон в SharedPreferences
-                sharedPreferences?.saveDescriptionTeacher(binding?.idAccountTeacherTvMyDesc?.text.toString())
+                // сохранение в Room
+
 
                 // сохранение в Firestore
                 accountTeacherViewModel.setDataFromMyProfile(
@@ -106,8 +114,8 @@ class AccountTeacherFragment : Fragment() {
                 openOrClosedEditText2(false)
                 binding?.idAccountTeacherTvRedact2?.text = "изменить"
 
-                // сохранение на телефон в SharedPreferences
-                sharedPreferences?.saveExperienceTeacher(binding?.idAccountTeacherTvOpitRaboti?.text.toString())
+                // сохранение в Room
+
 
                 // сохранение в Firestore
                 accountTeacherViewModel.setDataFromMyProfile(
@@ -131,8 +139,8 @@ class AccountTeacherFragment : Fragment() {
                 openOrClosedEditText3(false)
                 binding?.idAccountTeacherTvRedact3?.text = "изменить"
 
-                // сохранение на телефон в SharedPreferences
-                sharedPreferences?.saveEducationTeacher(binding?.idAccountTeacherTvEducation?.text.toString())
+                // сохранение в Room
+
 
                 // сохранение в Firestore
                 accountTeacherViewModel.setDataFromMyProfile(
@@ -163,12 +171,12 @@ class AccountTeacherFragment : Fragment() {
     }
 
     // функция показа основной информации в профиле учителя
-    private fun showMyInfoTeacher(){
-        binding?.idAccountTvLastName?.setText(sharedPreferences?.getLastNameTeacher())
-        binding?.idAccountTvFirstName?.setText(sharedPreferences?.getFirstNameTeacher())
-        binding?.idAccountTeacherTvMyDesc?.setText(sharedPreferences?.getDescriptionTeacher())
-        binding?.idAccountTeacherTvOpitRaboti?.setText(sharedPreferences?.getExperienceTeacher())
-        binding?.idAccountTeacherTvEducation?.setText(sharedPreferences?.getEducationTeacher())
+    private fun showMyInfoTeacher(data:MyAccountEntity?){
+        binding?.idAccountTvLastName?.setText(data?.lastName)
+        binding?.idAccountTvFirstName?.setText(data?.firstName)
+        binding?.idAccountTeacherTvMyDesc?.setText(data?.description)
+        binding?.idAccountTeacherTvOpitRaboti?.setText(data?.experience)
+        binding?.idAccountTeacherTvEducation?.setText(data?.education)
     }
 
     // функция открытия/закрытия для редактирования поля ввода

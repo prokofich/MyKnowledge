@@ -11,6 +11,7 @@ import com.my.knowledge.model.constant.Teachers
 import com.my.knowledge.model.constant.Teachers_and_Students
 import com.my.knowledge.model.constant.Teachers_price_list
 import com.my.knowledge.model.database.Room.entity.PriceListEntity
+import com.my.knowledge.model.modelData.ModelResponseLogin
 import com.my.knowledge.model.modelData.ModelTeacher
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
@@ -161,7 +162,7 @@ class Firestore {
     }
 
     // функция входа в аккаунт
-    suspend fun loginInAccount(email: String,password: String):String{
+    suspend fun loginInAccount(email: String,password: String):ModelResponseLogin{
         return suspendCoroutine { continuation ->
             val firestoreAuth = FirebaseAuth.getInstance()
             firestoreAuth.signInWithEmailAndPassword(email,password)
@@ -176,18 +177,18 @@ class Firestore {
                                 .addOnSuccessListener {
                                     val typeUser = it.data?.get("status").toString()
                                     if(typeUser != ""){
-                                        continuation.resume(typeUser) // успешный вход в аккаунт учителя или студента
+                                        continuation.resume(ModelResponseLogin(typeUser,userId)) // успешный вход в аккаунт учителя или студента
                                     }else{
-                                        continuation.resume(ERROR) // ошибка входа
+                                        continuation.resume(ModelResponseLogin(ERROR, ERROR)) // ошибка входа
                                     }
                                 }
                                 .addOnFailureListener {
-                                    continuation.resume(ERROR) // ошибка входа
+                                    continuation.resume(ModelResponseLogin(ERROR, ERROR)) // ошибка входа
                                 }
                         }
 
                     }else{
-                        continuation.resume(ERROR) // ошибка входа
+                        continuation.resume(ModelResponseLogin(ERROR, ERROR)) // ошибка входа
                     }
                 }
         }

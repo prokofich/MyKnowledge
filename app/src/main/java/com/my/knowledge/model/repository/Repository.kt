@@ -2,13 +2,9 @@ package com.my.knowledge.model.repository
 
 import android.content.Context
 import android.widget.Toast
-import com.my.knowledge.model.modelData.ModelUser
 import com.my.knowledge.model.constant.CORRECT
 import com.my.knowledge.model.constant.MAIN
 import com.my.knowledge.model.constant.alfavit
-import com.my.knowledge.model.database.Room.entity.PriceListEntity
-import com.my.knowledge.model.database.firebase.Firestore
-import com.my.knowledge.model.modelData.ModelTeacher
 
 
 class Repository{
@@ -37,7 +33,7 @@ class Repository{
     }
 
     // функция проверки правильности введенных данных
-    fun checkInputData(email:String?,password:String?,firstName:String?,lastName:String?,status:String?):String{
+    fun checkInputData(email:String?,password:String?,firstName:String?,lastName:String?,status:String?,networkState:Boolean?):String{
 
         val set1 = setOf(
             "0","1","2","3","4","5","6","7","8","9","!","#","$","%","^","&","*","(",")","-",
@@ -47,7 +43,11 @@ class Repository{
             return if(email?.contains("@") == true){
                 if((firstName!!.toSet() intersect set1).isEmpty()){
                     if((lastName!!.toSet() intersect set1).isEmpty()){
-                        CORRECT
+                        if(networkState == true){
+                            CORRECT
+                        }else{
+                            "проверьте состояние сети"
+                        }
                     }else{
                         "в фамилии должны быть только буквы"
                     }
@@ -63,11 +63,15 @@ class Repository{
     }
 
     // функция проверки правильности введенных данных для входа в аккаунт
-    fun checkInputDataInLogin(email:String?,password:String?):String{
-        return if(email!="" && password!=""){
+    fun checkInputDataInLogin(email:String?,password:String?,stateNetwork:Boolean?):String{
+        return if(email!="" && password!="" && stateNetwork == true){
             CORRECT
         }else{
-            "вы заполнили не все поля"
+            return if(stateNetwork == false){
+                "проверьте интернет соединение"
+            }else{
+                "вы заполнили не все поля"
+            }
         }
     }
 }

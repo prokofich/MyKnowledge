@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import androidx.activity.addCallback
 import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
-import com.my.knowledge.model.database.firebase.Firestore
 import com.my.knowledge.model.constant.MAIN
 import com.my.knowledge.R
 import com.my.knowledge.viewmodel.generalviewmodel.RegistrationViewModel
@@ -17,17 +16,15 @@ import com.my.knowledge.model.constant.TEACHER
 import com.my.knowledge.databinding.FragmentRegistrationBinding
 import com.my.knowledge.model.constant.CORRECT
 import com.my.knowledge.model.constant.ERROR
+import com.my.knowledge.model.database.Room.entity.MyAccountEntity
 import com.my.knowledge.model.modelData.ModelUser
 import com.my.knowledge.model.repository.Repository
-import com.my.knowledge.model.database.sharedpreferences.SharedPreferences
 
 class RegistrationFragment : Fragment() {
 
     private var binding: FragmentRegistrationBinding? = null
     private var registrationViewModel: RegistrationViewModel? = null
-    private var firestore: Firestore? = null
     private var statusUser:String? = null
-    private var sharedPreferences: SharedPreferences? = null
     private var repository: Repository? = null
 
     override fun onCreateView(
@@ -41,46 +38,49 @@ class RegistrationFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        firestore = Firestore()
         repository = Repository()
-        sharedPreferences = SharedPreferences(requireContext())
 
         registrationViewModel = ViewModelProvider(this)[RegistrationViewModel::class.java]
 
         // попытка зарегистрироваться
         binding?.idRegButtonRegistration?.setOnClickListener {
+
             binding?.idRegPb?.isVisible = true
             registrationViewModel?.checkInputData(
                 binding?.idRegEtEmail?.text.toString(),
                 binding?.idRegEtPassword?.text.toString(),
                 binding?.idRegEtFirstName?.text.toString(),
                 binding?.idRegEtLastName?.text.toString(),
-                statusUser
+                statusUser,
+                MAIN?.getStateNetwork()
             )
+
         }
 
         registrationViewModel?.isRegistration?.observe(viewLifecycleOwner){ data ->
+
             if(data != ERROR){
                 binding?.idRegPb?.isVisible = false
-                sharedPreferences?.saveUserId(data)
 
-                val modelUser = ModelUser(
-                    binding?.idRegEtFirstName?.text.toString(),
-                    binding?.idRegEtLastName?.text.toString(),
-                    statusUser!!,
-                    data
-                )
+                val modelUser = ModelUser(binding?.idRegEtFirstName?.text.toString(), binding?.idRegEtLastName?.text.toString(),
+                    statusUser!!, data)
+
+                val myAccountEntity = MyAccountEntity(data, binding?.idRegEtFirstName?.text.toString(),
+                    binding?.idRegEtLastName?.text.toString(), statusUser!!, "", "", "")
 
                 registrationViewModel?.setPrimaryDataAfterRegistration(modelUser)
-
-                sharedPreferences?.saveFirstNameTeacher(binding?.idRegEtFirstName?.text.toString())
-                sharedPreferences?.saveLastNameTeacher(binding?.idRegEtLastName?.text.toString())
-
+                registrationViewModel?.insertAccountInLocalDatabase(myAccountEntity)
                 repository?.showToast("вы успешно зарегистрировались!",requireContext())
+                binding?.idRegButtonRegistration?.isEnabled = false
+
+            }else{
+                repository?.showToast("ошибка при регистрации",requireContext())
             }
+
         }
 
         registrationViewModel?.isCorrectInputData?.observe(viewLifecycleOwner){ data ->
+
             if(data == CORRECT){
                 binding?.idRegTvError?.text = ""
                 registrationViewModel?.createAccount(binding?.idRegEtEmail?.text.toString(),binding?.idRegEtPassword?.text.toString())
@@ -89,14 +89,16 @@ class RegistrationFragment : Fragment() {
                 binding?.idRegTvError?.text = data
                 repository?.showToast(data,requireContext())
             }
+
         }
 
         binding?.idRegRg?.setOnCheckedChangeListener { _, checkedId ->
-            @Suppress("KotlinConstantConditions")
+
             when (checkedId) {
                 binding?.idRegRbTeacher?.id -> { statusUser = TEACHER }
                 binding?.idRegRbStudent?.id -> { statusUser = STUDENT }
             }
+
         }
 
         // переход обратно на экран входа

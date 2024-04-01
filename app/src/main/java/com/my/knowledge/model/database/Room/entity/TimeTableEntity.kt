@@ -14,4 +14,19 @@ data class TimeTableEntity(
     @ColumnInfo(name = "student") val student:String,
     @ColumnInfo(name = "studentId") val studentId:String,
     @ColumnInfo(name = "dayWeek") val dayWeek:String
-)
+){
+
+    fun toHashMap(): HashMap<String, Any?> {
+        return hashMapOf(
+            "id" to id,
+            "nameLesson" to nameLesson,
+            "price" to price,
+            "startTime" to startTime,
+            "endTime" to endTime,
+            "student" to student,
+            "studentId" to studentId,
+            "dayWeek" to dayWeek
+        )
+    }
+
+}
