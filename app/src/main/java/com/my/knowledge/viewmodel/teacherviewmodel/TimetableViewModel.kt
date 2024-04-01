@@ -16,6 +16,4 @@ class TimetableViewModel:ViewModel() {
 
     private val firestoreRepository = FirestoreRepository()
 
-
-
 }
