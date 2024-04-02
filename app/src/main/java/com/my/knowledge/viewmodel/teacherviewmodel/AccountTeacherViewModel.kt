@@ -8,7 +8,6 @@ import com.my.knowledge.model.database.Room.database.AppDatabase
 import com.my.knowledge.model.database.Room.entity.MyAccountEntity
 import com.my.knowledge.model.database.Room.repository.RoomRepository
 import com.my.knowledge.model.database.firebase.repository.FirestoreRepository
-import com.my.knowledge.model.database.sharedpreferences.SharedPreferences
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -25,8 +24,8 @@ class AccountTeacherViewModel(application: Application): AndroidViewModel(applic
     fun setFirstAndLastName(firstName:String,lastName:String,userId:String?){
         viewModelScope.launch(Dispatchers.IO) {
 
-            if(userId != null){
-                val answer = firestoreRepository.setFirstAndLastName(firstName, lastName, userId)
+            userId?.let {
+                val answer = firestoreRepository.setFirstAndLastName(firstName, lastName, it)
                 withContext(Dispatchers.Main){
                     synchronized(lock){
                         isSuccessful.value = answer
@@ -40,8 +39,8 @@ class AccountTeacherViewModel(application: Application): AndroidViewModel(applic
     fun setDataFromMyProfile(dataFromProfile:String,typeDataFromProfile:String,userId:String?){
         viewModelScope.launch(Dispatchers.IO) {
 
-            if(userId != null){
-                val answer = firestoreRepository.setDataFromMyProfile(dataFromProfile, typeDataFromProfile, userId)
+            userId?.let {
+                val answer = firestoreRepository.setDataFromMyProfile(dataFromProfile, typeDataFromProfile, it)
                 withContext(Dispatchers.Main){
                     synchronized(lock){
                         isSuccessful.value = answer
@@ -66,10 +65,8 @@ class AccountTeacherViewModel(application: Application): AndroidViewModel(applic
 
     fun updateInfoMyAccount(item:MyAccountEntity){
         viewModelScope.launch(Dispatchers.IO) {
-
             databaseRoom = RoomRepository(getApplication()).database
             databaseRoom?.databaseMyAccountDao()?.updateAccount(item)
-
         }
     }
 

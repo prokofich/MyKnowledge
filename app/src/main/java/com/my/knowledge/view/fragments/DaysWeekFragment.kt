@@ -47,13 +47,13 @@ class DaysWeekFragment : Fragment() {
         binding?.idDaysWeekCs6Button?.setOnClickListener { goToTable(SATURDAY) }
         binding?.idDaysWeekCs7Button?.setOnClickListener { goToTable(SUNDAY) }
 
-        binding?.idDaysWeekCs1Tv1?.text = "занятий: ${sharedPreferences?.getCountLessonsInMonday()}"
+        /*binding?.idDaysWeekCs1Tv1?.text = "занятий: ${sharedPreferences?.getCountLessonsInMonday()}"
         binding?.idDaysWeekCs2Tv1?.text = "занятий: ${sharedPreferences?.getCountLessonsInTuesday()}"
         binding?.idDaysWeekCs3Tv1?.text = "занятий: ${sharedPreferences?.getCountLessonsInWednesday()}"
         binding?.idDaysWeekCs4Tv1?.text = "занятий: ${sharedPreferences?.getCountLessonsInThursday()}"
         binding?.idDaysWeekCs5Tv1?.text = "занятий: ${sharedPreferences?.getCountLessonsInFriday()}"
         binding?.idDaysWeekCs6Tv1?.text = "занятий: ${sharedPreferences?.getCountLessonsInSaturday()}"
-        binding?.idDaysWeekCs7Tv1?.text = "занятий: ${sharedPreferences?.getCountLessonsInSunday()}"
+        binding?.idDaysWeekCs7Tv1?.text = "занятий: ${sharedPreferences?.getCountLessonsInSunday()}"*/
 
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner){
             MAIN?.navController?.navigate(R.id.action_daysWeekFragment_to_teacherMenuFragment)
