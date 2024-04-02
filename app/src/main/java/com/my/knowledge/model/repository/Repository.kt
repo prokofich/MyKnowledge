@@ -9,6 +9,11 @@ import com.my.knowledge.model.constant.alfavit
 
 class Repository{
 
+    //функция проверки интернет соединения
+    fun checkNetworkState():Boolean? {
+        return MAIN?.getStateNetwork()
+    }
+
     // функция закрытия приложения
     fun closeApplication(){
         MAIN?.closeApplication()

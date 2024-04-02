@@ -8,6 +8,7 @@ import com.my.knowledge.model.database.Room.database.AppDatabase
 import com.my.knowledge.model.database.Room.entity.MyAccountEntity
 import com.my.knowledge.model.database.Room.repository.RoomRepository
 import com.my.knowledge.model.database.firebase.repository.FirestoreRepository
+import com.my.knowledge.model.database.sharedpreferences.SharedPreferences
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -23,7 +24,6 @@ class AccountTeacherViewModel(application: Application): AndroidViewModel(applic
 
     fun setFirstAndLastName(firstName:String,lastName:String,userId:String?){
         viewModelScope.launch(Dispatchers.IO) {
-
 
             if(userId != null){
                 val answer = firestoreRepository.setFirstAndLastName(firstName, lastName, userId)
@@ -64,11 +64,11 @@ class AccountTeacherViewModel(application: Application): AndroidViewModel(applic
         }
     }
 
-    fun setInfoMyAccount(item:MyAccountEntity){
+    fun updateInfoMyAccount(item:MyAccountEntity){
         viewModelScope.launch(Dispatchers.IO) {
 
             databaseRoom = RoomRepository(getApplication()).database
-            databaseRoom?.databaseMyAccountDao()?.insertAccount(item)
+            databaseRoom?.databaseMyAccountDao()?.updateAccount(item)
 
         }
     }

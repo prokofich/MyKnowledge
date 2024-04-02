@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import androidx.activity.addCallback
 import com.my.knowledge.R
 import com.my.knowledge.databinding.FragmentTableBinding
-import com.my.knowledge.databinding.FragmentTeacherMenuBinding
 import com.my.knowledge.model.constant.MAIN
 
 class TableFragment : Fragment() {
@@ -24,9 +23,6 @@ class TableFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-
-
 
         // возврат в меню выбора дня недели
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner){

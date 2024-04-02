@@ -39,7 +39,6 @@ class RegistrationFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         repository = Repository()
-
         registrationViewModel = ViewModelProvider(this)[RegistrationViewModel::class.java]
 
         // попытка зарегистрироваться
