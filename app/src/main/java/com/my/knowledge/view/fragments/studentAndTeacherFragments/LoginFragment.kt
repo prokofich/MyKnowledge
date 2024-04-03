@@ -1,4 +1,4 @@
-package com.my.knowledge.view.fragments
+package com.my.knowledge.view.fragments.studentAndTeacherFragments
 
 import android.app.AlertDialog
 import android.os.Bundle
@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.activity.addCallback
 import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
@@ -60,11 +61,16 @@ class LoginFragment : Fragment() {
             showOrHideProgressBar(false)
 
             when(data.statusUser){
-                TEACHER -> { MAIN?.navController?.navigate(R.id.action_loginFragment_to_teacherMenuFragment) }
+                /*TEACHER -> { MAIN?.navController?.navigate(R.id.action_loginFragment_to_teacherMenuFragment) }
                 STUDENT -> { MAIN?.navController?.navigate(R.id.action_loginFragment_to_studentMenuFragment) }
                 else -> {
                     repository?.showToast("ошибка входа",requireContext())
                     binding!!.idLoginTvError.text = "ошибка при входе"
+                }*/
+                TEACHER -> {
+                    Toast.makeText(requireContext(),"вход",Toast.LENGTH_SHORT).show()
+                    MAIN?.showOrHideBottomNavigationForTeacher(true)
+                    MAIN?.navController?.navigate(R.id.accountTeacherFragment)
                 }
             }
 

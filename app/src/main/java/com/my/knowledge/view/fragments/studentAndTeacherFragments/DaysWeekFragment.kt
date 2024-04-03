@@ -1,4 +1,4 @@
-package com.my.knowledge.view.fragments
+package com.my.knowledge.view.fragments.studentAndTeacherFragments
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -56,11 +56,7 @@ class DaysWeekFragment : Fragment() {
         binding?.idDaysWeekCs7Tv1?.text = "занятий: ${sharedPreferences?.getCountLessonsInSunday()}"*/
 
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner){
-            MAIN?.navController?.navigate(R.id.action_daysWeekFragment_to_teacherMenuFragment)
-        }
-
-        binding?.idDaysWeekButtonBack?.setOnClickListener {
-            MAIN?.navController?.navigate(R.id.action_daysWeekFragment_to_teacherMenuFragment)
+            //MAIN?.navController?.navigate(R.id.action_daysWeekFragment_to_teacherMenuFragment)
         }
 
     }

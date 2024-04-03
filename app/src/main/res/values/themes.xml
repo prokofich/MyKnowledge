@@ -15,10 +15,6 @@
         <item name="android:background">@drawable/selector_menu_button</item>
     </style>
 
-    <style name="ButtonMenuNewStyle">
-        <item name="android:background">@drawable/selector_buttom_menu_new</item>
-    </style>
-
     <style name="ButtonStyleOrange">
         <item name="android:background">@drawable/selector_button_2</item>
     </style>

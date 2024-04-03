@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/image_doska_new"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".view.fragments.PriceListFragment">
+    tools:context=".view.fragments.teacherFragments.PriceListFragment">
 
     <TextView
         android:id="@+id/id_price_list_tv_title_1"
@@ -52,22 +52,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/id_price_list_button_add"
-        app:layout_constraintBottom_toTopOf="@id/id_price_list_button_back"/>
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/id_price_list_button_back"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:text="назад"
-        android:textColor="@color/white"
-        android:textStyle="bold"
-        android:textSize="15sp"
-        android:layout_marginBottom="8dp"
-        style="@style/LoginButtonMenuStyle"
-        app:layout_constraintWidth_percent="0.3"
-        app:layout_constraintHeight_percent="0.06"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

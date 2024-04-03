@@ -1,4 +1,4 @@
-package com.my.knowledge.model.database.Room.repository
+package com.my.knowledge.model.repository
 
 import androidx.room.Room
 import com.my.knowledge.model.database.Room.database.AppDatabase

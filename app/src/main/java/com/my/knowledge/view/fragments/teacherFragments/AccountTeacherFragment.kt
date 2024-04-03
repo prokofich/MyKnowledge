@@ -1,15 +1,13 @@
-package com.my.knowledge.view.fragments
+package com.my.knowledge.view.fragments.teacherFragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.my.knowledge.R
 import androidx.activity.addCallback
 import androidx.lifecycle.ViewModelProvider
 import com.my.knowledge.databinding.FragmentAccountTeacherBinding
-import com.my.knowledge.model.constant.MAIN
 import com.my.knowledge.model.constant.TEACHER
 import com.my.knowledge.model.database.Room.entity.MyAccountEntity
 import com.my.knowledge.model.database.sharedpreferences.SharedPreferences
@@ -151,12 +149,7 @@ class AccountTeacherFragment : Fragment() {
 
         // выход в меню учителя
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner){
-            MAIN?.navController?.navigate(R.id.action_accountTeacherFragment_to_teacherMenuFragment)
-        }
-
-        // выход в меню учителя
-        binding?.idAccountTeacherButtonBack?.setOnClickListener {
-            MAIN?.navController?.navigate(R.id.action_accountTeacherFragment_to_teacherMenuFragment)
+            //MAIN?.navController?.navigate(R.id.action_accountTeacherFragment_to_teacherMenuFragment)
         }
 
     }

@@ -6,8 +6,8 @@
         android:topLeftRadius="20dp"
         android:topRightRadius="20dp"/>
     <gradient
-        android:startColor="#246b45"
-        android:endColor="#1a5133"
+        android:startColor="@color/green_6"
+        android:endColor="@color/green_7"
         android:type="linear"
         android:angle="90">
     </gradient>

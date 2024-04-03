@@ -1,4 +1,4 @@
-package com.my.knowledge.view.fragments
+package com.my.knowledge.view.fragments.teacherFragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -6,9 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.addCallback
-import com.my.knowledge.R
 import com.my.knowledge.databinding.FragmentTableBinding
-import com.my.knowledge.model.constant.MAIN
 
 class TableFragment : Fragment() {
 
@@ -26,13 +24,10 @@ class TableFragment : Fragment() {
 
         // возврат в меню выбора дня недели
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner){
-            MAIN?.navController?.navigate(R.id.action_tableFragment_to_daysWeekFragment)
+            //MAIN?.navController?.navigate(R.id.action_tableFragment_to_daysWeekFragment)
         }
 
-        // возврат в меню выбора дня недели
-        binding?.idTableButtonBack?.setOnClickListener {
-            MAIN?.navController?.navigate(R.id.action_tableFragment_to_daysWeekFragment)
-        }
+
 
     }
 

@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/image_doska_new"
-    tools:context=".view.fragments.SettingsFragment">
+    tools:context=".view.fragments.studentAndTeacherFragments.SettingsFragment">
 
     <TextView
         android:layout_width="wrap_content"

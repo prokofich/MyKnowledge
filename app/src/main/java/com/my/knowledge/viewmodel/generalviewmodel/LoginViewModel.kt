@@ -3,7 +3,7 @@ package com.my.knowledge.viewmodel.generalviewmodel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.my.knowledge.model.database.firebase.repository.FirestoreRepository
+import com.my.knowledge.model.repository.FirestoreRepository
 import com.my.knowledge.model.modelData.ModelResponseLogin
 import com.my.knowledge.model.repository.Repository
 import kotlinx.coroutines.Dispatchers

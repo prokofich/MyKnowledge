@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/image_doska_new"
-    tools:context=".view.fragments.DaysWeekFragment">
+    tools:context=".view.fragments.studentAndTeacherFragments.DaysWeekFragment">
 
     <TextView
         android:layout_width="match_parent"
@@ -357,7 +357,7 @@
         android:layout_height="0dp"
         app:layout_constraintStart_toStartOf="parent"
         android:id="@+id/id_days_week_cs_7"
-        app:layout_constraintBottom_toTopOf="@id/id_days_week_button_back"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHeight_percent="0.18"
         app:layout_constraintWidth_percent="0.5"
         app:layout_constraintTop_toBottomOf="@id/id_days_week_cs_6"
@@ -404,21 +404,5 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:text="назад"
-        android:textColor="@color/white"
-        android:textStyle="bold"
-        android:textSize="18sp"
-        android:id="@+id/id_days_week_button_back"
-        app:layout_constraintWidth_percent="0.3"
-        app:layout_constraintHeight_percent="0.06"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginBottom="10dp"
-        style="@style/LoginButtonMenuStyle"
-        app:layout_constraintBottom_toBottomOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

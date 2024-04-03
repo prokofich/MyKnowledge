@@ -1,4 +1,4 @@
-package com.my.knowledge.view.fragments
+package com.my.knowledge.view.fragments.studentFragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

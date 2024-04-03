@@ -6,8 +6,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.my.knowledge.model.database.Room.database.AppDatabase
 import com.my.knowledge.model.database.Room.entity.PriceListEntity
-import com.my.knowledge.model.database.Room.repository.RoomRepository
-import com.my.knowledge.model.database.firebase.repository.FirestoreRepository
+import com.my.knowledge.model.repository.RoomRepository
+import com.my.knowledge.model.repository.FirestoreRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext

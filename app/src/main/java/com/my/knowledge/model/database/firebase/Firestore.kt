@@ -148,7 +148,7 @@ class Firestore {
         val primaryData = hashMapOf(
             "first_name" to modelUser.firstName, "last_name" to modelUser.lastName,
             "status" to modelUser.status, "user_id" to modelUser.userId,
-            "myDescription" to "","experience" to "","education" to "","myRating" to ""
+            "my_description" to "","experience" to "","education" to "","my_rating" to ""
         )
 
         firestore.collection(Teachers_and_Students).document(modelUser.userId).set(primaryData) // отправка данных в общую базу
@@ -206,12 +206,12 @@ class Firestore {
                     val teacher = ModelTeacher()
                     teacher.education = it.data?.get("education").toString()
                     teacher.experience = it.data?.get("experience").toString()
-                    teacher.last_name = it.data?.get("last_name").toString()
-                    teacher.first_name = it.data?.get("first_name").toString()
-                    teacher.myDescription = it.data?.get("myDescription").toString()
-                    teacher.myRating = it.data?.get("myRating").toString()
+                    teacher.lastName = it.data?.get("last_name").toString()
+                    teacher.firstName = it.data?.get("first_name").toString()
+                    teacher.myDescription = it.data?.get("my_description").toString()
+                    teacher.myRating = it.data?.get("my_rating").toString()
                     teacher.status = it.data?.get("status").toString()
-                    teacher.user_id = it.data?.get("user_id").toString()
+                    teacher.userId = it.data?.get("user_id").toString()
 
                     if(it.data?.get("first_name") != ""){
                         continuation.resume(teacher)

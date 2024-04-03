@@ -4,4 +4,23 @@
         <!-- Customize your dark theme here. -->
         <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
     </style>
+
+    <style name="Theme.MyKnowledge" parent="Base.Theme.MyKnowledge" />
+
+    <style name="LoginButtonMenuStyle">
+        <item name="android:background">@drawable/selector_login_button</item>
+    </style>
+
+    <style name="ButtonMenuStyle">
+        <item name="android:background">@drawable/selector_menu_button</item>
+    </style>
+
+    <style name="ButtonStyleOrange">
+        <item name="android:background">@drawable/selector_button_2</item>
+    </style>
+
+    <style name="ButtonStyleDayGreen">
+        <item name="android:background">@drawable/selector_button_day_green</item>
+    </style>
+
 </resources>

@@ -4,7 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.my.knowledge.model.database.Room.database.AppDatabase
 import com.my.knowledge.model.database.Room.entity.TimeTableEntity
-import com.my.knowledge.model.database.firebase.repository.FirestoreRepository
+import com.my.knowledge.model.repository.FirestoreRepository
 
 class TimetableViewModel:ViewModel() {
 

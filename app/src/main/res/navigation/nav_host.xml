@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.my.knowledge.view.fragments.LoginFragment"
+        android:name="com.my.knowledge.view.fragments.studentAndTeacherFragments.LoginFragment"
         android:label="fragment_login"
         tools:layout="@layout/fragment_login" >
         <action
@@ -22,7 +22,7 @@
     </fragment>
     <fragment
         android:id="@+id/registrationFragment"
-        android:name="com.my.knowledge.view.fragments.RegistrationFragment"
+        android:name="com.my.knowledge.view.fragments.studentAndTeacherFragments.RegistrationFragment"
         android:label="fragment_registration"
         tools:layout="@layout/fragment_registration" >
         <action
@@ -37,7 +37,7 @@
     </fragment>
     <fragment
         android:id="@+id/teacherMenuFragment"
-        android:name="com.my.knowledge.view.fragments.TeacherMenuFragment"
+        android:name="com.my.knowledge.view.fragments.teacherFragments.TeacherMenuFragment"
         android:label="fragment_teacher_menu"
         tools:layout="@layout/fragment_teacher_menu" >
         <action
@@ -55,7 +55,7 @@
     </fragment>
     <fragment
         android:id="@+id/accountTeacherFragment"
-        android:name="com.my.knowledge.view.fragments.AccountTeacherFragment"
+        android:name="com.my.knowledge.view.fragments.teacherFragments.AccountTeacherFragment"
         android:label="fragment_account_teacher"
         tools:layout="@layout/fragment_account_teacher" >
         <action
@@ -64,12 +64,12 @@
     </fragment>
     <fragment
         android:id="@+id/studentMenuFragment"
-        android:name="com.my.knowledge.view.fragments.StudentMenuFragment"
+        android:name="com.my.knowledge.view.fragments.studentFragments.StudentMenuFragment"
         android:label="fragment_student_menu"
         tools:layout="@layout/fragment_student_menu" />
     <fragment
         android:id="@+id/splashFragment"
-        android:name="com.my.knowledge.view.fragments.SplashFragment"
+        android:name="com.my.knowledge.view.fragments.studentAndTeacherFragments.SplashFragment"
         android:label="fragment_splash"
         tools:layout="@layout/fragment_splash" >
         <action
@@ -87,7 +87,7 @@
     </fragment>
     <fragment
         android:id="@+id/priceListFragment"
-        android:name="com.my.knowledge.view.fragments.PriceListFragment"
+        android:name="com.my.knowledge.view.fragments.teacherFragments.PriceListFragment"
         android:label="fragment_price_list"
         tools:layout="@layout/fragment_price_list" >
         <action
@@ -96,7 +96,7 @@
     </fragment>
     <fragment
         android:id="@+id/searchUsersFragment"
-        android:name="com.my.knowledge.view.fragments.SearchUsersFragment"
+        android:name="com.my.knowledge.view.fragments.studentAndTeacherFragments.SearchUsersFragment"
         android:label="fragment_search_users"
         tools:layout="@layout/fragment_search_users" >
         <action
@@ -105,7 +105,7 @@
     </fragment>
     <fragment
         android:id="@+id/daysWeekFragment"
-        android:name="com.my.knowledge.view.fragments.DaysWeekFragment"
+        android:name="com.my.knowledge.view.fragments.studentAndTeacherFragments.DaysWeekFragment"
         android:label="fragment_days_week"
         tools:layout="@layout/fragment_days_week" >
         <action
@@ -117,7 +117,7 @@
     </fragment>
     <fragment
         android:id="@+id/tableFragment"
-        android:name="com.my.knowledge.view.fragments.TableFragment"
+        android:name="com.my.knowledge.view.fragments.teacherFragments.TableFragment"
         android:label="fragment_table"
         tools:layout="@layout/fragment_table" >
         <action

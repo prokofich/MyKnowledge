@@ -3,12 +3,11 @@ package com.my.knowledge.viewmodel.generalviewmodel
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.my.knowledge.model.database.Room.database.AppDatabase
 import com.my.knowledge.model.database.Room.entity.MyAccountEntity
-import com.my.knowledge.model.database.Room.repository.RoomRepository
-import com.my.knowledge.model.database.firebase.repository.FirestoreRepository
+import com.my.knowledge.model.repository.RoomRepository
+import com.my.knowledge.model.repository.FirestoreRepository
 import com.my.knowledge.model.modelData.ModelUser
 import com.my.knowledge.model.repository.Repository
 import kotlinx.coroutines.Dispatchers

@@ -1,4 +1,4 @@
-package com.my.knowledge.view.fragments
+package com.my.knowledge.view.fragments.teacherFragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,8 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import com.my.knowledge.R
-import com.my.knowledge.databinding.FragmentLoginBinding
-import com.my.knowledge.databinding.FragmentRegistrationBinding
 import com.my.knowledge.databinding.FragmentTeacherMenuBinding
 import com.my.knowledge.model.constant.MAIN
 import com.my.knowledge.model.database.sharedpreferences.SharedPreferences
@@ -39,7 +37,6 @@ class TeacherMenuFragment : Fragment() {
         binding?.idMenuTeacherButtonPriceList?.setOnClickListener{
             MAIN?.navController?.navigate(R.id.action_teacherMenuFragment_to_priceListFragment)
         }
-
 
     }
 

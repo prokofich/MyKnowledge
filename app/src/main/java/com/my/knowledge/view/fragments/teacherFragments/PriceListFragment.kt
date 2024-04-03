@@ -1,4 +1,4 @@
-package com.my.knowledge.view.fragments
+package com.my.knowledge.view.fragments.teacherFragments
 
 import android.app.AlertDialog
 import android.content.DialogInterface
@@ -7,13 +7,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.activity.addCallback
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
-import com.my.knowledge.R
 import com.my.knowledge.databinding.FragmentPriceListBinding
-import com.my.knowledge.model.constant.MAIN
 import com.my.knowledge.model.database.Room.entity.PriceListEntity
 import com.my.knowledge.model.database.sharedpreferences.SharedPreferences
 import com.my.knowledge.model.modelAdapter.adapters.PriceListAdapter
@@ -69,12 +66,7 @@ class PriceListFragment : Fragment(),PriceListInterface {
 
         // выход в меню
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner){
-            MAIN?.navController?.navigate(R.id.action_priceListFragment_to_teacherMenuFragment)
-        }
-
-        // выход в меню
-        binding?.idPriceListButtonBack?.setOnClickListener {
-            MAIN?.navController?.navigate(R.id.action_priceListFragment_to_teacherMenuFragment)
+            //MAIN?.navController?.navigate(R.id.action_priceListFragment_to_teacherMenuFragment)
         }
 
         // добавление элемента в прокручиваемый список

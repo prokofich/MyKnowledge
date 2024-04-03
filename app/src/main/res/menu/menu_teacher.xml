@@ -3,12 +3,22 @@
 
     <item
         android:title="профиль"
-        android:id="@+id/id_menu_teacher_profile"/>
+        android:icon="@drawable/image_profile"
+        android:id="@+id/id_bottom_menu_teacher_profile"/>
+
+    <item
+        android:title="поиск"
+        android:icon="@drawable/image_search"
+        android:id="@+id/id_bottom_menu_teacher_search"/>
 
     <item
         android:title="расписание"
-        android:id="@+id/id_menu_teacher_table"/>
+        android:icon="@drawable/image_calendar"
+        android:id="@+id/id_bottom_menu_teacher_table"/>
 
-
+    <item
+        android:title="прайс-лист"
+        android:icon="@drawable/image_price_list"
+        android:id="@+id/id_bottom_menu_teacher_price_list"/>
 
 </menu>

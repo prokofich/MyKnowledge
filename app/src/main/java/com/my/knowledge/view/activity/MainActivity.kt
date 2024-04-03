@@ -4,7 +4,9 @@ import android.content.IntentFilter
 import android.net.ConnectivityManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.view.WindowManager
+import androidx.core.view.isVisible
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.my.knowledge.model.constant.MAIN
@@ -36,6 +38,17 @@ class MainActivity : AppCompatActivity(),InterfaceNetworkBroadcastReceiver {
         // установка контроллера для навигации
         navController = Navigation.findNavController(this, R.id.id_nav_host)
 
+        // навигация для учителя
+        binding?.bottomNavigationTeacher?.setOnNavigationItemSelectedListener{
+            when(it.itemId){
+                R.id.id_bottom_menu_teacher_profile    -> navController?.navigate(R.id.accountTeacherFragment)
+                R.id.id_bottom_menu_teacher_search     -> navController?.navigate(R.id.searchUsersFragment)
+                R.id.id_bottom_menu_teacher_table      -> navController?.navigate(R.id.daysWeekFragment)
+                R.id.id_bottom_menu_teacher_price_list -> navController?.navigate(R.id.priceListFragment)
+            }
+            true
+        }
+
     }
 
     // функция регистрации ресивера
@@ -55,6 +68,14 @@ class MainActivity : AppCompatActivity(),InterfaceNetworkBroadcastReceiver {
     // функция закрытия приложения
     fun closeApplication(){
         this.finishAffinity()
+    }
+
+    // функция показа или скрытия нижнего бара с меню для учителя
+    fun showOrHideBottomNavigationForTeacher(isShow:Boolean){
+        when(isShow){
+            true  -> { binding?.bottomNavigationTeacher?.visibility = View.VISIBLE }
+            false -> { binding?.bottomNavigationTeacher?.visibility = View.GONE }
+        }
     }
 
     // функция получения состояния сети

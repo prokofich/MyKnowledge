@@ -1,4 +1,4 @@
-package com.my.knowledge.view.fragments
+package com.my.knowledge.view.fragments.studentAndTeacherFragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -42,8 +42,15 @@ class SplashFragment : Fragment() {
         splashViewModel.isOpenAccount.observe(viewLifecycleOwner){
             if(it){
                 when(sharedPreferences?.getTypeUserInLastSession()){
-                    TEACHER -> { MAIN?.navController?.navigate(R.id.action_splashFragment_to_teacherMenuFragment) }
-                    STUDENT -> { MAIN?.navController?.navigate(R.id.action_splashFragment_to_studentMenuFragment) }
+                    TEACHER -> {
+                        MAIN?.showOrHideBottomNavigationForTeacher(true)
+                        MAIN?.navController?.navigate(R.id.accountTeacherFragment)
+                    }
+                    STUDENT -> {
+
+                        // НАДО ДОБАВИТЬ ДЛЯ СТУДЕНТА ВХОД
+
+                    }
                 }
             }else{
                 MAIN?.navController?.navigate(R.id.action_splashFragment_to_loginFragment)

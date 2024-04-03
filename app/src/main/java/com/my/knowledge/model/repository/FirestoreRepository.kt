@@ -1,4 +1,4 @@
-package com.my.knowledge.model.database.firebase.repository
+package com.my.knowledge.model.repository
 
 import com.my.knowledge.model.database.Room.entity.PriceListEntity
 import com.my.knowledge.model.database.firebase.Firestore
