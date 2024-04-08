@@ -1,6 +1,7 @@
 package com.my.knowledge.viewmodel.teacherviewmodel
 
 import android.app.Application
+import android.graphics.Bitmap
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
@@ -18,8 +19,10 @@ class AccountTeacherViewModel(application: Application): AndroidViewModel(applic
     private val firestoreRepository = FirestoreRepository()
     private val lock = Any()
 
-    val isSuccessful:MutableLiveData<Boolean> = MutableLiveData()
-    val infoMyAccount:MutableLiveData<MyAccountEntity?> = MutableLiveData()
+    val isSuccessful : MutableLiveData <Boolean> = MutableLiveData ()
+    val infoMyAccount : MutableLiveData <MyAccountEntity?> = MutableLiveData ()
+    val urlPhoto : MutableLiveData <String> = MutableLiveData ()
+    val photoFromStorage : MutableLiveData <Bitmap?> = MutableLiveData ()
 
     fun setFirstAndLastName(firstName:String,lastName:String,userId:String?){
         viewModelScope.launch(Dispatchers.IO) {
@@ -29,6 +32,32 @@ class AccountTeacherViewModel(application: Application): AndroidViewModel(applic
                 withContext(Dispatchers.Main){
                     synchronized(lock){
                         isSuccessful.value = answer
+                    }
+                }
+            }
+
+        }
+    }
+
+    fun uploadPhotoForProfile(bitmap: Bitmap){
+        viewModelScope.launch(Dispatchers.IO) {
+
+            val answer = firestoreRepository.uploadPhotoForProfileTeacher(bitmap)
+            withContext(Dispatchers.Main){
+                urlPhoto.value = answer
+            }
+
+        }
+    }
+
+    fun getImageFromStorageByUrl(url: String?){
+        viewModelScope.launch(Dispatchers.IO) {
+
+            url?.let {
+                if(url.isNotEmpty()){
+                    val answer = firestoreRepository.getImageFromStorageByUrl(it)
+                    withContext(Dispatchers.Main){
+                        photoFromStorage.value = answer
                     }
                 }
             }
@@ -67,6 +96,16 @@ class AccountTeacherViewModel(application: Application): AndroidViewModel(applic
         viewModelScope.launch(Dispatchers.IO) {
             databaseRoom = RoomRepository(getApplication()).database
             databaseRoom?.databaseMyAccountDao()?.updateAccount(item)
+        }
+    }
+
+    fun updateUrlPhotoFromProfile(url:String,userId: String?){
+        viewModelScope.launch(Dispatchers.IO) {
+
+            userId?.let {
+                firestoreRepository.updateUrlPhotoFromProfile(url, it)
+            }
+
         }
     }
 

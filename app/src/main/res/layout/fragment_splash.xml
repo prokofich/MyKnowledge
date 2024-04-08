@@ -15,7 +15,6 @@
         android:gravity="center"
         android:textSize="50sp"
         android:textColor="@color/white"
-        android:fontFamily="@font/architects_daughter"
         android:id="@+id/id_login_tv_title"
         app:layout_constraintHeight_percent="0.12"
         app:layout_constraintStart_toStartOf="parent"

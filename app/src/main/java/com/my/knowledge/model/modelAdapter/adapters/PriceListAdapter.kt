@@ -1,96 +1,86 @@
 package com.my.knowledge.model.modelAdapter.adapters
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ImageView
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
-import com.my.knowledge.R
+import com.my.knowledge.databinding.ItemPriceTeacherBinding
+import com.my.knowledge.model.constant.OperationStatus
 import com.my.knowledge.model.database.Room.entity.PriceListEntity
+import com.my.knowledge.model.database.sharedpreferences.SharedPreferences
 import com.my.knowledge.model.modelAdapter.interfaces.PriceListInterface
 import com.my.knowledge.model.repository.Repository
 
-class PriceListAdapter(private val interfaceAdapter:PriceListInterface): RecyclerView.Adapter<PriceListAdapter.PriceListViewHolder>() {
+class PriceListAdapter(private val interfaceAdapter:PriceListInterface,context: Context): RecyclerView.Adapter<PriceListAdapter.PriceListViewHolder>() {
 
-    private var listPrice = mutableListOf<PriceListEntity>()
+    lateinit var binding:ItemPriceTeacherBinding
+    private var listPriceEntity = mutableListOf<PriceListEntity>()
     private var isOpenEditText = false
     private var repository = Repository()
     private var answer:String? = null
+    private var idUser = SharedPreferences(context).getUserId()
 
     class PriceListViewHolder(view: View):RecyclerView.ViewHolder(view)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PriceListViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_price_teacher,parent,false)
-        return PriceListViewHolder(view)
+        binding = ItemPriceTeacherBinding.inflate(LayoutInflater.from(parent.context),parent,false)
+        return PriceListViewHolder(binding.root)
     }
 
     override fun getItemCount(): Int {
-        return listPrice.size
+        return listPriceEntity.size
     }
 
     override fun onBindViewHolder(holder: PriceListViewHolder, position: Int) {
-
-        val editTextViewName = holder.itemView.findViewById<EditText>(R.id.id_item_price_et_name)
-        val editTextViewPrice = holder.itemView.findViewById<EditText>(R.id.id_item_price_et_price)
-        val editTextViewDescription = holder.itemView.findViewById<EditText>(R.id.id_item_price_et_desc)
-
-        editTextViewName.setText(listPrice[position].name)
-        editTextViewPrice.setText(listPrice[position].price)
-        editTextViewDescription.setText(listPrice[position].desc)
-
+        binding.idItemPriceEtName.setText(listPriceEntity[position].name)
+        binding.idItemPriceEtPrice.setText(listPriceEntity[position].price)
+        binding.idItemPriceEtDesc.setText(listPriceEntity[position].desc)
     }
 
-    @SuppressLint("NotifyDataSetChanged")
     override fun onViewAttachedToWindow(holder: PriceListViewHolder) {
         super.onViewAttachedToWindow(holder)
 
-        val name = holder.itemView.findViewById<EditText>(R.id.id_item_price_et_name)
-        val price = holder.itemView.findViewById<EditText>(R.id.id_item_price_et_price)
-        val description = holder.itemView.findViewById<EditText>(R.id.id_item_price_et_desc)
-        val redact = holder.itemView.findViewById<Button>(R.id.id_item_price_button_redact)
-        val delete = holder.itemView.findViewById<ImageView>(R.id.id_item_price_iv_delete)
+        val bindingItem = binding
 
-        redact.setOnClickListener {
-            if(redact.text == "редактировать"){
+        bindingItem.idItemPriceButtonRedact.setOnClickListener {
+            if(bindingItem.idItemPriceButtonRedact.text == "редактировать"){
 
-                redact.text = "сохранить"
-                delete.isVisible = true
+                bindingItem.idItemPriceButtonRedact.text = "сохранить"
+                bindingItem.idItemPriceIvDelete.isVisible = true
                 openOrClosedEditText(true)
-                name.isEnabled = isOpenEditText
-                price.isEnabled = isOpenEditText
-                description.isEnabled = isOpenEditText
+                bindingItem.idItemPriceEtName.isEnabled = isOpenEditText
+                bindingItem.idItemPriceEtPrice.isEnabled = isOpenEditText
+                bindingItem.idItemPriceEtDesc.isEnabled = isOpenEditText
 
             }else{
-                answer = repository.checkInputPriceData(name.text.toString(), price.text.toString(), description.text.toString())
-                if(answer == "верно"){
 
-                    if(listPrice[holder.adapterPosition].id.toInt() == 0){
-                        interfaceAdapter.savePrice(
-                            PriceListEntity(
-                                name = name.text.toString(),
-                                price = price.text.toString(),
-                                desc = description.text.toString())
-                        )
-                    }else{
-                        interfaceAdapter.updatePrice(
-                            PriceListEntity(
-                                id = listPrice[holder.adapterPosition].id,
-                                name = name.text.toString(),
-                                price = price.text.toString(),
-                                desc = description.text.toString())
-                        )
-                    }
+                answer = repository.checkInputPriceData(
+                    bindingItem.idItemPriceEtName.text.toString(),
+                    bindingItem.idItemPriceEtPrice.text.toString(),
+                    bindingItem.idItemPriceEtDesc.text.toString()
+                )
 
-                    redact.text = "редактировать"
-                    delete.isVisible = false
+                if(answer == OperationStatus.Correct.status){
+
+                    val itemPriceList = PriceListEntity(
+                        id = listPriceEntity[holder.adapterPosition].id,
+                        name = bindingItem.idItemPriceEtName.text.toString(),
+                        price = bindingItem.idItemPriceEtPrice.text.toString(),
+                        desc = bindingItem.idItemPriceEtDesc.text.toString(),
+                        idUser = idUser
+                    )
+
+                    interfaceAdapter.updatePrice(itemPriceList,holder.adapterPosition)
+
+                    bindingItem.idItemPriceButtonRedact.text = "редактировать"
+                    bindingItem.idItemPriceIvDelete.isVisible = false
                     openOrClosedEditText(false)
-                    name.isEnabled = isOpenEditText
-                    price.isEnabled = isOpenEditText
-                    description.isEnabled = isOpenEditText
+                    bindingItem.idItemPriceEtName.isEnabled = isOpenEditText
+                    bindingItem.idItemPriceEtPrice.isEnabled = isOpenEditText
+                    bindingItem.idItemPriceEtDesc.isEnabled = isOpenEditText
 
                 }else{ interfaceAdapter.showToast(answer) }
 
@@ -98,27 +88,39 @@ class PriceListAdapter(private val interfaceAdapter:PriceListInterface): Recycle
 
         }
 
-        delete.setOnClickListener {
-            interfaceAdapter.showDialog(
-                PriceListEntity(
-                    id = listPrice[holder.adapterPosition].id,
-                    name = name.text.toString(),
-                    price = price.text.toString(),
-                    desc = description.text.toString()
-                )
-            )
+        bindingItem.idItemPriceIvDelete.setOnClickListener {
+            interfaceAdapter.showDialog(holder.adapterPosition)
         }
 
     }
 
+    private fun openOrClosedEditText(isOpen:Boolean){
+        isOpenEditText = isOpen
+    }
+
     @SuppressLint("NotifyDataSetChanged")
-    fun setListPrice(list:MutableList<PriceListEntity>){
-        listPrice = list
+    fun setItemsInList(list:MutableList<PriceListEntity>){
+        listPriceEntity = list
         notifyDataSetChanged()
     }
 
-    private fun openOrClosedEditText(isOpen:Boolean){
-        isOpenEditText = isOpen
+    // добавление элемента в прокручиваемый список
+    fun addItemInList(item:PriceListEntity){
+        listPriceEntity.add(item)
+        notifyItemChanged(listPriceEntity.lastIndex)
+    }
+
+    // обновление элемента в прокручиваемом списке
+    fun updateItemInList(item:PriceListEntity,indexItem:Int){
+        listPriceEntity[indexItem] = item
+        notifyItemChanged(indexItem)
+    }
+
+    // удаление элемента из прокручиваемого списка
+    fun deleteItemInList(indexItem:Int){
+        listPriceEntity.removeAt(indexItem)
+        notifyItemRemoved(indexItem)
+        notifyItemRangeChanged(indexItem, listPriceEntity.size)
     }
 
 }

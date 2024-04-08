@@ -1,6 +1,5 @@
 package com.my.knowledge.view.fragments.studentAndTeacherFragments
 
-import android.app.AlertDialog
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -14,16 +13,14 @@ import com.my.knowledge.model.constant.MAIN
 import com.my.knowledge.R
 import com.my.knowledge.model.repository.Repository
 import com.my.knowledge.databinding.FragmentLoginBinding
-import com.my.knowledge.model.constant.CORRECT
-import com.my.knowledge.model.constant.STUDENT
-import com.my.knowledge.model.constant.TEACHER
+import com.my.knowledge.model.constant.OperationStatus
+import com.my.knowledge.model.constant.UserType
 import com.my.knowledge.model.database.sharedpreferences.SharedPreferences
 import com.my.knowledge.viewmodel.generalviewmodel.LoginViewModel
 
 class LoginFragment : Fragment() {
 
     private var binding: FragmentLoginBinding? = null
-    private var alertDialog:AlertDialog? = null
     private var repository: Repository? = null
 
     override fun onCreateView(
@@ -54,38 +51,38 @@ class LoginFragment : Fragment() {
 
         }
 
-        loginViewModel.isLogin.observe(viewLifecycleOwner){ data ->
+        loginViewModel.isLogin.observe(viewLifecycleOwner){
 
-            SharedPreferences(requireContext()).saveUserId(data.userId)
-            SharedPreferences(requireContext()).setTypeUserInLastSession(data.statusUser)
+            SharedPreferences(requireContext()).saveUserId(it.userId)
+            SharedPreferences(requireContext()).setTypeUserInLastSession(it.statusUser)
             showOrHideProgressBar(false)
 
-            when(data.statusUser){
-                /*TEACHER -> { MAIN?.navController?.navigate(R.id.action_loginFragment_to_teacherMenuFragment) }
-                STUDENT -> { MAIN?.navController?.navigate(R.id.action_loginFragment_to_studentMenuFragment) }
-                else -> {
-                    repository?.showToast("ошибка входа",requireContext())
-                    binding!!.idLoginTvError.text = "ошибка при входе"
-                }*/
-                TEACHER -> {
-                    Toast.makeText(requireContext(),"вход",Toast.LENGTH_SHORT).show()
+            when(it.statusUser){
+                UserType.Teacher.user -> {
                     MAIN?.showOrHideBottomNavigationForTeacher(true)
                     MAIN?.navController?.navigate(R.id.accountTeacherFragment)
+                }
+                UserType.Student.user -> {
+
+                }
+                else -> {
+                    showError("ошибка,попробуйте еще раз")
+                    repository?.showToast("ошибка,попробуйте еще раз",requireContext())
                 }
             }
 
         }
 
-        loginViewModel.isCorrectInputData.observe(viewLifecycleOwner){ data ->
+        loginViewModel.isCorrectInputData.observe(viewLifecycleOwner){
 
-            when(data){
-                CORRECT -> {
+            when(it){
+                OperationStatus.Correct.status -> {
                     loginViewModel.loginInAccount(binding?.idLoginEtEmail?.text.toString(),binding?.idLoginEtPassword?.text.toString())
                 }
                 else -> {
                     showOrHideProgressBar(false)
-                    showError(data)
-                    repository?.showToast(data,requireContext())
+                    showError(it)
+                    repository?.showToast(it,requireContext())
                 }
             }
 
@@ -98,7 +95,7 @@ class LoginFragment : Fragment() {
 
         // выход из приложения
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner){
-            exitTheApplication()
+            repository?.exitTheApplication()
         }
 
     }
@@ -107,26 +104,6 @@ class LoginFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         binding = null
-    }
-
-    // функция показа диалогового сообщения о выходе из приложения
-    private fun exitTheApplication(){
-
-        val builder = AlertDialog.Builder(context)
-        builder.setTitle("выход из приложения")
-        builder.setMessage("вы точно хотите выйти?")
-
-        builder.setPositiveButton("выйти") { _, _ ->
-            repository?.closeApplication()
-        }
-
-        builder.setNegativeButton("отмена") { _, _ ->
-            alertDialog?.dismiss()
-        }
-
-        alertDialog = builder.create()
-        alertDialog?.show()
-
     }
 
     // функция показа ошибки на экране

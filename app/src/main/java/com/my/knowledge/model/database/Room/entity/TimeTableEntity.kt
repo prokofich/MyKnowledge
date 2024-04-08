@@ -7,25 +7,25 @@ import androidx.room.PrimaryKey
 @Entity("TimeTableEntity")
 data class TimeTableEntity(
     @PrimaryKey(autoGenerate = true) val id:Long = 0,
-    @ColumnInfo(name = "nameLesson")  val nameLesson:String,
-    @ColumnInfo(name = "price") val price:Int,
-    @ColumnInfo(name = "startTime")  val startTime:String,
-    @ColumnInfo(name = "endTime") val endTime:String,
-    @ColumnInfo(name = "student") val student:String,
-    @ColumnInfo(name = "studentId") val studentId:String,
-    @ColumnInfo(name = "dayWeek") val dayWeek:String
+    @ColumnInfo("name_lesson")  val nameLesson:String,
+    @ColumnInfo("price") val price:Int,
+    @ColumnInfo("start_time")  val startTime:String,
+    @ColumnInfo("end_time") val endTime:String,
+    @ColumnInfo("student") val student:String,
+    @ColumnInfo("student_id") val studentId:String,
+    @ColumnInfo("day_week") val dayWeek:String
 ){
 
     fun toHashMap(): HashMap<String, Any?> {
         return hashMapOf(
             "id" to id,
-            "nameLesson" to nameLesson,
+            "name_lesson" to nameLesson,
             "price" to price,
-            "startTime" to startTime,
-            "endTime" to endTime,
+            "start_time" to startTime,
+            "end_time" to endTime,
             "student" to student,
-            "studentId" to studentId,
-            "dayWeek" to dayWeek
+            "student_id" to studentId,
+            "day_week" to dayWeek
         )
     }
 

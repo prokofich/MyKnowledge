@@ -11,21 +11,19 @@ import androidx.lifecycle.ViewModelProvider
 import com.my.knowledge.model.constant.MAIN
 import com.my.knowledge.R
 import com.my.knowledge.viewmodel.generalviewmodel.RegistrationViewModel
-import com.my.knowledge.model.constant.STUDENT
-import com.my.knowledge.model.constant.TEACHER
 import com.my.knowledge.databinding.FragmentRegistrationBinding
-import com.my.knowledge.model.constant.CORRECT
-import com.my.knowledge.model.constant.ERROR
+import com.my.knowledge.model.constant.OperationStatus
+import com.my.knowledge.model.constant.UserType
+import com.my.knowledge.model.database.Room.entity.CountLessonsEntity
 import com.my.knowledge.model.database.Room.entity.MyAccountEntity
-import com.my.knowledge.model.modelData.ModelUser
 import com.my.knowledge.model.repository.Repository
 
 class RegistrationFragment : Fragment() {
 
     private var binding: FragmentRegistrationBinding? = null
-    private var registrationViewModel: RegistrationViewModel? = null
     private var statusUser:String? = null
     private var repository: Repository? = null
+    private var registrationViewModel: RegistrationViewModel? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -56,19 +54,22 @@ class RegistrationFragment : Fragment() {
 
         }
 
-        registrationViewModel?.isRegistration?.observe(viewLifecycleOwner){ data ->
+        registrationViewModel?.isRegistration?.observe(viewLifecycleOwner){
 
-            if(data != ERROR){
+            if(it != OperationStatus.Error.status){
+
                 binding?.idRegPb?.isVisible = false
 
-                val modelUser = ModelUser(binding?.idRegEtFirstName?.text.toString(), binding?.idRegEtLastName?.text.toString(),
-                    statusUser!!, data)
+                val myAccountEntity = MyAccountEntity(it, binding?.idRegEtFirstName?.text.toString(),
+                    binding?.idRegEtLastName?.text.toString(), statusUser!!, "", "", "","")
 
-                val myAccountEntity = MyAccountEntity(data, binding?.idRegEtFirstName?.text.toString(),
-                    binding?.idRegEtLastName?.text.toString(), statusUser!!, "", "", "")
+                val countLessons = CountLessonsEntity(idUser = it, countInMonday = 0, countInTuesday = 0, countInWednesday = 0,
+                    countInThursday = 0, countInFriday = 0, countInSaturday = 0, countInSunday = 0)
 
-                registrationViewModel?.setPrimaryDataAfterRegistration(modelUser)
+                registrationViewModel?.setPrimaryDataAfterRegistration(myAccountEntity)
                 registrationViewModel?.insertAccountInLocalDatabase(myAccountEntity)
+                registrationViewModel?.setCountLessonsInLocalDatabase(countLessons)
+
                 repository?.showToast("вы успешно зарегистрировались!",requireContext())
                 binding?.idRegButtonRegistration?.isEnabled = false
 
@@ -78,15 +79,15 @@ class RegistrationFragment : Fragment() {
 
         }
 
-        registrationViewModel?.isCorrectInputData?.observe(viewLifecycleOwner){ data ->
+        registrationViewModel?.isCorrectInputData?.observe(viewLifecycleOwner){
 
-            if(data == CORRECT){
+            if(it == OperationStatus.Correct.status){
                 binding?.idRegTvError?.text = ""
                 registrationViewModel?.createAccount(binding?.idRegEtEmail?.text.toString(),binding?.idRegEtPassword?.text.toString())
             }else{
                 binding?.idRegPb?.isVisible = false
-                binding?.idRegTvError?.text = data
-                repository?.showToast(data,requireContext())
+                binding?.idRegTvError?.text = it
+                repository?.showToast(it,requireContext())
             }
 
         }
@@ -94,8 +95,8 @@ class RegistrationFragment : Fragment() {
         binding?.idRegRg?.setOnCheckedChangeListener { _, checkedId ->
 
             when (checkedId) {
-                binding?.idRegRbTeacher?.id -> { statusUser = TEACHER }
-                binding?.idRegRbStudent?.id -> { statusUser = STUDENT }
+                binding?.idRegRbTeacher?.id -> { statusUser = UserType.Teacher.user }
+                binding?.idRegRbStudent?.id -> { statusUser = UserType.Student.user }
             }
 
         }

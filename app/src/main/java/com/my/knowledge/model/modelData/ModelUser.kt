@@ -8,7 +8,8 @@ data class ModelUser(
     var firstName:String,
     var lastName:String,
     var status:String,
-    var userId:String
+    var userId:String,
+    var urlPhoto:String
 ):Parcelable{
 
     fun toHashMap(): HashMap<String, Any?> {

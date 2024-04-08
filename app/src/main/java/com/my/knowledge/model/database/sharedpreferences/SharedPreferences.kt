@@ -3,24 +3,23 @@ package com.my.knowledge.model.database.sharedpreferences
 import android.content.Context
 import android.content.SharedPreferences
 import android.preference.PreferenceManager
-import com.my.knowledge.model.constant.COUNT_LESSONS_IN_FRIDAY
-import com.my.knowledge.model.constant.COUNT_LESSONS_IN_MONDAY
-import com.my.knowledge.model.constant.COUNT_LESSONS_IN_SATURDAY
-import com.my.knowledge.model.constant.COUNT_LESSONS_IN_SUNDAY
-import com.my.knowledge.model.constant.COUNT_LESSONS_IN_THURSDAY
-import com.my.knowledge.model.constant.COUNT_LESSONS_IN_TUESDAY
-import com.my.knowledge.model.constant.COUNT_LESSONS_IN_WEDNESDAY
-import com.my.knowledge.model.constant.DESCRIPTION_TEACHER
-import com.my.knowledge.model.constant.EDUCATION_TEACHER
-import com.my.knowledge.model.constant.EXPERIENCE_TEACHER
-import com.my.knowledge.model.constant.FIRST_NAME_TEACHER
-import com.my.knowledge.model.constant.LAST_NAME_TEACHER
+import com.my.knowledge.model.constant.URL_PHOTO_FROM_PROFILE
 import com.my.knowledge.model.constant.USER_ID
 import com.my.knowledge.model.constant.USER_TYPE
 
 class SharedPreferences(context: Context) {
 
     private var sharedPreferences:SharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
+
+    // функция получения url адреса аватарки
+    fun getUrlPhotoFromProfile() : String {
+        return sharedPreferences.getString(URL_PHOTO_FROM_PROFILE,"").toString()
+    }
+
+    // функция установки url адреса для аватарки
+    fun setUrlPhotoFromProfile(url:String) {
+        sharedPreferences.edit().putString(URL_PHOTO_FROM_PROFILE,url).apply()
+    }
 
     // функция сохранения ID пользователя
     fun saveUserId(userId:String){

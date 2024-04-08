@@ -1,74 +1,98 @@
 package com.my.knowledge.model.database.firebase
 
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
-import com.my.knowledge.model.constant.ERROR
-import com.my.knowledge.model.modelData.ModelUser
+import com.google.firebase.storage.FirebaseStorage
+import com.my.knowledge.model.constant.OperationStatus
 import com.my.knowledge.model.constant.Students
-import com.my.knowledge.model.constant.TEACHER
 import com.my.knowledge.model.constant.Teachers
 import com.my.knowledge.model.constant.Teachers_and_Students
 import com.my.knowledge.model.constant.Teachers_price_list
+import com.my.knowledge.model.constant.UserType
+import com.my.knowledge.model.database.Room.entity.MyAccountEntity
 import com.my.knowledge.model.database.Room.entity.PriceListEntity
 import com.my.knowledge.model.modelData.ModelResponseLogin
-import com.my.knowledge.model.modelData.ModelTeacher
+import java.io.ByteArrayOutputStream
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
 
 class Firestore {
 
+    private val firebaseAuth = FirebaseAuth.getInstance()
+    private val firestore = FirebaseFirestore.getInstance()
+    private val storage = FirebaseStorage.getInstance()
+
     // проверка для безлогинового входа
-    fun checkOpenAccount():Boolean{
+    fun checkOpenAccount() : Boolean {
         val firestoreAuth = FirebaseAuth.getInstance()
         return firestoreAuth.currentUser!=null
     }
 
     // функция регистрации пользователя
-    suspend fun createAccount(email:String,password:String):String{
+    suspend fun createAccount(email : String, password : String) : String {
         return suspendCoroutine { continuation ->
-            FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, password)
+
+            firebaseAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
                         val userId = task.result?.user?.uid
-                        if(userId != null) continuation.resume(userId) else continuation.resume(
-                            ERROR
-                        )
+                        if(userId != null) continuation.resume(userId) else continuation.resume(OperationStatus.Correct.status)
                     } else {
-                        continuation.resume(ERROR) // регистрация не удалась
+                        continuation.resume(OperationStatus.Error.status)
                     }
                 }
         }
     }
 
-    // функция сохранения имени и фамилии
-    suspend fun setFirstAnsLastName(firstName:String,lastName:String,userId:String):Boolean{
+    // функция получения картинки из Storage
+    suspend fun getImageFromStorageByUrl(url : String) : Bitmap? {
         return suspendCoroutine { continuation ->
 
-            val firestore = FirebaseFirestore.getInstance()
-            val data = hashMapOf("first_name" to firstName,"last_name" to lastName)
-            firestore.collection(Teachers).document(userId).set(data, SetOptions.merge())
-                .addOnSuccessListener {
-                    firestore.collection(Teachers_and_Students).document(userId).set(data,SetOptions.merge())
-                        .addOnSuccessListener {
-                            continuation.resume(true) // данные успешно сохранены
-                        }
-                        .addOnFailureListener {
-                            continuation.resume(false) // ошибка при сохранении данных
-                        }
+            val storageReference = storage.reference.child("images/"+url)
+
+            val oneMegabyte = 1024 * 1024.toLong()
+            storageReference.getBytes(oneMegabyte)
+                .addOnSuccessListener { bytes ->
+                    val bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.size)
+                    continuation.resume(bitmap)
                 }
                 .addOnFailureListener {
-                    continuation.resume(false) // ошибка при сохранении данных
+                    continuation.resume(null)
                 }
 
         }
     }
 
-    suspend fun setDataFromMyProfile(dataFromProfile:String,typeDataFromProfile:String,userId:String):Boolean{
+    // функция сохранения имени и фамилии
+    suspend fun setFirstAnsLastName(firstName : String , lastName : String , userId : String) : Boolean {
         return suspendCoroutine { continuation ->
 
-            val firestore = FirebaseFirestore.getInstance()
+            val data = hashMapOf("first_name" to firstName,"last_name" to lastName)
+            firestore.collection(Teachers).document(userId).set(data, SetOptions.merge())
+                .addOnSuccessListener {
+                    firestore.collection(Teachers_and_Students).document(userId).set(data,SetOptions.merge())
+                        .addOnSuccessListener {
+                            continuation.resume(true)
+                        }
+                        .addOnFailureListener {
+                            continuation.resume(false)
+                        }
+                }
+                .addOnFailureListener {
+                    continuation.resume(false)
+                }
+
+        }
+    }
+
+    suspend fun setDataFromMyProfile(dataFromProfile : String , typeDataFromProfile : String , userId : String) : Boolean {
+        return suspendCoroutine { continuation ->
+
             val data = hashMapOf(typeDataFromProfile to dataFromProfile)
+
             firestore.collection(Teachers).document(userId).set(data, SetOptions.merge())
                 .addOnSuccessListener {
                     firestore.collection(Teachers_and_Students).document(userId).set(data, SetOptions.merge())
@@ -87,14 +111,11 @@ class Firestore {
     }
 
     // функция отправки данных из прайс листа
-    suspend fun setDataInPriceList(item:PriceListEntity,userId: String):Boolean{
+    suspend fun setDataInPriceList(item : PriceListEntity , userId : String) : Boolean {
         return suspendCoroutine { continuation ->
 
-            val firestore = FirebaseFirestore.getInstance()
-            val data = item.toHashMap()
-
             firestore.collection(Teachers_price_list).document(userId)
-                .collection(item.id.toString()).document(item.id.toString()).set(data, SetOptions.merge())
+                .collection(item.id.toString()).document(item.id.toString()).set(item.toHashMap(), SetOptions.merge())
                 .addOnSuccessListener {
                     continuation.resume(true)
                 }
@@ -105,14 +126,11 @@ class Firestore {
     }
 
     // функция обновления данных из прайс-листа
-    suspend fun updateDataInPriceList(item: PriceListEntity,userId: String):Boolean{
+    suspend fun updateDataInPriceList(item : PriceListEntity, userId : String) : Boolean {
         return suspendCoroutine { continuation ->
 
-            val firestore = FirebaseFirestore.getInstance()
-            val data = item.toHashMap()
-
             firestore.collection(Teachers_price_list).document(userId)
-                .collection(item.id.toString()).document(item.id.toString()).update(data)
+                .collection(item.id.toString()).document(item.id.toString()).update(item.toHashMap())
                 .addOnSuccessListener {
                     continuation.resume(true)
                 }
@@ -124,10 +142,8 @@ class Firestore {
     }
 
     // функция удаления данных из прайс-листа
-    suspend fun deleteDataInPriceList(item: PriceListEntity,userId: String):Boolean{
+    suspend fun deleteDataInPriceList(item: PriceListEntity,userId: String) : Boolean {
         return suspendCoroutine { continuation ->
-
-            val firestore = FirebaseFirestore.getInstance()
 
             firestore.collection(Teachers_price_list).document(userId)
                 .collection(item.id.toString()).document(item.id.toString()).delete()
@@ -142,21 +158,14 @@ class Firestore {
     }
 
     // функция отправки первичных данных после успешной регистрации
-    suspend fun setPrimaryDataAfterRegistration(modelUser: ModelUser){
-        val firestore = FirebaseFirestore.getInstance()
+    fun setPrimaryDataAfterRegistration(item : MyAccountEntity){
 
-        val primaryData = hashMapOf(
-            "first_name" to modelUser.firstName, "last_name" to modelUser.lastName,
-            "status" to modelUser.status, "user_id" to modelUser.userId,
-            "my_description" to "","experience" to "","education" to "","my_rating" to ""
-        )
+        firestore.collection(Teachers_and_Students).document(item.idUser).set(item.toHashMap())
 
-        firestore.collection(Teachers_and_Students).document(modelUser.userId).set(primaryData) // отправка данных в общую базу
-
-        if(modelUser.status == TEACHER){
-            firestore.collection(Teachers).document(modelUser.userId).set(primaryData) // отправка данных в базу учителей
+        if(item.status == UserType.Teacher.user){
+            firestore.collection(Teachers).document(item.idUser).set(item.toHashMap())
         }else{
-            firestore.collection(Students).document(modelUser.userId).set(primaryData) // отправка данных в базу учеников
+            firestore.collection(Students).document(item.idUser).set(item.toHashMap())
         }
 
     }
@@ -164,6 +173,7 @@ class Firestore {
     // функция входа в аккаунт
     suspend fun loginInAccount(email: String,password: String):ModelResponseLogin{
         return suspendCoroutine { continuation ->
+
             val firestoreAuth = FirebaseAuth.getInstance()
             firestoreAuth.signInWithEmailAndPassword(email,password)
                 .addOnCompleteListener { task ->
@@ -177,47 +187,51 @@ class Firestore {
                                 .addOnSuccessListener {
                                     val typeUser = it.data?.get("status").toString()
                                     if(typeUser != ""){
-                                        continuation.resume(ModelResponseLogin(typeUser,userId)) // успешный вход в аккаунт учителя или студента
+                                        continuation.resume(ModelResponseLogin(typeUser,userId))
                                     }else{
-                                        continuation.resume(ModelResponseLogin(ERROR, ERROR)) // ошибка входа
+                                        continuation.resume(ModelResponseLogin(OperationStatus.Error.status, OperationStatus.Error.status))
                                     }
                                 }
                                 .addOnFailureListener {
-                                    continuation.resume(ModelResponseLogin(ERROR, ERROR)) // ошибка входа
+                                    continuation.resume(ModelResponseLogin(OperationStatus.Error.status, OperationStatus.Error.status))
                                 }
                         }
 
                     }else{
-                        continuation.resume(ModelResponseLogin(ERROR, ERROR)) // ошибка входа
+                        continuation.resume(ModelResponseLogin(OperationStatus.Error.status, OperationStatus.Error.status))
                     }
                 }
+
         }
     }
 
-    // функция получения моих данных как учителя
-    suspend fun getMyInfoTeacher(idTeacher:String):ModelTeacher{
+    // функция обновления url адреса
+    fun updateUrlPhotoFromProfile(url:String,userId: String){
+
+        val data = mapOf("url_photo" to url)
+        firestore.collection(Teachers_and_Students).document(userId).update(data) // отправка данных в общую базу
+        firestore.collection(Teachers).document(userId).update(data)
+
+    }
+
+
+
+    suspend fun uploadPhotoForProfileTeacher(bitmap:Bitmap):String{
         return suspendCoroutine { continuation ->
 
-            val firestore = FirebaseFirestore.getInstance()
-            firestore.collection(Teachers).document(idTeacher)
-                .get()
-                .addOnSuccessListener{
+            val storageReference = FirebaseStorage.getInstance().reference
+            val imageReference = storageReference.child("images/${System.currentTimeMillis()}.jpg")
+            val baos = ByteArrayOutputStream()
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
+            val data = baos.toByteArray()
+            val uploadTask = imageReference.putBytes(data)
 
-                    val teacher = ModelTeacher()
-                    teacher.education = it.data?.get("education").toString()
-                    teacher.experience = it.data?.get("experience").toString()
-                    teacher.lastName = it.data?.get("last_name").toString()
-                    teacher.firstName = it.data?.get("first_name").toString()
-                    teacher.myDescription = it.data?.get("my_description").toString()
-                    teacher.myRating = it.data?.get("my_rating").toString()
-                    teacher.status = it.data?.get("status").toString()
-                    teacher.userId = it.data?.get("user_id").toString()
-
-                    if(it.data?.get("first_name") != ""){
-                        continuation.resume(teacher)
-                    }
-
-                }
+            uploadTask.addOnFailureListener {
+                continuation.resume(OperationStatus.Error.status)
+            }.addOnSuccessListener {
+                val downloadUrl = imageReference.name
+                continuation.resume(downloadUrl)
+            }
 
         }
     }

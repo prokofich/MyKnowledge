@@ -1,12 +1,12 @@
 package com.my.knowledge.view.activity
 
+import android.app.AlertDialog
 import android.content.IntentFilter
 import android.net.ConnectivityManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.view.WindowManager
-import androidx.core.view.isVisible
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.my.knowledge.model.constant.MAIN
@@ -19,6 +19,7 @@ class MainActivity : AppCompatActivity(),InterfaceNetworkBroadcastReceiver {
 
     var navController:NavController? = null
     private var stateNetwork:Boolean? = null
+    private var alertDialog:AlertDialog? = null
     private var networkBroadcast: NetworkBroadcastReceiver? = null
     private var binding:ActivityMainBinding? = null
 
@@ -51,6 +52,24 @@ class MainActivity : AppCompatActivity(),InterfaceNetworkBroadcastReceiver {
 
     }
 
+    // функция показа диалога о выходе из приложения
+    fun exitApplication(){
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle("выход из приложения")
+        builder.setMessage("вы точно хотите выйти?")
+
+        builder.setPositiveButton("выйти") { _, _ ->
+            this.finishAffinity()
+        }
+
+        builder.setNegativeButton("отмена") { _, _ ->
+            alertDialog?.dismiss()
+        }
+
+        alertDialog = builder.create()
+        alertDialog?.show()
+    }
+
     // функция регистрации ресивера
     override fun onResume() {
         super.onResume()
@@ -63,11 +82,6 @@ class MainActivity : AppCompatActivity(),InterfaceNetworkBroadcastReceiver {
     override fun onStop() {
         super.onStop()
         unregisterReceiver(networkBroadcast)
-    }
-
-    // функция закрытия приложения
-    fun closeApplication(){
-        this.finishAffinity()
     }
 
     // функция показа или скрытия нижнего бара с меню для учителя

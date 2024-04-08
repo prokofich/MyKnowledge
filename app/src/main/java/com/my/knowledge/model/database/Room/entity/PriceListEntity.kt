@@ -5,12 +5,13 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.google.firebase.firestore.Exclude
 
-@Entity(tableName = "PriceListEntity")
+@Entity("PriceListEntity")
 data class PriceListEntity(
-    @PrimaryKey(autoGenerate = true) val id:Long = 0,
-    @ColumnInfo(name = "name")val name:String,
-    @ColumnInfo(name = "price")val price:String,
-    @ColumnInfo(name = "desc")val desc:String
+    @PrimaryKey(autoGenerate = true) var id:Long = 0,
+    @ColumnInfo("idUser") val idUser:String?,
+    @ColumnInfo("name") val name:String,
+    @ColumnInfo("price") val price:String,
+    @ColumnInfo("desc") val desc:String
 ){
     fun toHashMap(): HashMap<String, Any?> {
         return hashMapOf(

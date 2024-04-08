@@ -10,8 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.my.knowledge.R
 import com.my.knowledge.databinding.FragmentSplashBinding
 import com.my.knowledge.model.constant.MAIN
-import com.my.knowledge.model.constant.STUDENT
-import com.my.knowledge.model.constant.TEACHER
+import com.my.knowledge.model.constant.UserType
 import com.my.knowledge.model.database.sharedpreferences.SharedPreferences
 import com.my.knowledge.model.repository.Repository
 import com.my.knowledge.viewmodel.generalviewmodel.SplashViewModel
@@ -34,6 +33,7 @@ class SplashFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        repository = Repository()
         sharedPreferences = SharedPreferences(requireContext())
 
         val splashViewModel = ViewModelProvider(this)[SplashViewModel::class.java]
@@ -42,13 +42,12 @@ class SplashFragment : Fragment() {
         splashViewModel.isOpenAccount.observe(viewLifecycleOwner){
             if(it){
                 when(sharedPreferences?.getTypeUserInLastSession()){
-                    TEACHER -> {
+
+                    UserType.Teacher.user -> {
                         MAIN?.showOrHideBottomNavigationForTeacher(true)
                         MAIN?.navController?.navigate(R.id.accountTeacherFragment)
                     }
-                    STUDENT -> {
-
-                        // НАДО ДОБАВИТЬ ДЛЯ СТУДЕНТА ВХОД
+                    UserType.Student.user -> {
 
                     }
                 }
@@ -59,8 +58,7 @@ class SplashFragment : Fragment() {
 
         // выход из приложения
          requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner){
-             repository = Repository()
-             repository?.closeApplication()
+             repository?.exitTheApplication()
          }
 
     }

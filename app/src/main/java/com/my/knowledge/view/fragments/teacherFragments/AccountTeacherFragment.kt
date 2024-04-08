@@ -1,14 +1,20 @@
 package com.my.knowledge.view.fragments.teacherFragments
 
+import android.app.Activity
+import android.content.Intent
+import android.graphics.Bitmap
+import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.addCallback
 import androidx.lifecycle.ViewModelProvider
+import coil.load
 import com.my.knowledge.databinding.FragmentAccountTeacherBinding
-import com.my.knowledge.model.constant.TEACHER
+import com.my.knowledge.model.constant.UserType
 import com.my.knowledge.model.database.Room.entity.MyAccountEntity
 import com.my.knowledge.model.database.sharedpreferences.SharedPreferences
 import com.my.knowledge.model.repository.Repository
@@ -16,6 +22,8 @@ import com.my.knowledge.viewmodel.teacherviewmodel.AccountTeacherViewModel
 
 class AccountTeacherFragment : Fragment() {
 
+    private val PICK_IMAGE_REQUEST = 71
+    private var filePath: Uri? = null
     private var binding: FragmentAccountTeacherBinding? = null
     private var repository: Repository? = null
     private var sharedPreferences: SharedPreferences? = null
@@ -38,17 +46,48 @@ class AccountTeacherFragment : Fragment() {
 
         accountTeacherViewModel?.getInfoMyAccount(sharedPreferences?.getUserId().toString())
 
+        if(repository?.checkNetworkState() == true){
+            accountTeacherViewModel?.getImageFromStorageByUrl(sharedPreferences?.getUrlPhotoFromProfile())
+        }
+
+        accountTeacherViewModel?.photoFromStorage?.observe(viewLifecycleOwner){
+
+            showImageForProfile(it)
+
+        }
+
         // показ данных профиля
-        accountTeacherViewModel?.infoMyAccount?.observe(viewLifecycleOwner){ data ->
-            showMyInfoTeacher(data)
+        accountTeacherViewModel?.infoMyAccount?.observe(viewLifecycleOwner){
+
+            showMyInfoTeacher(it)
+
         }
 
         // показ ответа после редактирования профиля
-        accountTeacherViewModel?.isSuccessful?.observe(viewLifecycleOwner){ data ->
-            if(data){
+        accountTeacherViewModel?.isSuccessful?.observe(viewLifecycleOwner){
+
+            if(it){
                 repository?.showToast("данные успешно сохранены",requireContext())
             }else{
                 repository?.showToast("ошибка,данные не сохранены",requireContext())
+            }
+
+        }
+
+
+        accountTeacherViewModel?.urlPhoto?.observe(viewLifecycleOwner){
+
+            sharedPreferences?.setUrlPhotoFromProfile(it)
+            accountTeacherViewModel?.updateUrlPhotoFromProfile(it,sharedPreferences?.getUserId())
+
+        }
+
+        // открытие галереи для выбора аватарки
+        binding?.idAccountIvPhoto?.setOnClickListener {
+            if(binding?.idAccountTeacherTvRedact?.text == "сохранить"){
+                chooseImage()
+            }else{
+                repository?.showToast("нажмите - редактировать - ",requireContext())
             }
         }
 
@@ -147,9 +186,24 @@ class AccountTeacherFragment : Fragment() {
             }
         }
 
-        // выход в меню учителя
+        // выход из приложения
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner){
-            //MAIN?.navController?.navigate(R.id.action_accountTeacherFragment_to_teacherMenuFragment)
+            repository?.exitTheApplication()
+        }
+
+    }
+
+    @Deprecated("Deprecated in Java")
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode == PICK_IMAGE_REQUEST && resultCode == Activity.RESULT_OK && data != null && data.data != null) {
+
+            filePath = data.data
+            val bitmap = MediaStore.Images.Media.getBitmap(requireContext().contentResolver, filePath)
+            binding?.idAccountIvPhoto?.load(bitmap)
+            accountTeacherViewModel?.uploadPhotoForProfile(bitmap)
+
         }
 
     }
@@ -167,6 +221,11 @@ class AccountTeacherFragment : Fragment() {
         binding?.idAccountTeacherTvMyDesc?.setText(data?.description)
         binding?.idAccountTeacherTvOpitRaboti?.setText(data?.experience)
         binding?.idAccountTeacherTvEducation?.setText(data?.education)
+    }
+
+    // функция показа аватарки
+    private fun showImageForProfile(bitmap: Bitmap?){
+        binding?.idAccountIvPhoto?.load(bitmap)
     }
 
     // функция открытия/закрытия для редактирования поля ввода
@@ -194,14 +253,23 @@ class AccountTeacherFragment : Fragment() {
     private fun updateDataFromMyProfileInLocalDatabase(){
         accountTeacherViewModel?.updateInfoMyAccount(MyAccountEntity(SharedPreferences(requireContext()).getUserId(),
             binding?.idAccountTvFirstName?.text.toString(),binding?.idAccountTvLastName?.text.toString(),
-            TEACHER, binding?.idAccountTeacherTvMyDesc?.text.toString(),
-            binding?.idAccountTeacherTvOpitRaboti?.text.toString(), binding?.idAccountTeacherTvEducation?.text.toString()
+            UserType.Teacher.user, binding?.idAccountTeacherTvMyDesc?.text.toString(),
+            binding?.idAccountTeacherTvOpitRaboti?.text.toString(), binding?.idAccountTeacherTvEducation?.text.toString(),
+            sharedPreferences?.getUrlPhotoFromProfile().toString()
         ))
     }
 
     // функция обновления данных из моего профиля в Firestore
     private fun updateDataFromMyProfileInFirestore(data:String,typeData:String){
         accountTeacherViewModel?.setDataFromMyProfile(data,typeData, sharedPreferences?.getUserId())
+    }
+
+    // функция выбора фотографии из галереи
+    private fun chooseImage() {
+        val intent = Intent()
+        intent.type = "image/*"
+        intent.action = Intent.ACTION_GET_CONTENT
+        startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST)
     }
 
 }

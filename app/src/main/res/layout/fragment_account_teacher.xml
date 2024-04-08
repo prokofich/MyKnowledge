@@ -21,6 +21,7 @@
         <ImageView
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:adjustViewBounds="true"
             android:background="@drawable/image_account"
             app:layout_constraintEnd_toStartOf="@id/id_account_tv_last_name"
             android:id="@+id/id_account_iv_photo"
@@ -71,7 +72,7 @@
             android:layout_height="0dp"
             android:gravity="center"
             style="@style/LoginButtonMenuStyle"
-            android:text="редактировать"
+            android:text="@string/title_text_account_teacher_2"
             android:textColor="@color/white"
             android:textStyle="bold"
             android:textSize="11sp"
@@ -126,7 +127,7 @@
                 android:layout_height="30dp"
                 android:gravity="center"
                 android:textColor="@color/white"
-                android:text="О себе:"
+                android:text="@string/title_text_account_teacher_1"
                 android:textStyle="italic"
                 android:textSize="22sp"
                 android:layout_marginTop="10dp"
@@ -144,38 +145,29 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/id_account_teacher_tv_title_1"/>
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <EditText
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/id_account_teacher_cs_my_desc"
-                android:background="@drawable/background_cs_login_white"
+                android:layout_marginTop="15dp"
                 android:layout_margin="10dp"
-                app:layout_constraintTop_toBottomOf="@id/id_account_teacher_tv_title_1">
-
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_marginTop="15dp"
-                    android:layout_margin="10dp"
-                    android:gravity="center"
-                    android:enabled="false"
-                    android:textSize="17sp"
-                    android:hint="нажмите ИЗМЕНИТЬ,чтобы отредактировать текст"
-                    android:textStyle="italic|bold"
-                    android:textColor="@color/white"
-                    android:textColorHint="#313331"
-                    android:id="@+id/id_account_teacher_tv_my_desc"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    android:layout_height="wrap_content"/>
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                android:gravity="center"
+                android:enabled="false"
+                android:textSize="17sp"
+                android:padding="12sp"
+                android:background="@drawable/background_cs_login_white"
+                android:hint="@string/title_text_account_teacher_4"
+                android:textStyle="italic|bold"
+                android:textColor="@color/white"
+                android:textColorHint="#313331"
+                android:id="@+id/id_account_teacher_tv_my_desc"
+                app:layout_constraintTop_toBottomOf="@id/id_account_teacher_tv_title_1"
+                android:layout_height="wrap_content"/>
 
             <TextView
                 android:layout_width="0dp"
                 android:gravity="center"
                 android:textColor="@color/white"
                 android:textStyle="bold"
-                android:text="изменить"
+                android:text="@string/title_text_account_teacher_3"
                 android:layout_height="24dp"
                 android:textSize="14sp"
                 style="@style/LoginButtonMenuStyle"
@@ -184,7 +176,7 @@
                 app:layout_constraintWidth_percent="0.22"
                 android:layout_marginEnd="10dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/id_account_teacher_cs_my_desc"/>
+                app:layout_constraintTop_toBottomOf="@id/id_account_teacher_tv_my_desc"/>
 
             <View
                 android:layout_width="0dp"
@@ -201,7 +193,7 @@
                 android:layout_height="30dp"
                 android:gravity="center"
                 android:textColor="@color/white"
-                android:text="Опыт работы:"
+                android:text="@string/title_text_account_teacher_6"
                 android:textStyle="italic"
                 android:textSize="22sp"
                 android:layout_marginTop="10dp"
@@ -219,38 +211,29 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/id_account_teacher_tv_title_2"/>
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <EditText
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/id_account_teacher_cs_opit_raboti"
-                android:background="@drawable/background_cs_login_white"
+                android:layout_marginTop="15dp"
                 android:layout_margin="10dp"
-                app:layout_constraintTop_toBottomOf="@id/id_account_teacher_tv_title_2">
-
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_marginTop="15dp"
-                    android:layout_margin="10dp"
-                    android:gravity="center"
-                    android:textSize="17sp"
-                    android:enabled="false"
-                    android:hint="нажмите ИЗМЕНИТЬ,чтобы отредактировать текст"
-                    android:textStyle="italic|bold"
-                    android:textColor="@color/white"
-                    android:textColorHint="#313331"
-                    android:id="@+id/id_account_teacher_tv_opit_raboti"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    android:layout_height="wrap_content"/>
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                android:gravity="center"
+                android:textSize="17sp"
+                android:enabled="false"
+                android:padding="12sp"
+                android:background="@drawable/background_cs_login_white"
+                android:hint="@string/title_text_account_teacher_4"
+                android:textStyle="italic|bold"
+                android:textColor="@color/white"
+                android:textColorHint="#313331"
+                android:id="@+id/id_account_teacher_tv_opit_raboti"
+                app:layout_constraintTop_toBottomOf="@id/id_account_teacher_tv_title_2"
+                android:layout_height="wrap_content"/>
 
             <TextView
                 android:layout_width="0dp"
                 android:gravity="center"
                 android:textColor="@color/white"
                 android:textStyle="bold"
-                android:text="изменить"
+                android:text="@string/title_text_account_teacher_3"
                 android:layout_height="24dp"
                 android:textSize="14sp"
                 style="@style/LoginButtonMenuStyle"
@@ -259,7 +242,7 @@
                 app:layout_constraintWidth_percent="0.22"
                 android:layout_marginEnd="10dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/id_account_teacher_cs_opit_raboti"/>
+                app:layout_constraintTop_toBottomOf="@id/id_account_teacher_tv_opit_raboti"/>
 
             <View
                 android:layout_width="0dp"
@@ -276,7 +259,7 @@
                 android:layout_height="30dp"
                 android:gravity="center"
                 android:textColor="@color/white"
-                android:text="Моё образование:"
+                android:text="@string/title_text_account_teacher_7"
                 android:textStyle="italic"
                 android:textSize="22sp"
                 android:layout_marginTop="10dp"
@@ -294,38 +277,29 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/id_account_teacher_tv_title_3"/>
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <EditText
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/id_account_teacher_cs_education"
-                android:background="@drawable/background_cs_login_white"
+                android:layout_marginTop="15dp"
                 android:layout_margin="10dp"
-                app:layout_constraintTop_toBottomOf="@id/id_account_teacher_tv_title_3">
-
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_marginTop="15dp"
-                    android:layout_margin="10dp"
-                    android:gravity="center"
-                    android:textSize="17sp"
-                    android:enabled="false"
-                    android:hint="нажмите ИЗМЕНИТЬ,чтобы отредактировать текст"
-                    android:textStyle="italic|bold"
-                    android:textColor="@color/white"
-                    android:textColorHint="#313331"
-                    android:id="@+id/id_account_teacher_tv_education"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    android:layout_height="wrap_content"/>
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                android:gravity="center"
+                android:textSize="17sp"
+                android:padding="12sp"
+                android:background="@drawable/background_cs_login_white"
+                android:enabled="false"
+                android:hint="@string/title_text_account_teacher_4"
+                android:textStyle="italic|bold"
+                android:textColor="@color/white"
+                android:textColorHint="#313331"
+                android:id="@+id/id_account_teacher_tv_education"
+                app:layout_constraintTop_toBottomOf="@id/id_account_teacher_tv_title_3"
+                android:layout_height="wrap_content"/>
 
             <TextView
                 android:layout_width="0dp"
                 android:gravity="center"
                 android:textColor="@color/white"
                 android:textStyle="bold"
-                android:text="изменить"
+                android:text="@string/title_text_account_teacher_3"
                 android:layout_height="24dp"
                 android:textSize="14sp"
                 style="@style/LoginButtonMenuStyle"
@@ -334,7 +308,7 @@
                 android:layout_marginEnd="10dp"
                 android:layout_marginTop="5dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/id_account_teacher_cs_education"/>
+                app:layout_constraintTop_toBottomOf="@id/id_account_teacher_tv_education"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -5,12 +5,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.activity.addCallback
 import com.my.knowledge.databinding.FragmentTableBinding
+import com.my.knowledge.model.repository.Repository
 
 class TableFragment : Fragment() {
 
     private var binding: FragmentTableBinding? = null
+    private var repository:Repository? = null
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -22,12 +24,7 @@ class TableFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // возврат в меню выбора дня недели
-        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner){
-            //MAIN?.navController?.navigate(R.id.action_tableFragment_to_daysWeekFragment)
-        }
-
-
+        repository = Repository()
 
     }
 

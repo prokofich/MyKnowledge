@@ -2,10 +2,9 @@ package com.my.knowledge.model.repository
 
 import android.content.Context
 import android.widget.Toast
-import com.my.knowledge.model.constant.CORRECT
 import com.my.knowledge.model.constant.MAIN
+import com.my.knowledge.model.constant.OperationStatus
 import com.my.knowledge.model.constant.alfavit
-
 
 class Repository{
 
@@ -14,16 +13,16 @@ class Repository{
         return MAIN?.getStateNetwork()
     }
 
-    // функция закрытия приложения
-    fun closeApplication(){
-        MAIN?.closeApplication()
+    // функция выхода из приложения
+    fun exitTheApplication(){
+        MAIN?.exitApplication()
     }
 
     // функция проверки правильности введенных данных
     fun checkInputPriceData(name:String,price:String,desc:String):String{
         return if(name!="" && price!="" && desc!=""){
             if(price.toSet().intersect(alfavit.toSet()).isEmpty()){
-                "верно"
+                OperationStatus.Correct.status
             }else{
                 "в поле цены запишите число"
             }
@@ -49,7 +48,7 @@ class Repository{
                 if((firstName!!.toSet() intersect set1).isEmpty()){
                     if((lastName!!.toSet() intersect set1).isEmpty()){
                         if(networkState == true){
-                            CORRECT
+                            OperationStatus.Correct.status
                         }else{
                             "проверьте состояние сети"
                         }
@@ -70,7 +69,7 @@ class Repository{
     // функция проверки правильности введенных данных для входа в аккаунт
     fun checkInputDataInLogin(email:String?,password:String?,stateNetwork:Boolean?):String{
         return if(email!="" && password!="" && stateNetwork == true){
-            CORRECT
+            OperationStatus.Correct.status
         }else{
             return if(stateNetwork == false){
                 "проверьте интернет соединение"

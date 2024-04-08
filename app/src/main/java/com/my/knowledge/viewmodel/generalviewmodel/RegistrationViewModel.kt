@@ -5,6 +5,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.my.knowledge.model.database.Room.database.AppDatabase
+import com.my.knowledge.model.database.Room.entity.CountLessonsEntity
 import com.my.knowledge.model.database.Room.entity.MyAccountEntity
 import com.my.knowledge.model.repository.RoomRepository
 import com.my.knowledge.model.repository.FirestoreRepository
@@ -25,21 +26,36 @@ class RegistrationViewModel(application: Application) : AndroidViewModel(applica
 
     fun createAccount(email:String,password:String){
         viewModelScope.launch(Dispatchers.IO) {
+
             val answer = firestoreRepository.createAccount(email, password)
             withContext(Dispatchers.Main){
                 isRegistration.value = answer
             }
+
         }
     }
 
-    fun setPrimaryDataAfterRegistration(modelUser: ModelUser){
+    fun setPrimaryDataAfterRegistration(item: MyAccountEntity){
         viewModelScope.launch(Dispatchers.IO) {
-            firestoreRepository.setPrimaryDataAfterRegistration(modelUser)
+
+            firestoreRepository.setPrimaryDataAfterRegistration(item)
+
+        }
+    }
+
+    fun setCountLessonsInLocalDatabase(item: CountLessonsEntity){
+        viewModelScope.launch(Dispatchers.IO) {
+
+            databaseRoom = RoomRepository(getApplication()).database
+            databaseRoom?.databaseCountLessonsDao()?.insertCountLessons(item)
+
         }
     }
 
     fun checkInputData(email:String?,password:String?,firstName:String?,lastName:String?,status:String?,stateNetwork:Boolean?){
+
         isCorrectInputData.value = repository.checkInputData(email, password, firstName, lastName, status,stateNetwork)
+
     }
 
     fun insertAccountInLocalDatabase(item: MyAccountEntity){

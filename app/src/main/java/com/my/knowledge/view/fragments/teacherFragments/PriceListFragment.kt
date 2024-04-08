@@ -27,6 +27,7 @@ class PriceListFragment : Fragment(),PriceListInterface {
     private var priceListAdapter: PriceListAdapter? = null
     private var sharedPreferences: SharedPreferences? = null
     private var priceListViewModel: PriceListViewModel? = null
+    private var maxIdPriceList = 0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,40 +40,81 @@ class PriceListFragment : Fragment(),PriceListInterface {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        repository = Repository()
+        sharedPreferences = SharedPreferences(requireContext())
         priceListViewModel = ViewModelProvider(this)[PriceListViewModel::class.java]
 
         recyclerView = binding?.idPriceListRv
-        priceListAdapter = PriceListAdapter(this)
+        priceListAdapter = PriceListAdapter(this,requireContext())
         recyclerView?.adapter = priceListAdapter
 
+        priceListViewModel?.getMaxIdInPriceList(sharedPreferences?.getUserId())
         priceListViewModel?.getAllPriceList()
 
-        priceListViewModel?.priceList?.observe(viewLifecycleOwner){ data ->
-            if(data != null){
-                listPrice = data.toMutableList()
-                priceListAdapter?.setListPrice(listPrice)
+        priceListViewModel?.priceList?.observe(viewLifecycleOwner){
+            if(it != null){
+                listPrice = it.toMutableList()
+                priceListAdapter?.setItemsInList(it.toMutableList())
             }
         }
 
-        priceListViewModel?.isSuccessful?.observe(viewLifecycleOwner){ data ->
-            repository = Repository()
-            if(data){
+        priceListViewModel?.maxId?.observe(viewLifecycleOwner){
+            maxIdPriceList = it
+        }
+
+        priceListViewModel?.isSuccessful?.observe(viewLifecycleOwner){
+            if(it){
                 repository?.showToast("действие успешно выполнено",requireContext())
-                priceListViewModel?.getAllPriceList()
             }else{
                 repository?.showToast("ошибка",requireContext())
             }
         }
 
-        // выход в меню
-        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner){
-            //MAIN?.navController?.navigate(R.id.action_priceListFragment_to_teacherMenuFragment)
-        }
-
         // добавление элемента в прокручиваемый список
         binding?.idPriceListButtonAdd?.setOnClickListener {
-            listPrice.add(PriceListEntity(name = "", price = "", desc = ""))
-            priceListAdapter?.setListPrice(listPrice)
+            if(repository?.checkNetworkState() == true){
+                val newItem = PriceListEntity(name = "", price = "", desc = "", idUser = sharedPreferences?.getUserId())
+                savePriceInRoom(newItem)
+            }
+        }
+
+        // обработка ответа от Room при сохранении
+        priceListViewModel?.isSuccessfulInsertInRoom?.observe(viewLifecycleOwner){
+            if(repository?.checkNetworkState() == true){
+                savePriceInFirestore(it) // сохранение в Firestore
+                listPrice.add(it)
+                priceListAdapter?.addItemInList(it) // показ пустого элемента на экране
+            }
+        }
+
+        // обработка ответа от Firestore при сохранении
+        priceListViewModel?.isSuccessfulInsertInFirestore?.observe(viewLifecycleOwner){
+            if(!it) {
+                repository?.showToast("ошибка, попробуйте еще раз", requireContext())
+            }
+        }
+
+        // обработка ответа от Firestore при обновлении
+        priceListViewModel?.isSuccessfulUpdateInFirestore?.observe(viewLifecycleOwner){
+            if(it){
+                repository?.showToast("данные успешно обновлены", requireContext())
+            }else{
+                repository?.showToast("ошибка при обновлении", requireContext())
+            }
+        }
+
+        // обработка ответа от Firestore при удалении
+        priceListViewModel?.isSuccessfulDeleteInFirestore?.observe(viewLifecycleOwner){
+            if(it){
+                repository?.showToast("данные успешно удалены", requireContext())
+            }else{
+                repository?.showToast("ошибка при удалении", requireContext())
+            }
+        }
+
+        // выход из приложения
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner){
+            repository?.exitTheApplication()
         }
 
     }
@@ -83,32 +125,34 @@ class PriceListFragment : Fragment(),PriceListInterface {
         binding = null
     }
 
-    // функция сохранения новой позиции в прайс-листе
-    override fun savePrice(item: PriceListEntity) {
-        sharedPreferences = SharedPreferences(requireContext())
-        priceListViewModel?.insertPriceFromDatabase(item,sharedPreferences?.getUserId())
+    // функция сохранения элемента в Room
+    private fun savePriceInRoom(item: PriceListEntity) {
+        priceListViewModel?.insertItemPriceListInRoom(item)
+    }
+
+    // функция сохранения элемента в Firestore
+    private fun savePriceInFirestore(item: PriceListEntity){
+        priceListViewModel?.insertItemPriceListInFirestore(item,sharedPreferences?.getUserId())
     }
 
     // функция обновления старой позиции в прайс-листе
-    override fun updatePrice(item: PriceListEntity) {
-        sharedPreferences = SharedPreferences(requireContext())
-        priceListViewModel?.updatePriceFromDatabase(item,sharedPreferences?.getUserId())
+    override fun updatePrice(item: PriceListEntity,indexItem: Int) {
+        priceListViewModel?.updateItemPriceListInRoom(item)
+        priceListViewModel?.updateItemPriceListInFirestore(item,sharedPreferences?.getUserId())
+        listPrice[indexItem] = item
+        priceListAdapter?.updateItemInList(item, indexItem)
     }
 
     // функция удаления старой позиции из прайс-листа
-    override fun deletePrice(item: PriceListEntity) {
-        sharedPreferences = SharedPreferences(requireContext())
-        priceListViewModel?.deletePriceFromDatabase(item,sharedPreferences?.getUserId())
-    }
-
-    // функция показа всплывающего сообщения
-    override fun showToast(message: String?) {
-        repository = Repository()
-        repository?.showToast(message,requireContext())
+    private fun deletePrice(item: PriceListEntity,indexItem: Int) {
+        listPrice.removeAt(indexItem)
+        priceListAdapter?.deleteItemInList(indexItem)
+        priceListViewModel?.deleteItemPriceListInRoom(item)
+        priceListViewModel?.deleteItemPriceListInFirestore(item,sharedPreferences?.getUserId())
     }
 
     // функция показа диалога о подтверждении удаления
-    override fun showDialog(item: PriceListEntity) {
+    override fun showDialog(indexItem:Int) {
         val alertDialogBuilder = AlertDialog.Builder(requireContext())
         alertDialogBuilder.apply {
 
@@ -116,16 +160,7 @@ class PriceListFragment : Fragment(),PriceListInterface {
             setMessage("Вы уверены, что хотите удалить этот элемент?")
 
             setPositiveButton("Да") { dialogInterface: DialogInterface, _: Int ->
-                if(item.id.toInt() != 0){
-
-                    deletePrice(item)
-
-                }else{
-
-                    listPrice.remove(PriceListEntity(id = 0, name = "", price = "", desc = ""))
-                    priceListAdapter?.setListPrice(listPrice)
-
-                }
+                deletePrice(listPrice[indexItem],indexItem)
                 dialogInterface.dismiss()
             }
             setNegativeButton("Нет") { dialogInterface: DialogInterface, _: Int ->
@@ -134,6 +169,11 @@ class PriceListFragment : Fragment(),PriceListInterface {
         }
 
         alertDialogBuilder.create().show()
+    }
+
+    // функция показа всплывающего сообщения
+    override fun showToast(message: String?) {
+        repository?.showToast(message,requireContext())
     }
 
 }
