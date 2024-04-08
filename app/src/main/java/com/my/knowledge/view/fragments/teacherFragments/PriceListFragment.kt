@@ -27,7 +27,6 @@ class PriceListFragment : Fragment(),PriceListInterface {
     private var priceListAdapter: PriceListAdapter? = null
     private var sharedPreferences: SharedPreferences? = null
     private var priceListViewModel: PriceListViewModel? = null
-    private var maxIdPriceList = 0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -48,25 +47,12 @@ class PriceListFragment : Fragment(),PriceListInterface {
         priceListAdapter = PriceListAdapter(this,requireContext())
         recyclerView?.adapter = priceListAdapter
 
-        priceListViewModel?.getMaxIdInPriceList(sharedPreferences?.getUserId())
-        priceListViewModel?.getAllPriceList()
+        priceListViewModel?.getAllPriceList(sharedPreferences?.getUserId())
 
         priceListViewModel?.priceList?.observe(viewLifecycleOwner){
             if(it != null){
                 listPrice = it.toMutableList()
                 priceListAdapter?.setItemsInList(it.toMutableList())
-            }
-        }
-
-        priceListViewModel?.maxId?.observe(viewLifecycleOwner){
-            maxIdPriceList = it
-        }
-
-        priceListViewModel?.isSuccessful?.observe(viewLifecycleOwner){
-            if(it){
-                repository?.showToast("действие успешно выполнено",requireContext())
-            }else{
-                repository?.showToast("ошибка",requireContext())
             }
         }
 

@@ -14,10 +14,10 @@ data class ModelUser(
 
     fun toHashMap(): HashMap<String, Any?> {
         return hashMapOf(
-            "id" to firstName,
-            "name" to lastName,
+            "id"    to firstName,
+            "name"  to lastName,
             "price" to status,
-            "desc" to userId
+            "desc"  to userId
         )
     }
 

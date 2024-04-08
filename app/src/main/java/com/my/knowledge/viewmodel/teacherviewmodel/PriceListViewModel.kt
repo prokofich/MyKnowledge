@@ -18,7 +18,6 @@ class PriceListViewModel(application: Application):AndroidViewModel(application)
     private val firestoreRepository = FirestoreRepository()
 
     val priceList: MutableLiveData <List <PriceListEntity>? > = MutableLiveData()
-
     val isSuccessfulInsertInRoom: MutableLiveData <PriceListEntity> = MutableLiveData()
     val isSuccessfulInsertInFirestore: MutableLiveData <Boolean> = MutableLiveData()
     val isSuccessfulUpdateInFirestore: MutableLiveData <Boolean> = MutableLiveData()
@@ -35,7 +34,9 @@ class PriceListViewModel(application: Application):AndroidViewModel(application)
             withContext(Dispatchers.Main){
                 answer?.let {
                     item.id = answer
-                    isSuccessfulInsertInRoom.value = item
+                    synchronized(lock){
+                        isSuccessfulInsertInRoom.value = item
+                    }
                 }
             }
 
@@ -114,7 +115,9 @@ class PriceListViewModel(application: Application):AndroidViewModel(application)
                 databaseRoom = RoomRepository(getApplication()).database
                 val answer = databaseRoom?.databasePriceListDao()?.getAllPriceList(it)
                 withContext(Dispatchers.Main){
-                    priceList.value = answer
+                    synchronized(lock){
+                        priceList.value = answer
+                    }
                 }
             }
 
