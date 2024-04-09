@@ -20,6 +20,6 @@ interface PriceListDao {
     fun updatePrice(item: PriceListEntity)
 
     @Insert
-    fun insertPrice(item: PriceListEntity):Long
+    fun insertPrice(item: PriceListEntity) : Long
 
 }

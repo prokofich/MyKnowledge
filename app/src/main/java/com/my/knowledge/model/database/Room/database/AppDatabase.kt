@@ -11,7 +11,7 @@ import com.my.knowledge.model.database.Room.entity.MyAccountEntity
 import com.my.knowledge.model.database.Room.entity.PriceListEntity
 import com.my.knowledge.model.database.Room.entity.TimeTableEntity
 
-@Database(entities = [PriceListEntity :: class, TimeTableEntity :: class, MyAccountEntity :: class, CountLessonsEntity :: class], version = 17)
+@Database(entities = [PriceListEntity :: class, TimeTableEntity :: class, MyAccountEntity :: class, CountLessonsEntity :: class], version = 19)
 abstract class AppDatabase:RoomDatabase() {
     abstract fun databasePriceListDao () : PriceListDao
     abstract fun databaseTimeTableDao () : TimeTableDao

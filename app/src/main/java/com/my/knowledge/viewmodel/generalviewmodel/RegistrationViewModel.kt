@@ -24,10 +24,10 @@ class RegistrationViewModel(application: Application) : AndroidViewModel(applica
     val isRegistration: MutableLiveData<String> = MutableLiveData()
     val isCorrectInputData: MutableLiveData<String> = MutableLiveData()
 
-    fun createAccount(email:String,password:String){
+    fun createAccountInFirestore(email:String,password:String){
         viewModelScope.launch(Dispatchers.IO) {
 
-            val answer = firestoreRepository.createAccount(email, password)
+            val answer = firestoreRepository.createAccountInFirestore(email, password)
             withContext(Dispatchers.Main){
                 isRegistration.value = answer
             }
@@ -38,7 +38,7 @@ class RegistrationViewModel(application: Application) : AndroidViewModel(applica
     fun setPrimaryDataAfterRegistration(item: MyAccountEntity){
         viewModelScope.launch(Dispatchers.IO) {
 
-            firestoreRepository.setPrimaryDataAfterRegistration(item)
+            firestoreRepository.setPrimaryDataAfterRegistrationInFirestore(item)
 
         }
     }

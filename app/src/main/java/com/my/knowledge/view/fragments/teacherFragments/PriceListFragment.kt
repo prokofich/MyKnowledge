@@ -50,7 +50,7 @@ class PriceListFragment : Fragment(),PriceListInterface {
         priceListViewModel?.getAllPriceList(sharedPreferences?.getUserId())
 
         priceListViewModel?.priceList?.observe(viewLifecycleOwner){
-            if(it != null){
+            it?.let{
                 listPrice = it.toMutableList()
                 priceListAdapter?.setItemsInList(it.toMutableList())
             }

@@ -18,10 +18,12 @@ class PriceListViewModel(application: Application):AndroidViewModel(application)
     private val firestoreRepository = FirestoreRepository()
 
     val priceList: MutableLiveData <List <PriceListEntity>? > = MutableLiveData()
-    val isSuccessfulInsertInRoom: MutableLiveData <PriceListEntity> = MutableLiveData()
-    val isSuccessfulInsertInFirestore: MutableLiveData <Boolean> = MutableLiveData()
-    val isSuccessfulUpdateInFirestore: MutableLiveData <Boolean> = MutableLiveData()
-    val isSuccessfulDeleteInFirestore: MutableLiveData <Boolean> = MutableLiveData()
+
+    val isSuccessfulInsertInRoom : MutableLiveData <PriceListEntity> = MutableLiveData()
+
+    val isSuccessfulInsertInFirestore : MutableLiveData <Boolean> = MutableLiveData()
+    val isSuccessfulUpdateInFirestore : MutableLiveData <Boolean> = MutableLiveData()
+    val isSuccessfulDeleteInFirestore : MutableLiveData <Boolean> = MutableLiveData()
 
     private val lock = Any()
 
@@ -56,7 +58,7 @@ class PriceListViewModel(application: Application):AndroidViewModel(application)
         viewModelScope.launch(Dispatchers.IO) {
 
             userId?.let {
-                val answer = firestoreRepository.setDataInPriceList(item , it)
+                val answer = firestoreRepository.setDataInPriceListInFirestore(item , it)
                 withContext(Dispatchers.Main){
                     synchronized(lock){
                         isSuccessfulInsertInFirestore.value = answer
@@ -72,7 +74,7 @@ class PriceListViewModel(application: Application):AndroidViewModel(application)
         viewModelScope.launch(Dispatchers.IO) {
 
             userId?.let {
-                val answer = firestoreRepository.updateDataInPriceList(item , it)
+                val answer = firestoreRepository.updateDataInPriceListInFirestore(item , it)
                 withContext(Dispatchers.Main){
                     synchronized(lock){
                         isSuccessfulUpdateInFirestore.value = answer
@@ -96,7 +98,7 @@ class PriceListViewModel(application: Application):AndroidViewModel(application)
         viewModelScope.launch(Dispatchers.IO) {
 
             userId?.let {
-                val answer = firestoreRepository.deleteDataInPriceList(item , it)
+                val answer = firestoreRepository.deleteDataInPriceListInFirestore(item , it)
                 withContext(Dispatchers.Main){
                     synchronized(lock){
                         isSuccessfulDeleteInFirestore.value = answer

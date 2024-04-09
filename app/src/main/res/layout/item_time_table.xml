@@ -96,7 +96,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="0dp"
-        android:layout_height="50dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
         android:layout_marginEnd="5dp"
         android:layout_marginBottom="10dp"
@@ -108,7 +108,7 @@
 
         <TextView
             android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_height="45dp"
             android:gravity="center"
             android:enabled="false"
             android:fontFamily="@font/baloo"
@@ -116,18 +116,16 @@
             android:text="00"
             android:textStyle="bold"
             android:textSize="28sp"
+            android:layout_marginTop="5dp"
             android:id="@+id/id_item_time_table_cs_2_tv_time_1_hour"
-            app:layout_constraintHeight_percent="0.8"
             app:layout_constraintWidth_percent="0.1"
             android:layout_marginStart="10dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent"/>
 
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            app:layout_constraintHeight_percent="0.8"
+            android:layout_height="45dp"
             app:layout_constraintWidth_percent="0.1"
             android:gravity="center"
             android:text=":"
@@ -141,7 +139,7 @@
 
         <TextView
             android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_height="45dp"
             android:gravity="center"
             android:enabled="false"
             android:fontFamily="@font/baloo"
@@ -149,12 +147,11 @@
             android:text="00"
             android:textStyle="bold"
             android:textSize="28sp"
+            android:layout_marginTop="5dp"
             android:id="@+id/id_item_time_table_cs_2_tv_time_1_minute"
-            app:layout_constraintHeight_percent="0.8"
             app:layout_constraintWidth_percent="0.1"
             app:layout_constraintStart_toEndOf="@id/id_item_time_table_tv_1"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <View
             android:layout_width="0dp"
@@ -163,13 +160,13 @@
             app:layout_constraintWidth_percent="0.05"
             android:background="@color/white"
             android:id="@+id/id_item_time_table_tv_2"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/id_item_time_table_cs_2_tv_time_1_minute"
+            app:layout_constraintTop_toTopOf="@id/id_item_time_table_cs_2_tv_time_1_minute"
             app:layout_constraintStart_toEndOf="@id/id_item_time_table_cs_2_tv_time_1_minute"/>
 
         <TextView
             android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_height="45dp"
             android:enabled="false"
             android:gravity="center"
             android:fontFamily="@font/baloo"
@@ -177,18 +174,16 @@
             android:text="00"
             android:textStyle="bold"
             android:textSize="28sp"
+            android:layout_marginTop="5dp"
             android:id="@+id/id_item_time_table_cs_2_tv_time_2_hour"
-            app:layout_constraintHeight_percent="0.8"
             app:layout_constraintWidth_percent="0.1"
             android:layout_marginStart="5dp"
             app:layout_constraintStart_toEndOf="@id/id_item_time_table_tv_2"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent"/>
 
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            app:layout_constraintHeight_percent="0.8"
+            android:layout_height="45dp"
             app:layout_constraintWidth_percent="0.1"
             android:gravity="center"
             android:text=":"
@@ -202,7 +197,7 @@
 
         <TextView
             android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_height="45dp"
             android:gravity="center"
             android:enabled="false"
             android:fontFamily="@font/baloo"
@@ -210,28 +205,26 @@
             android:text="00"
             android:textStyle="bold"
             android:textSize="28sp"
+            android:layout_marginTop="5dp"
             android:id="@+id/id_item_time_table_cs_2_tv_time_2_minute"
-            app:layout_constraintHeight_percent="0.8"
             app:layout_constraintWidth_percent="0.1"
             app:layout_constraintStart_toEndOf="@id/id_item_time_table_tv_3"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent"/>
 
         <ImageView
             android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_height="40dp"
             android:visibility="gone"
             android:id="@+id/id_item_time_table_iv_delete"
-            app:layout_constraintHeight_percent="0.8"
             app:layout_constraintWidth_percent="0.1"
             android:background="@drawable/image_delete_2"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="@id/id_item_time_table_button_redact"
+            app:layout_constraintBottom_toBottomOf="@id/id_item_time_table_button_redact"
             app:layout_constraintEnd_toStartOf="@id/id_item_time_table_button_redact"/>
 
         <androidx.appcompat.widget.AppCompatButton
             android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_height="30dp"
             style="@style/LoginButtonMenuStyle"
             android:layout_marginEnd="10dp"
             android:gravity="center"
@@ -240,10 +233,24 @@
             android:id="@+id/id_item_time_table_button_redact"
             android:textStyle="bold"
             app:layout_constraintWidth_percent="0.25"
-            app:layout_constraintHeight_percent="0.5"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="@id/id_item_time_table_cs_2_tv_time_2_minute"
+            app:layout_constraintBottom_toBottomOf="@id/id_item_time_table_cs_2_tv_time_2_minute"
             app:layout_constraintEnd_toEndOf="parent"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:text="напомнить о занятии"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:layout_marginBottom="5dp"
+            style="@style/ButtonStyleOrange2"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/id_item_time_table_cs_2_tv_time_2_minute"
+            android:id="@+id/id_item_time_table_button_push"
+            android:layout_marginTop="5dp"
+            app:layout_constraintStart_toStartOf="@id/id_item_time_table_cs_2_tv_time_1_hour"
+            app:layout_constraintEnd_toEndOf="@id/id_item_time_table_cs_2_tv_time_2_minute"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

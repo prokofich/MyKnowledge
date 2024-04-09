@@ -20,13 +20,13 @@ const val alfavit = "qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNMёйц�
 const val DAY_OF_WEEK = "DAY_OF_WEEK"
 
 enum class DayOfWeek(val day:String){
-    Monday("понедельник"),
-    Tuesday("вторник"),
-    Wednesday("среда"),
-    Thursday("четверг"),
-    Friday("пятница"),
-    Saturday("суббота"),
-    Sunday("воскресенье")
+    Monday("ПН"),
+    Tuesday("ВТ"),
+    Wednesday("СР"),
+    Thursday("ЧТ"),
+    Friday("ПТ"),
+    Saturday("СБ"),
+    Sunday("ВС")
 }
 
 enum class UserType(val user:String){

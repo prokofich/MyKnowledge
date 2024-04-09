@@ -5,8 +5,12 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.EditText
+import android.widget.ImageView
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
+import com.my.knowledge.R
 import com.my.knowledge.databinding.ItemPriceTeacherBinding
 import com.my.knowledge.model.constant.OperationStatus
 import com.my.knowledge.model.database.Room.entity.PriceListEntity
@@ -16,7 +20,6 @@ import com.my.knowledge.model.repository.Repository
 
 class PriceListAdapter(private val interfaceAdapter:PriceListInterface,context: Context): RecyclerView.Adapter<PriceListAdapter.PriceListViewHolder>() {
 
-    lateinit var binding:ItemPriceTeacherBinding
     private var listPriceEntity = mutableListOf<PriceListEntity>()
     private var isOpenEditText = false
     private var repository = Repository()
@@ -26,8 +29,8 @@ class PriceListAdapter(private val interfaceAdapter:PriceListInterface,context: 
     class PriceListViewHolder(view: View):RecyclerView.ViewHolder(view)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PriceListViewHolder {
-        binding = ItemPriceTeacherBinding.inflate(LayoutInflater.from(parent.context),parent,false)
-        return PriceListViewHolder(binding.root)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_price_teacher,parent,false)
+        return PriceListViewHolder(view)
     }
 
     override fun getItemCount(): Int {
@@ -35,52 +38,62 @@ class PriceListAdapter(private val interfaceAdapter:PriceListInterface,context: 
     }
 
     override fun onBindViewHolder(holder: PriceListViewHolder, position: Int) {
-        binding.idItemPriceEtName.setText(listPriceEntity[position].name)
-        binding.idItemPriceEtPrice.setText(listPriceEntity[position].price)
-        binding.idItemPriceEtDesc.setText(listPriceEntity[position].desc)
+
+        val editTextName = holder.itemView.findViewById<EditText>(R.id.id_item_price_et_name)
+        val editTextPrice = holder.itemView.findViewById<EditText>(R.id.id_item_price_et_price)
+        val editTextDesc = holder.itemView.findViewById<EditText>(R.id.id_item_price_et_desc)
+
+        editTextName.setText(listPriceEntity[position].name)
+        editTextPrice.setText(listPriceEntity[position].price)
+        editTextDesc.setText(listPriceEntity[position].desc)
+        
     }
 
     override fun onViewAttachedToWindow(holder: PriceListViewHolder) {
         super.onViewAttachedToWindow(holder)
 
-        val bindingItem = binding
+        val editTextName = holder.itemView.findViewById<EditText>(R.id.id_item_price_et_name)
+        val editTextPrice = holder.itemView.findViewById<EditText>(R.id.id_item_price_et_price)
+        val editTextDesc = holder.itemView.findViewById<EditText>(R.id.id_item_price_et_desc)
+        val buttonRedact = holder.itemView.findViewById<Button>(R.id.id_item_price_button_redact)
+        val imageViewDelete = holder.itemView.findViewById<ImageView>(R.id.id_item_price_iv_delete)
 
-        bindingItem.idItemPriceButtonRedact.setOnClickListener {
-            if(bindingItem.idItemPriceButtonRedact.text == "редактировать"){
+        buttonRedact.setOnClickListener {
+            if(buttonRedact.text == "редактировать"){
 
-                bindingItem.idItemPriceButtonRedact.text = "сохранить"
-                bindingItem.idItemPriceIvDelete.isVisible = true
+                buttonRedact.text = "сохранить"
+                imageViewDelete.isVisible = true
                 openOrClosedEditText(true)
-                bindingItem.idItemPriceEtName.isEnabled = isOpenEditText
-                bindingItem.idItemPriceEtPrice.isEnabled = isOpenEditText
-                bindingItem.idItemPriceEtDesc.isEnabled = isOpenEditText
+                editTextName.isEnabled = isOpenEditText
+                editTextPrice.isEnabled = isOpenEditText
+                editTextDesc.isEnabled = isOpenEditText
 
             }else{
 
                 answer = repository.checkInputPriceData(
-                    bindingItem.idItemPriceEtName.text.toString(),
-                    bindingItem.idItemPriceEtPrice.text.toString(),
-                    bindingItem.idItemPriceEtDesc.text.toString()
+                    name = editTextName.text.toString(),
+                    price = editTextPrice.text.toString(),
+                    desc = editTextDesc.text.toString()
                 )
 
                 if(answer == OperationStatus.Correct.status){
 
                     val itemPriceList = PriceListEntity(
                         id = listPriceEntity[holder.adapterPosition].id,
-                        name = bindingItem.idItemPriceEtName.text.toString(),
-                        price = bindingItem.idItemPriceEtPrice.text.toString(),
-                        desc = bindingItem.idItemPriceEtDesc.text.toString(),
+                        name = editTextName.text.toString(),
+                        price = editTextPrice.text.toString(),
+                        desc = editTextDesc.text.toString(),
                         idUser = idUser
                     )
 
                     interfaceAdapter.updatePrice(itemPriceList,holder.adapterPosition)
 
-                    bindingItem.idItemPriceButtonRedact.text = "редактировать"
-                    bindingItem.idItemPriceIvDelete.isVisible = false
+                    buttonRedact.text = "редактировать"
+                    imageViewDelete.isVisible = false
                     openOrClosedEditText(false)
-                    bindingItem.idItemPriceEtName.isEnabled = isOpenEditText
-                    bindingItem.idItemPriceEtPrice.isEnabled = isOpenEditText
-                    bindingItem.idItemPriceEtDesc.isEnabled = isOpenEditText
+                    editTextName.isEnabled = isOpenEditText
+                    editTextPrice.isEnabled = isOpenEditText
+                    editTextDesc.isEnabled = isOpenEditText
 
                 }else{ interfaceAdapter.showToast(answer) }
 
@@ -88,7 +101,7 @@ class PriceListAdapter(private val interfaceAdapter:PriceListInterface,context: 
 
         }
 
-        bindingItem.idItemPriceIvDelete.setOnClickListener {
+        imageViewDelete.setOnClickListener {
             interfaceAdapter.showDialog(holder.adapterPosition)
         }
 

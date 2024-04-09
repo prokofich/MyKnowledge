@@ -28,7 +28,7 @@ class AccountTeacherViewModel(application: Application): AndroidViewModel(applic
         viewModelScope.launch(Dispatchers.IO) {
 
             userId?.let {
-                val answer = firestoreRepository.setFirstAndLastName(firstName, lastName, it)
+                val answer = firestoreRepository.setFirstAndLastNameInFirestore(firstName, lastName, it)
                 withContext(Dispatchers.Main){
                     synchronized(lock){
                         isSuccessful.value = answer
@@ -42,7 +42,7 @@ class AccountTeacherViewModel(application: Application): AndroidViewModel(applic
     fun uploadPhotoForProfile(bitmap: Bitmap){
         viewModelScope.launch(Dispatchers.IO) {
 
-            val answer = firestoreRepository.uploadPhotoForProfileTeacher(bitmap)
+            val answer = firestoreRepository.uploadPhotoForProfileTeacherInFirestore(bitmap)
             withContext(Dispatchers.Main){
                 urlPhoto.value = answer
             }
@@ -69,7 +69,7 @@ class AccountTeacherViewModel(application: Application): AndroidViewModel(applic
         viewModelScope.launch(Dispatchers.IO) {
 
             userId?.let {
-                val answer = firestoreRepository.setDataFromMyProfile(dataFromProfile, typeDataFromProfile, it)
+                val answer = firestoreRepository.setDataFromMyProfileInFirestore(dataFromProfile, typeDataFromProfile, it)
                 withContext(Dispatchers.Main){
                     synchronized(lock){
                         isSuccessful.value = answer
@@ -103,7 +103,7 @@ class AccountTeacherViewModel(application: Application): AndroidViewModel(applic
         viewModelScope.launch(Dispatchers.IO) {
 
             userId?.let {
-                firestoreRepository.updateUrlPhotoFromProfile(url, it)
+                firestoreRepository.updateUrlPhotoFromProfileInFirestore(url, it)
             }
 
         }

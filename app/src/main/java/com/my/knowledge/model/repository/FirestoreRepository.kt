@@ -9,8 +9,8 @@ import com.my.knowledge.model.modelData.ModelResponseLogin
 class FirestoreRepository {
 
     // функция загрузки аватарки и получения её url адреса
-    suspend fun uploadPhotoForProfileTeacher(bitmap : Bitmap) : String{
-        return Firestore().uploadPhotoForProfileTeacher(bitmap)
+    suspend fun uploadPhotoForProfileTeacherInFirestore(bitmap : Bitmap) : String{
+        return Firestore().uploadPhotoForProfileTeacherInFirestore(bitmap)
     }
 
     // функция получения картинки из Storage
@@ -19,53 +19,53 @@ class FirestoreRepository {
     }
 
     // функция обновления url адреса аватарки
-    fun updateUrlPhotoFromProfile(url:String,userId: String) {
-        Firestore().updateUrlPhotoFromProfile(url, userId)
+    fun updateUrlPhotoFromProfileInFirestore(url:String,userId: String) {
+        Firestore().updateUrlPhotoFromProfileInFirestore(url, userId)
     }
 
     // асинхронная функция отправки данных из прайс листа в Firestore
-    suspend fun setDataInPriceList(item : PriceListEntity, userId : String) : Boolean {
-        return Firestore().setDataInPriceList(item, userId)
+    suspend fun setDataInPriceListInFirestore(item : PriceListEntity, userId : String) : Boolean {
+        return Firestore().setDataInPriceListInFirestore(item, userId)
     }
 
     // асинхронная функция обновления данных из прайс-листа в Firestore
-    suspend fun updateDataInPriceList(item : PriceListEntity, userId : String) : Boolean {
-        return Firestore().updateDataInPriceList(item, userId)
+    suspend fun updateDataInPriceListInFirestore(item : PriceListEntity, userId : String) : Boolean {
+        return Firestore().updateDataInPriceListInFirestore(item, userId)
     }
 
     // асинхронная функция удаления данных их прайс-листа в Firestore
-    suspend fun deleteDataInPriceList(item : PriceListEntity, userId : String) : Boolean {
-        return Firestore().deleteDataInPriceList(item, userId)
+    suspend fun deleteDataInPriceListInFirestore(item : PriceListEntity, userId : String) : Boolean {
+        return Firestore().deleteDataInPriceListInFirestore(item, userId)
     }
 
     // асинхронная функция отправки данных из профиля учителя
-    suspend fun setDataFromMyProfile(dataFromProfile : String,typeDataFromProfile : String,userId : String) : Boolean {
-        return Firestore().setDataFromMyProfile(dataFromProfile, typeDataFromProfile, userId)
+    suspend fun setDataFromMyProfileInFirestore(dataFromProfile : String,typeDataFromProfile : String,userId : String) : Boolean {
+        return Firestore().setDataFromMyProfileInFirestore(dataFromProfile, typeDataFromProfile, userId)
     }
 
     // асинхронная функция отправки имени и фамилии
-    suspend fun setFirstAndLastName(firstName : String,lastName : String,userId : String) : Boolean {
-        return Firestore().setFirstAnsLastName(firstName, lastName, userId)
+    suspend fun setFirstAndLastNameInFirestore(firstName : String,lastName : String,userId : String) : Boolean {
+        return Firestore().setFirstAndLastNameInFirestore(firstName, lastName, userId)
     }
 
     // асинхронная функция регистрации пользователя
-    suspend fun createAccount(email : String,password : String) : String {
-        return Firestore().createAccount(email,password)
+    suspend fun createAccountInFirestore(email : String,password : String) : String {
+        return Firestore().createAccountInFirestore(email,password)
     }
 
     // асинхронная функция входа в аккаунт
-    suspend fun loginInAccount(email : String,password : String) : ModelResponseLogin {
-        return Firestore().loginInAccount(email,password)
+    suspend fun loginInAccountInFirestore(email : String,password : String) : ModelResponseLogin {
+        return Firestore().loginInAccountInFirestore(email,password)
     }
 
     // асинхронная функция добавления первичных данных на сервер после регистрации
-    fun setPrimaryDataAfterRegistration(item : MyAccountEntity) {
-        Firestore().setPrimaryDataAfterRegistration(item)
+    fun setPrimaryDataAfterRegistrationInFirestore(item : MyAccountEntity) {
+        Firestore().setPrimaryDataAfterRegistrationInFirestore(item)
     }
 
     // асинхронная функция проверки безлогинового входа
-    fun checkOpenAccount() : Boolean {
-        return Firestore().checkOpenAccount()
+    fun checkOpenAccountInFirestore() : Boolean {
+        return Firestore().checkOpenAccountInFirestore()
     }
 
 }

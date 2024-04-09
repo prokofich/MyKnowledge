@@ -24,7 +24,7 @@ class LoginViewModel:ViewModel() {
 
     fun loginInAccount(email:String,password:String){
         viewModelScope.launch(Dispatchers.IO) {
-            val answer = firestoreRepository.loginInAccount(email, password)
+            val answer = firestoreRepository.loginInAccountInFirestore(email, password)
             withContext(Dispatchers.Main){
                 isLogin.value = answer
             }

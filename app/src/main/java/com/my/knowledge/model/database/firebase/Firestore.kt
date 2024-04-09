@@ -26,13 +26,13 @@ class Firestore {
     private val storage = FirebaseStorage.getInstance()
 
     // проверка для безлогинового входа
-    fun checkOpenAccount() : Boolean {
+    fun checkOpenAccountInFirestore() : Boolean {
         val firestoreAuth = FirebaseAuth.getInstance()
         return firestoreAuth.currentUser!=null
     }
 
     // функция регистрации пользователя
-    suspend fun createAccount(email : String, password : String) : String {
+    suspend fun createAccountInFirestore(email : String, password : String) : String {
         return suspendCoroutine { continuation ->
 
             firebaseAuth.createUserWithEmailAndPassword(email, password)
@@ -67,7 +67,7 @@ class Firestore {
     }
 
     // функция сохранения имени и фамилии
-    suspend fun setFirstAnsLastName(firstName : String , lastName : String , userId : String) : Boolean {
+    suspend fun setFirstAndLastNameInFirestore(firstName : String , lastName : String , userId : String) : Boolean {
         return suspendCoroutine { continuation ->
 
             val data = hashMapOf("first_name" to firstName,"last_name" to lastName)
@@ -88,7 +88,7 @@ class Firestore {
         }
     }
 
-    suspend fun setDataFromMyProfile(dataFromProfile : String , typeDataFromProfile : String , userId : String) : Boolean {
+    suspend fun setDataFromMyProfileInFirestore(dataFromProfile : String , typeDataFromProfile : String , userId : String) : Boolean {
         return suspendCoroutine { continuation ->
 
             val data = hashMapOf(typeDataFromProfile to dataFromProfile)
@@ -111,7 +111,7 @@ class Firestore {
     }
 
     // функция отправки данных из прайс листа
-    suspend fun setDataInPriceList(item : PriceListEntity , userId : String) : Boolean {
+    suspend fun setDataInPriceListInFirestore(item : PriceListEntity , userId : String) : Boolean {
         return suspendCoroutine { continuation ->
 
             firestore.collection(Teachers_price_list).document(userId)
@@ -126,7 +126,7 @@ class Firestore {
     }
 
     // функция обновления данных из прайс-листа
-    suspend fun updateDataInPriceList(item : PriceListEntity, userId : String) : Boolean {
+    suspend fun updateDataInPriceListInFirestore(item : PriceListEntity, userId : String) : Boolean {
         return suspendCoroutine { continuation ->
 
             firestore.collection(Teachers_price_list).document(userId)
@@ -142,7 +142,7 @@ class Firestore {
     }
 
     // функция удаления данных из прайс-листа
-    suspend fun deleteDataInPriceList(item: PriceListEntity,userId: String) : Boolean {
+    suspend fun deleteDataInPriceListInFirestore(item: PriceListEntity,userId: String) : Boolean {
         return suspendCoroutine { continuation ->
 
             firestore.collection(Teachers_price_list).document(userId)
@@ -158,7 +158,7 @@ class Firestore {
     }
 
     // функция отправки первичных данных после успешной регистрации
-    fun setPrimaryDataAfterRegistration(item : MyAccountEntity){
+    fun setPrimaryDataAfterRegistrationInFirestore(item : MyAccountEntity){
 
         firestore.collection(Teachers_and_Students).document(item.idUser).set(item.toHashMap())
 
@@ -171,7 +171,7 @@ class Firestore {
     }
 
     // функция входа в аккаунт
-    suspend fun loginInAccount(email: String,password: String):ModelResponseLogin{
+    suspend fun loginInAccountInFirestore(email: String,password: String):ModelResponseLogin{
         return suspendCoroutine { continuation ->
 
             val firestoreAuth = FirebaseAuth.getInstance()
@@ -206,17 +206,17 @@ class Firestore {
     }
 
     // функция обновления url адреса
-    fun updateUrlPhotoFromProfile(url:String,userId: String){
+    fun updateUrlPhotoFromProfileInFirestore(url:String,userId: String){
 
         val data = mapOf("url_photo" to url)
-        firestore.collection(Teachers_and_Students).document(userId).update(data) // отправка данных в общую базу
+        firestore.collection(Teachers_and_Students).document(userId).update(data)
         firestore.collection(Teachers).document(userId).update(data)
 
     }
 
 
 
-    suspend fun uploadPhotoForProfileTeacher(bitmap:Bitmap):String{
+    suspend fun uploadPhotoForProfileTeacherInFirestore(bitmap:Bitmap):String{
         return suspendCoroutine { continuation ->
 
             val storageReference = FirebaseStorage.getInstance().reference

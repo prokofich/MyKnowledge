@@ -10,8 +10,8 @@ import com.my.knowledge.model.database.Room.entity.TimeTableEntity
 @Dao
 interface TimeTableDao {
 
-    @Query("SELECT * FROM TimeTableEntity WHERE day_week = :dayOfWeek")
-    fun getTimeTableByDayOfWeek(dayOfWeek: String): List<TimeTableEntity>
+    @Query("SELECT * FROM TimeTableEntity WHERE day_week = :dayOfWeek AND user_id = :userId")
+    fun getListTimeTableByDayOfWeek(dayOfWeek: String,userId:String): List<TimeTableEntity>
 
     @Query("SELECT COUNT(*) FROM TimeTableEntity WHERE day_week = :dayOfWeek")
     fun getCountTimeTableByDayOfWeek(dayOfWeek: String): Int

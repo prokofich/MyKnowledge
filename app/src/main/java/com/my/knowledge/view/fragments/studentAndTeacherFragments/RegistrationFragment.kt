@@ -83,7 +83,7 @@ class RegistrationFragment : Fragment() {
 
             if(it == OperationStatus.Correct.status){
                 binding?.idRegTvError?.text = ""
-                registrationViewModel?.createAccount(binding?.idRegEtEmail?.text.toString(),binding?.idRegEtPassword?.text.toString())
+                registrationViewModel?.createAccountInFirestore(binding?.idRegEtEmail?.text.toString(),binding?.idRegEtPassword?.text.toString())
             }else{
                 binding?.idRegPb?.isVisible = false
                 binding?.idRegTvError?.text = it
