@@ -21,4 +21,9 @@
         android:icon="@drawable/image_price_list"
         android:id="@+id/id_bottom_menu_teacher_price_list"/>
 
+    <item
+        android:title="прайс-лист"
+        android:icon="@drawable/image_price_list"
+        android:id="@+id/id_bottom_menu_teacher_price_list_2"/>
+
 </menu>

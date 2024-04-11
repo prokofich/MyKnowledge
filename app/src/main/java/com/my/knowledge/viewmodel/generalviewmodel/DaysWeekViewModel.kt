@@ -16,7 +16,7 @@ class DaysWeekViewModel(application: Application):AndroidViewModel(application) 
     private var databaseRoom: AppDatabase? = null
     var countLessons: MutableLiveData<CountLessonsEntity?> = MutableLiveData()
 
-    fun getCountAllLessonsByIdUser(idUser:String?){
+    fun getCountAllLessonsByIdUser(idUser : String?){
         viewModelScope.launch(Dispatchers.IO) {
 
             idUser?.let {

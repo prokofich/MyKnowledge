@@ -11,9 +11,11 @@ import com.my.knowledge.model.constant.Students
 import com.my.knowledge.model.constant.Teachers
 import com.my.knowledge.model.constant.Teachers_and_Students
 import com.my.knowledge.model.constant.Teachers_price_list
+import com.my.knowledge.model.constant.Teachers_table_list
 import com.my.knowledge.model.constant.UserType
 import com.my.knowledge.model.database.Room.entity.MyAccountEntity
 import com.my.knowledge.model.database.Room.entity.PriceListEntity
+import com.my.knowledge.model.database.Room.entity.TimeTableEntity
 import com.my.knowledge.model.modelData.ModelResponseLogin
 import java.io.ByteArrayOutputStream
 import kotlin.coroutines.resume
@@ -110,6 +112,22 @@ class Firestore {
 
     }
 
+    // функция отправки данных из расписания
+    suspend fun setDataInTableListInFirestore(item : TimeTableEntity , userId : String , day : String) : Boolean {
+        return suspendCoroutine { continuation ->
+
+            firestore.collection(Teachers_table_list).document(userId)
+                .collection(day).document(item.id.toString()).set(item.toHashMap(), SetOptions.merge())
+                .addOnSuccessListener {
+                    continuation.resume(true)
+                }
+                .addOnFailureListener {
+                    continuation.resume(false)
+                }
+
+        }
+    }
+
     // функция отправки данных из прайс листа
     suspend fun setDataInPriceListInFirestore(item : PriceListEntity , userId : String) : Boolean {
         return suspendCoroutine { continuation ->
@@ -122,6 +140,22 @@ class Firestore {
                 .addOnFailureListener {
                     continuation.resume(false)
                 }
+        }
+    }
+
+    // функция обновления данных из расписания
+    suspend fun updateDataInTableListInFirestore(item : TimeTableEntity , userId : String , day : String) : Boolean {
+        return suspendCoroutine { continuation ->
+
+            firestore.collection(Teachers_table_list).document(userId)
+                .collection(day).document(item.id.toString()).update(item.toHashMap())
+                .addOnSuccessListener {
+                    continuation.resume(true)
+                }
+                .addOnFailureListener {
+                    continuation.resume(false)
+                }
+
         }
     }
 
@@ -142,11 +176,27 @@ class Firestore {
     }
 
     // функция удаления данных из прайс-листа
-    suspend fun deleteDataInPriceListInFirestore(item: PriceListEntity,userId: String) : Boolean {
+    suspend fun deleteDataInPriceListInFirestore(item : PriceListEntity , userId : String) : Boolean {
         return suspendCoroutine { continuation ->
 
             firestore.collection(Teachers_price_list).document(userId)
                 .collection(item.id.toString()).document(item.id.toString()).delete()
+                .addOnSuccessListener {
+                    continuation.resume(true)
+                }
+                .addOnFailureListener {
+                    continuation.resume(false)
+                }
+
+        }
+    }
+
+    // функция удаления данных из расписания
+    suspend fun deleteDataInTableListInFirestore(item : TimeTableEntity , userId : String , day : String) : Boolean {
+        return suspendCoroutine { continuation ->
+
+            firestore.collection(Teachers_table_list).document(userId)
+                .collection(day).document(item.id.toString()).delete()
                 .addOnSuccessListener {
                     continuation.resume(true)
                 }
@@ -234,6 +284,18 @@ class Firestore {
             }
 
         }
+    }
+
+    suspend fun getAllTeachers(){
+        return suspendCoroutine { continuation ->
+
+
+
+        }
+    }
+
+    suspend fun getAllStudents(){
+
     }
 
 }

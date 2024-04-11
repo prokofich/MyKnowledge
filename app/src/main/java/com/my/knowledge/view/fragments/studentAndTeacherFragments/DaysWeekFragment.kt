@@ -12,6 +12,7 @@ import com.my.knowledge.R
 import com.my.knowledge.databinding.FragmentDaysWeekBinding
 import com.my.knowledge.model.constant.DAY_OF_WEEK
 import com.my.knowledge.model.constant.DayOfWeek
+import com.my.knowledge.model.constant.KEY1
 import com.my.knowledge.model.constant.MAIN
 import com.my.knowledge.model.database.Room.entity.CountLessonsEntity
 import com.my.knowledge.model.database.sharedpreferences.SharedPreferences
@@ -25,6 +26,7 @@ class DaysWeekFragment : Fragment() {
     private var binding: FragmentDaysWeekBinding? = null
     private var daysWeekViewModel:DaysWeekViewModel? = null
     private var sharedPreferences:SharedPreferences? = null
+    private var itemCountLessons:CountLessonsEntity? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -46,6 +48,7 @@ class DaysWeekFragment : Fragment() {
 
         daysWeekViewModel?.countLessons?.observe(viewLifecycleOwner){
             showCountLessons(it)
+            itemCountLessons = it
         }
 
         binding?.idDaysWeekCs1Button?.setOnClickListener { goToTable(DayOfWeek.Monday.day) }
@@ -81,6 +84,7 @@ class DaysWeekFragment : Fragment() {
     private fun goToTable(dayWeek:String){
         bundle = Bundle()
         bundle?.putString(DAY_OF_WEEK,dayWeek)
+        itemCountLessons?.let { bundle?.putParcelable(KEY1,it) }
         MAIN?.navController?.navigate(R.id.action_daysWeekFragment_to_tableFragment,bundle)
     }
 

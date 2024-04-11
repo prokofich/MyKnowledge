@@ -6,7 +6,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="5dp"
         android:layout_height="wrap_content"
         android:background="@drawable/background_tv_account"
         app:layout_constraintStart_toStartOf="parent"
@@ -30,10 +30,10 @@
                 android:textStyle="bold"
                 android:textSize="15sp"
                 android:text="Название дисциплины:"
-                android:id="@+id/id_item_price_tv_title_name"
+                android:id="@+id/id_item_profile_teacher_price_tv_title_name"
                 app:layout_constraintWidth_percent="0.5"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/id_item_price_tv_title_price"
+                app:layout_constraintEnd_toStartOf="@id/id_item_profile_teacher_price_tv_title_price"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"/>
 
@@ -44,22 +44,19 @@
                 android:textColor="@color/white"
                 android:textStyle="bold"
                 android:textSize="15sp"
-                app:layout_constraintStart_toEndOf="@id/id_item_price_tv_title_name"
+                app:layout_constraintStart_toEndOf="@id/id_item_profile_teacher_price_tv_title_name"
                 android:text="Цена(руб/час):"
-                android:id="@+id/id_item_price_tv_title_price"
+                android:id="@+id/id_item_profile_teacher_price_tv_title_price"
                 app:layout_constraintWidth_percent="0.3"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-
-
         <EditText
-            android:id="@+id/id_item_price_et_name"
+            android:id="@+id/id_item_profile_teacher_price_et_name"
             android:layout_width="0dp"
             android:layout_height="45dp"
-            android:hint="дисциплина"
             android:gravity="center"
             android:textColorHint="#313331"
             android:textColor="@color/white"
@@ -68,14 +65,12 @@
             app:layout_constraintTop_toBottomOf="@id/id_item_price_cs_1"
             app:layout_constraintWidth_percent="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/id_item_price_et_price"/>
-
+            app:layout_constraintEnd_toStartOf="@id/id_item_profile_teacher_price_et_price"/>
 
         <EditText
-            android:id="@+id/id_item_price_et_price"
+            android:id="@+id/id_item_profile_teacher_price_et_price"
             android:layout_width="0dp"
             android:layout_height="45dp"
-            android:hint="цена"
             android:gravity="center"
             android:textColorHint="#313331"
             android:textColor="@color/white"
@@ -83,13 +78,13 @@
             android:layout_marginTop="5dp"
             app:layout_constraintTop_toBottomOf="@id/id_item_price_cs_1"
             app:layout_constraintWidth_percent="0.3"
-            app:layout_constraintStart_toEndOf="@id/id_item_price_et_name"
+            app:layout_constraintStart_toEndOf="@id/id_item_profile_teacher_price_et_name"
             app:layout_constraintEnd_toEndOf="parent"/>
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="25dp"
-            android:id="@+id/id_item_price_tv_title_desc"
+            android:id="@+id/id_item_profile_teacher_price_tv_title_desc"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:gravity="center"
@@ -98,7 +93,7 @@
             android:textSize="14sp"
             android:layout_marginTop="5dp"
             android:text="показать описание..."
-            app:layout_constraintTop_toBottomOf="@id/id_item_price_et_name"/>
+            app:layout_constraintTop_toBottomOf="@id/id_item_profile_teacher_price_et_name"/>
 
         <EditText
             android:layout_width="0dp"
@@ -110,39 +105,25 @@
             android:textColorHint="#313331"
             android:textColor="@color/white"
             android:textStyle="bold|italic"
-            android:hint="описание услуги"
-            android:id="@+id/id_item_price_et_desc"
-            app:layout_constraintTop_toBottomOf="@id/id_item_price_tv_title_desc"
-            app:layout_constraintStart_toStartOf="@id/id_item_price_et_name"
-            app:layout_constraintEnd_toEndOf="@id/id_item_price_et_price"/>
+            android:id="@+id/id_item_profile_teacher_price_et_desc"
+            app:layout_constraintTop_toBottomOf="@id/id_item_profile_teacher_price_tv_title_desc"
+            app:layout_constraintStart_toStartOf="@id/id_item_profile_teacher_price_et_name"
+            app:layout_constraintEnd_toEndOf="@id/id_item_profile_teacher_price_et_price"/>
 
         <androidx.appcompat.widget.AppCompatButton
             android:layout_width="0dp"
             android:layout_height="30dp"
             android:textColor="@color/white"
             android:textStyle="bold"
-            android:text="редактировать"
+            android:text="Отправить заявку на обучение"
             style="@style/LoginButtonMenuStyle"
-            app:layout_constraintTop_toBottomOf="@id/id_item_price_et_desc"
-            android:id="@+id/id_item_price_button_redact"
-            app:layout_constraintWidth_percent="0.4"
+            app:layout_constraintTop_toBottomOf="@id/id_item_profile_teacher_price_et_desc"
+            android:id="@+id/id_item_profile_teacher_price_button_go"
+            app:layout_constraintWidth_percent="0.7"
             android:layout_margin="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
-
-        <ImageView
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:visibility="gone"
-            android:layout_marginStart="10dp"
-            android:background="@drawable/image_delete_2"
-            android:id="@+id/id_item_price_iv_delete2"
-            app:layout_constraintWidth_percent="0.1"
-            app:layout_constraintHeight_percent="0.3"
-            app:layout_constraintTop_toTopOf="@id/id_item_price_button_redact"
-            app:layout_constraintStart_toEndOf="@id/id_item_price_button_redact"
-            app:layout_constraintBottom_toBottomOf="@id/id_item_price_button_redact" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

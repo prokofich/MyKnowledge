@@ -18,16 +18,20 @@ class LoginViewModel:ViewModel() {
     val isLogin: MutableLiveData<ModelResponseLogin> = MutableLiveData()
     val isCorrectInputData: MutableLiveData<String> = MutableLiveData()
 
-    fun checkInputDataInLogin(email:String?,password:String?,stateNetwork:Boolean?){
+    fun checkInputDataInLogin(email : String? , password : String? , stateNetwork : Boolean?){
+
         isCorrectInputData.value = repository.checkInputDataInLogin(email, password,stateNetwork)
+
     }
 
-    fun loginInAccount(email:String,password:String){
+    fun loginInAccount(email : String , password : String){
         viewModelScope.launch(Dispatchers.IO) {
+
             val answer = firestoreRepository.loginInAccountInFirestore(email, password)
             withContext(Dispatchers.Main){
                 isLogin.value = answer
             }
+
         }
     }
 

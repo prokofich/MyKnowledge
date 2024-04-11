@@ -20,7 +20,7 @@ class Repository{
 
     // функция проверки правильности введенных данных
     fun checkInputPriceData(name:String,price:String,desc:String):String{
-        return if(name!="" && price!="" && desc!=""){
+        return if(name.isNotEmpty() && price.isNotEmpty() && desc.isNotEmpty()){
             if(price.toSet().intersect(alfavit.toSet()).isEmpty()){
                 OperationStatus.Correct.status
             }else{
@@ -29,6 +29,25 @@ class Repository{
         }else{
             "вы ввели не все данные"
         }
+    }
+
+    fun checkInputTableData(nameLesson : String , nameStudent : String , price : String , startTime : String , endTime : String) : String {
+        return if(nameLesson.isNotEmpty() && nameStudent.isNotEmpty() && price.isNotEmpty() && startTime.isNotEmpty() && endTime.isNotEmpty()){
+            if(checkTimeFormat(startTime) && checkTimeFormat(endTime)){
+                OperationStatus.Correct.status
+            }else{
+                "неверный формат времени"
+            }
+        }else{
+            "вы ввели не все данные"
+        }
+    }
+
+    private fun checkTimeFormat(str: String): Boolean {
+        if (str.length != 4) return false
+        val hours = str.substring(0, 2).toIntOrNull()
+        val minutes = str.substring(2, 4).toIntOrNull()
+        return !(hours == null || hours !in 0..23 || minutes == null || minutes !in 0..59)
     }
 
     // функция показа всплывающего сообщения

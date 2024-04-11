@@ -17,7 +17,7 @@ interface TimeTableDao {
     fun getCountTimeTableByDayOfWeek(dayOfWeek: String): Int
 
     @Insert
-    fun insertTimeTableItem(item: TimeTableEntity)
+    fun insertTimeTableItem(item: TimeTableEntity):Long
 
     @Delete
     fun deleteTimeTableItem(item: TimeTableEntity)

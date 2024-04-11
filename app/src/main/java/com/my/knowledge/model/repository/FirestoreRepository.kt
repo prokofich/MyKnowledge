@@ -3,6 +3,7 @@ package com.my.knowledge.model.repository
 import android.graphics.Bitmap
 import com.my.knowledge.model.database.Room.entity.MyAccountEntity
 import com.my.knowledge.model.database.Room.entity.PriceListEntity
+import com.my.knowledge.model.database.Room.entity.TimeTableEntity
 import com.my.knowledge.model.database.firebase.Firestore
 import com.my.knowledge.model.modelData.ModelResponseLogin
 
@@ -21,6 +22,21 @@ class FirestoreRepository {
     // функция обновления url адреса аватарки
     fun updateUrlPhotoFromProfileInFirestore(url:String,userId: String) {
         Firestore().updateUrlPhotoFromProfileInFirestore(url, userId)
+    }
+
+    // асинхронная функция отправки данных из расписания в Firestore
+    suspend fun setDataInTableListInFirestore(item : TimeTableEntity , userId : String , day : String) : Boolean {
+        return Firestore().setDataInTableListInFirestore(item, userId, day)
+    }
+
+    // асинхронная функция обновления данных из расписания в Firestore
+    suspend fun updateDataInTableListInFirestore(item : TimeTableEntity , userId : String , day : String) : Boolean {
+        return Firestore().updateDataInTableListInFirestore(item, userId, day)
+    }
+
+    // асинхронная функция удаления данных из расписания в Firestore
+    suspend fun deleteDataInTableListInFirestore(item : TimeTableEntity , userId : String , day : String) : Boolean {
+        return Firestore().deleteDataInTableListInFirestore(item, userId, day)
     }
 
     // асинхронная функция отправки данных из прайс листа в Firestore

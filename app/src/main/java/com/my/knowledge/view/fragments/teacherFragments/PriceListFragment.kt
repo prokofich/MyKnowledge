@@ -67,9 +67,9 @@ class PriceListFragment : Fragment(),PriceListInterface {
         // обработка ответа от Room при сохранении
         priceListViewModel?.isSuccessfulInsertInRoom?.observe(viewLifecycleOwner){
             if(repository?.checkNetworkState() == true){
-                savePriceInFirestore(it) // сохранение в Firestore
+                savePriceInFirestore(it)
                 listPrice.add(it)
-                priceListAdapter?.addItemInList(it) // показ пустого элемента на экране
+                priceListAdapter?.addItemInList(it)
             }
         }
 

@@ -12,12 +12,14 @@ const val Teachers = "Teachers"
 const val Students = "Students"
 const val Teachers_and_Students = "Students and Teachers"
 const val Teachers_price_list = "Teachers price list"
+const val Teachers_table_list = "Teachers table list"
 
 const val USER_TYPE = "USER_TYPE"
 
 const val alfavit = "qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNMёйцукенгшщзхъфывапролджэячсмитьбюЁЙЦУКЕНГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИТЬБЮ"
 
 const val DAY_OF_WEEK = "DAY_OF_WEEK"
+const val KEY1 = "KEY1"
 
 enum class DayOfWeek(val day:String){
     Monday("ПН"),

@@ -19,12 +19,12 @@ class RegistrationViewModel(application: Application) : AndroidViewModel(applica
 
     private val firestoreRepository = FirestoreRepository()
     private val repository = Repository()
-    private var databaseRoom: AppDatabase? = null
+    private var databaseRoom : AppDatabase? = null
 
     val isRegistration: MutableLiveData<String> = MutableLiveData()
     val isCorrectInputData: MutableLiveData<String> = MutableLiveData()
 
-    fun createAccountInFirestore(email:String,password:String){
+    fun createAccountInFirestore(email : String , password : String){
         viewModelScope.launch(Dispatchers.IO) {
 
             val answer = firestoreRepository.createAccountInFirestore(email, password)
@@ -35,7 +35,7 @@ class RegistrationViewModel(application: Application) : AndroidViewModel(applica
         }
     }
 
-    fun setPrimaryDataAfterRegistration(item: MyAccountEntity){
+    fun setPrimaryDataAfterRegistration(item : MyAccountEntity){
         viewModelScope.launch(Dispatchers.IO) {
 
             firestoreRepository.setPrimaryDataAfterRegistrationInFirestore(item)
@@ -43,7 +43,7 @@ class RegistrationViewModel(application: Application) : AndroidViewModel(applica
         }
     }
 
-    fun setCountLessonsInLocalDatabase(item: CountLessonsEntity){
+    fun setCountLessonsInLocalDatabase(item : CountLessonsEntity){
         viewModelScope.launch(Dispatchers.IO) {
 
             databaseRoom = RoomRepository(getApplication()).database
@@ -52,13 +52,13 @@ class RegistrationViewModel(application: Application) : AndroidViewModel(applica
         }
     }
 
-    fun checkInputData(email:String?,password:String?,firstName:String?,lastName:String?,status:String?,stateNetwork:Boolean?){
+    fun checkInputData(email : String? , password : String? , firstName : String? , lastName : String? , status : String? , stateNetwork : Boolean?){
 
         isCorrectInputData.value = repository.checkInputData(email, password, firstName, lastName, status,stateNetwork)
 
     }
 
-    fun insertAccountInLocalDatabase(item: MyAccountEntity){
+    fun insertAccountInLocalDatabase(item : MyAccountEntity){
         viewModelScope.launch(Dispatchers.IO) {
 
             databaseRoom = RoomRepository(getApplication()).database
