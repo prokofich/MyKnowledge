@@ -28,7 +28,7 @@ class AccountTeacherViewModel(application: Application): AndroidViewModel(applic
         viewModelScope.launch(Dispatchers.IO) {
 
             userId?.let {
-                val answer = firestoreRepository.setFirstAndLastNameInFirestore(firstName, lastName, it)
+                val answer = firestoreRepository.updateFirstAndLastNameInFirestore(firstName, lastName, it)
                 withContext(Dispatchers.Main){
                     synchronized(lock){
                         isSuccessful.value = answer
@@ -69,7 +69,7 @@ class AccountTeacherViewModel(application: Application): AndroidViewModel(applic
         viewModelScope.launch(Dispatchers.IO) {
 
             userId?.let {
-                val answer = firestoreRepository.setDataFromMyProfileInFirestore(dataFromProfile, typeDataFromProfile, it)
+                val answer = firestoreRepository.updateDataFromMyProfileInFirestore(dataFromProfile, typeDataFromProfile, it)
                 withContext(Dispatchers.Main){
                     synchronized(lock){
                         isSuccessful.value = answer

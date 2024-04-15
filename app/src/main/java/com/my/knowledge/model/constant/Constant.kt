@@ -13,6 +13,7 @@ const val Students = "Students"
 const val Teachers_and_Students = "Students and Teachers"
 const val Teachers_price_list = "Teachers price list"
 const val Teachers_table_list = "Teachers table list"
+const val price_list = "price list"
 
 const val USER_TYPE = "USER_TYPE"
 

@@ -7,18 +7,19 @@ import com.google.firebase.firestore.Exclude
 
 @Entity("PriceListEntity")
 data class PriceListEntity(
-    @PrimaryKey(autoGenerate = true) var id:Long = 0,
-    @ColumnInfo("idUser")      val idUser:String?,
-    @ColumnInfo("name")        val name:String,
-    @ColumnInfo("price")       val price:String,
-    @ColumnInfo("desc")        val desc:String
+    @PrimaryKey(autoGenerate = true) var id:Long = 0,   // ID записи в базе данных
+    @ColumnInfo("idUser")      val idUser:String?, // ID учителя в базе данных
+    @ColumnInfo("name")        val name:String,    // название услуги
+    @ColumnInfo("price")       val price:String,   // цена услуги
+    @ColumnInfo("desc")        val desc:String     // описание услуги
 ){
-    fun toHashMap(): HashMap<String, Any?> {
+    fun toHashMap() : HashMap<String , Any?> {
         return hashMapOf(
-            "id"    to  id,
-            "name"  to  name,
-            "price" to  price,
-            "desc"  to  desc
+            "id"      to  id,
+            "user_id" to  idUser,
+            "name"    to  name,
+            "price"   to  price,
+            "desc"    to  desc
         )
     }
 

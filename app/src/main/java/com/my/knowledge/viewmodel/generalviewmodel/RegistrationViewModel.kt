@@ -9,7 +9,6 @@ import com.my.knowledge.model.database.Room.entity.CountLessonsEntity
 import com.my.knowledge.model.database.Room.entity.MyAccountEntity
 import com.my.knowledge.model.repository.RoomRepository
 import com.my.knowledge.model.repository.FirestoreRepository
-import com.my.knowledge.model.modelData.ModelUser
 import com.my.knowledge.model.repository.Repository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -38,7 +37,7 @@ class RegistrationViewModel(application: Application) : AndroidViewModel(applica
     fun setPrimaryDataAfterRegistration(item : MyAccountEntity){
         viewModelScope.launch(Dispatchers.IO) {
 
-            firestoreRepository.setPrimaryDataAfterRegistrationInFirestore(item)
+            firestoreRepository.savePrimaryDataAfterRegistrationInFirestore(item)
 
         }
     }

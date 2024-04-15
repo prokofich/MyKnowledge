@@ -18,7 +18,7 @@ import com.my.knowledge.model.database.sharedpreferences.SharedPreferences
 import com.my.knowledge.model.modelAdapter.interfaces.PriceListInterface
 import com.my.knowledge.model.repository.Repository
 
-class PriceListAdapter(private val interfaceAdapter:PriceListInterface,context: Context): RecyclerView.Adapter<PriceListAdapter.PriceListViewHolder>() {
+class PriceListAdapter(private val interfaceAdapter:PriceListInterface,context: Context) : RecyclerView.Adapter<PriceListAdapter.PriceListViewHolder>() {
 
     private var listPriceEntity = mutableListOf<PriceListEntity>()
     private var isOpenEditText = false

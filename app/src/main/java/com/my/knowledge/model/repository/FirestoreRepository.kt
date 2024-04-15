@@ -4,84 +4,106 @@ import android.graphics.Bitmap
 import com.my.knowledge.model.database.Room.entity.MyAccountEntity
 import com.my.knowledge.model.database.Room.entity.PriceListEntity
 import com.my.knowledge.model.database.Room.entity.TimeTableEntity
-import com.my.knowledge.model.database.firebase.Firestore
+import com.my.knowledge.model.database.firebase.FirestoreLoginManager
+import com.my.knowledge.model.database.firebase.FirestorePriceListManager
+import com.my.knowledge.model.database.firebase.FirestoreProfileManager
+import com.my.knowledge.model.database.firebase.FirestoreRegistrationManager
+import com.my.knowledge.model.database.firebase.FirestoreSearchManager
+import com.my.knowledge.model.database.firebase.FirestoreTableManager
 import com.my.knowledge.model.modelData.ModelResponseLogin
+import com.my.knowledge.model.modelData.ModelStudent
+import com.my.knowledge.model.modelData.ModelTeacher
 
 class FirestoreRepository {
 
     // функция загрузки аватарки и получения её url адреса
     suspend fun uploadPhotoForProfileTeacherInFirestore(bitmap : Bitmap) : String{
-        return Firestore().uploadPhotoForProfileTeacherInFirestore(bitmap)
+        return FirestoreProfileManager().uploadPhoto(bitmap)
     }
 
     // функция получения картинки из Storage
     suspend fun getImageFromStorageByUrl(url: String) : Bitmap?{
-        return Firestore().getImageFromStorageByUrl(url)
+        return FirestoreProfileManager().getImage(url)
     }
 
     // функция обновления url адреса аватарки
     fun updateUrlPhotoFromProfileInFirestore(url:String,userId: String) {
-        Firestore().updateUrlPhotoFromProfileInFirestore(url, userId)
+        FirestoreProfileManager().updateUrlPhoto(url, userId)
     }
 
     // асинхронная функция отправки данных из расписания в Firestore
     suspend fun setDataInTableListInFirestore(item : TimeTableEntity , userId : String , day : String) : Boolean {
-        return Firestore().setDataInTableListInFirestore(item, userId, day)
+        return FirestoreTableManager().save(item, userId, day)
     }
 
     // асинхронная функция обновления данных из расписания в Firestore
     suspend fun updateDataInTableListInFirestore(item : TimeTableEntity , userId : String , day : String) : Boolean {
-        return Firestore().updateDataInTableListInFirestore(item, userId, day)
+        return FirestoreTableManager().update(item, userId, day)
     }
 
     // асинхронная функция удаления данных из расписания в Firestore
     suspend fun deleteDataInTableListInFirestore(item : TimeTableEntity , userId : String , day : String) : Boolean {
-        return Firestore().deleteDataInTableListInFirestore(item, userId, day)
+        return FirestoreTableManager().delete(item, userId, day)
     }
 
     // асинхронная функция отправки данных из прайс листа в Firestore
     suspend fun setDataInPriceListInFirestore(item : PriceListEntity, userId : String) : Boolean {
-        return Firestore().setDataInPriceListInFirestore(item, userId)
+        return FirestorePriceListManager().save(item, userId)
     }
 
     // асинхронная функция обновления данных из прайс-листа в Firestore
     suspend fun updateDataInPriceListInFirestore(item : PriceListEntity, userId : String) : Boolean {
-        return Firestore().updateDataInPriceListInFirestore(item, userId)
+        return FirestorePriceListManager().update(item, userId)
     }
 
     // асинхронная функция удаления данных их прайс-листа в Firestore
     suspend fun deleteDataInPriceListInFirestore(item : PriceListEntity, userId : String) : Boolean {
-        return Firestore().deleteDataInPriceListInFirestore(item, userId)
+        return FirestorePriceListManager().delete(item, userId)
     }
 
     // асинхронная функция отправки данных из профиля учителя
-    suspend fun setDataFromMyProfileInFirestore(dataFromProfile : String,typeDataFromProfile : String,userId : String) : Boolean {
-        return Firestore().setDataFromMyProfileInFirestore(dataFromProfile, typeDataFromProfile, userId)
+    suspend fun updateDataFromMyProfileInFirestore(dataFromProfile : String,typeDataFromProfile : String,userId : String) : Boolean {
+        return FirestoreProfileManager().updateData(dataFromProfile, typeDataFromProfile, userId)
     }
 
     // асинхронная функция отправки имени и фамилии
-    suspend fun setFirstAndLastNameInFirestore(firstName : String,lastName : String,userId : String) : Boolean {
-        return Firestore().setFirstAndLastNameInFirestore(firstName, lastName, userId)
+    suspend fun updateFirstAndLastNameInFirestore(firstName : String,lastName : String,userId : String) : Boolean {
+        return FirestoreProfileManager().updateName(firstName, lastName, userId)
     }
 
     // асинхронная функция регистрации пользователя
     suspend fun createAccountInFirestore(email : String,password : String) : String {
-        return Firestore().createAccountInFirestore(email,password)
+        return FirestoreRegistrationManager().createAccount(email,password)
     }
 
     // асинхронная функция входа в аккаунт
     suspend fun loginInAccountInFirestore(email : String,password : String) : ModelResponseLogin {
-        return Firestore().loginInAccountInFirestore(email,password)
+        return FirestoreLoginManager().inputInAccount(email,password)
     }
 
     // асинхронная функция добавления первичных данных на сервер после регистрации
-    fun setPrimaryDataAfterRegistrationInFirestore(item : MyAccountEntity) {
-        Firestore().setPrimaryDataAfterRegistrationInFirestore(item)
+    fun savePrimaryDataAfterRegistrationInFirestore(item : MyAccountEntity) {
+        FirestoreRegistrationManager().saveData(item)
     }
 
     // асинхронная функция проверки безлогинового входа
     fun checkOpenAccountInFirestore() : Boolean {
-        return Firestore().checkOpenAccountInFirestore()
+        return FirestoreLoginManager().checkOpenAccount()
+    }
+
+    // асинхронная функция получения всех учителей из Firestore
+    suspend fun getTeachersInFirestore() : MutableList<ModelTeacher>{
+        return FirestoreSearchManager().getTeachers()
+    }
+
+    // асинхронная функция получения всех учеников из Firestore
+    suspend fun getStudentsInFirestore() : MutableList<ModelStudent>{
+        return FirestoreSearchManager().getStudents()
+    }
+
+    // асинхронная функция получения названия всех услуг у учителя из Firestore
+    suspend fun getNamePredmetsByIdTeacherInFirestore(idUser:String) : MutableList<String> {
+        return FirestoreSearchManager().getPredmetsById(idUser)
     }
 
 }

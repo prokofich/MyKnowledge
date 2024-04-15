@@ -8,7 +8,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:id="@+id/id_item_students_rv_search"
-        android:layout_height="wrap_content"
+        android:layout_height="150dp"
         android:layout_margin="10dp"
         android:background="@drawable/background_tv_account"
         app:layout_constraintStart_toStartOf="parent"
@@ -19,29 +19,32 @@
             android:layout_width="90dp"
             android:layout_height="95dp"
             android:layout_marginTop="10dp"
+            app:layout_constraintHeight_percent="0.65"
+            app:layout_constraintWidth_percent="0.23"
             android:background="@drawable/image_account"
             app:layout_constraintEnd_toStartOf="@id/id_item_students_rv_search_tv_last_name"
             android:id="@+id/id_item_students_rv_search_iv"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/id_item_students_rv_search_tv_status"/>
+            app:layout_constraintTop_toTopOf="parent"/>
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="30dp"
             android:id="@+id/id_item_students_rv_search_tv_status"
             app:layout_constraintWidth_percent="0.22"
-            app:layout_constraintHeight_percent="0.2"
             android:gravity="center"
+            app:layout_constraintHeight_percent="0.15"
             android:textStyle="bold"
             android:textColor="@color/white"
             android:text="Ученик"
+            android:layout_marginTop="10dp"
             android:textSize="16sp"
-            android:layout_margin="10dp"
+            android:layout_marginBottom="10dp"
             android:background="@drawable/background_tv_2"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/id_item_students_rv_search_iv"
-            app:layout_constraintEnd_toStartOf="@id/id_item_students_rv_search_tv_last_name"/>
+            app:layout_constraintStart_toStartOf="@id/id_item_students_rv_search_iv"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/id_item_students_rv_search_iv"
+            app:layout_constraintTop_toBottomOf="@id/id_item_students_rv_search_iv" />
 
         <TextView
             android:layout_width="0dp"
@@ -50,9 +53,9 @@
             android:textColor="@color/white"
             android:textStyle="bold|italic"
             android:textSize="18sp"
+            app:layout_constraintHeight_percent="0.24"
             android:background="@drawable/background_tv_name"
             android:text="Прокофьев"
-            app:layout_constraintBottom_toTopOf="@id/id_item_students_rv_search_tv_first_name"
             android:id="@+id/id_item_students_rv_search_tv_last_name"
             app:layout_constraintWidth_percent="0.6"
             app:layout_constraintStart_toEndOf="@id/id_item_students_rv_search_iv"
@@ -66,31 +69,15 @@
             android:textColor="@color/white"
             android:textStyle="bold|italic"
             android:textSize="18sp"
+            app:layout_constraintHeight_percent="0.24"
             android:background="@drawable/background_tv_name"
             android:text="Никита"
-            app:layout_constraintBottom_toBottomOf="@id/id_item_students_rv_search_iv"
             android:id="@+id/id_item_students_rv_search_tv_first_name"
             app:layout_constraintWidth_percent="0.6"
             app:layout_constraintStart_toEndOf="@id/id_item_students_rv_search_iv"
             app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="5dp"
             app:layout_constraintTop_toBottomOf="@id/id_item_students_rv_search_tv_last_name"/>
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="30dp"
-            android:gravity="center"
-            android:textColor="@color/white"
-            android:textStyle="bold"
-            android:background="@drawable/background_tv_2"
-            android:text="9 класс"
-            android:textSize="20sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginBottom="10dp"
-            android:id="@+id/id_item_students_rv_search_tv_klass"
-            app:layout_constraintWidth_percent="0.6"
-            app:layout_constraintStart_toEndOf="@id/id_item_students_rv_search_iv"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/id_item_students_rv_search_tv_status"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
