@@ -10,11 +10,12 @@ import kotlin.coroutines.suspendCoroutine
 
 class FirestoreLoginManager {
 
+    private val firestoreAuth = FirebaseAuth.getInstance()
+
     // функция входа в аккаунт
     suspend fun inputInAccount(email : String , password : String) : ModelResponseLogin {
         return suspendCoroutine { continuation ->
 
-            val firestoreAuth = FirebaseAuth.getInstance()
             firestoreAuth.signInWithEmailAndPassword(email , password)
                 .addOnCompleteListener { task ->
                     if(task.isSuccessful){
@@ -46,9 +47,10 @@ class FirestoreLoginManager {
     }
 
     // проверка для безлогинового входа
-    fun checkOpenAccount() : Boolean {
-        val firestoreAuth = FirebaseAuth.getInstance()
-        return firestoreAuth.currentUser!=null
-    }
+    fun checkOpenAccount() : Boolean = firestoreAuth.currentUser!=null
+
+    // функция выхода из аккаунта Firebase
+    fun exitAccount() = firestoreAuth.signOut()
+
 
 }

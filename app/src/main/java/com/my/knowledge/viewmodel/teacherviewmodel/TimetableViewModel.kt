@@ -44,7 +44,7 @@ class TimetableViewModel(application: Application) : AndroidViewModel(applicatio
             val answer = databaseRoom?.databaseTimeTableDao()?.insertTimeTableItem(item)
             withContext(Dispatchers.Main){
                 answer?.let {
-                    item.id = answer
+                    item.id = it
                     synchronized(lock){ isSuccessfulInsertInRoom.value = item }
                 }
             }

@@ -76,6 +76,11 @@ class FirestoreRepository {
         return FirestoreRegistrationManager().createAccount(email,password)
     }
 
+    // функция выхода из аккаунта Firebase
+    fun exitFromAccount(){
+        FirestoreLoginManager().exitAccount()
+    }
+
     // асинхронная функция входа в аккаунт
     suspend fun loginInAccountInFirestore(email : String,password : String) : ModelResponseLogin {
         return FirestoreLoginManager().inputInAccount(email,password)
@@ -104,6 +109,11 @@ class FirestoreRepository {
     // асинхронная функция получения названия всех услуг у учителя из Firestore
     suspend fun getNamePredmetsByIdTeacherInFirestore(idUser:String) : MutableList<String> {
         return FirestoreSearchManager().getPredmetsById(idUser)
+    }
+
+    // функция получения данных из профиля выбранного учителя
+    suspend fun getDataFromProfileTeacherById(idTeacher : String) : ModelTeacher {
+        return FirestoreProfileManager().getDataFromProfileTeacherById(idTeacher)
     }
 
 }

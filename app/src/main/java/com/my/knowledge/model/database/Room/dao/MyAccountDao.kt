@@ -11,15 +11,15 @@ import com.my.knowledge.model.database.Room.entity.MyAccountEntity
 interface MyAccountDao {
 
     @Query("SELECT * FROM MyAccountEntity WHERE idUser = :userId")
-    fun getAccountById(userId: String): MyAccountEntity
+    fun getAccountById(userId : String) : MyAccountEntity
 
     @Delete
-    fun deleteAccount(item: MyAccountEntity)
+    fun deleteAccount(item : MyAccountEntity)
 
     @Update
-    fun updateAccount(item: MyAccountEntity)
+    fun updateAccount(item : MyAccountEntity)
 
     @Insert
-    fun insertAccount(item: MyAccountEntity)
+    fun insertAccount(item : MyAccountEntity)
 
 }

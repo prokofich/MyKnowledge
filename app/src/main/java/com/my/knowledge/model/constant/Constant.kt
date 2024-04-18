@@ -21,6 +21,7 @@ const val alfavit = "qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNMёйц�
 
 const val DAY_OF_WEEK = "DAY_OF_WEEK"
 const val KEY1 = "KEY1"
+const val SELECTED_TEACHER = "SELECTED_TEACHER"
 
 enum class DayOfWeek(val day:String){
     Monday("ПН"),

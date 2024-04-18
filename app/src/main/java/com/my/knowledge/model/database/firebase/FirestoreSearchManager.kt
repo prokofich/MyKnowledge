@@ -44,7 +44,10 @@ class FirestoreSearchManager {
             firestore.collection(Teachers).get()
                 .addOnSuccessListener { documents ->
                     for (document in documents) {
-                        val model = document.toObject(ModelTeacher::class.java)
+                        val model = ModelTeacher()
+                        model.userId = document.getString("user_id").toString()
+                        model.firstName = document.getString("first_name").toString()
+                        model.lastName = document.getString("last_name").toString()
                         modelList.add(model)
                     }
                     continuation.resume(modelList)

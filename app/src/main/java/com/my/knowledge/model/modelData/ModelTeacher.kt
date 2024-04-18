@@ -9,7 +9,7 @@ data class ModelTeacher(
     @PropertyName("first_name")   var firstName:String = "",
     @PropertyName("last_name")    var lastName:String = "",
     @PropertyName("status")       var status:String = "",
-    @PropertyName("user_id")      var userId:String = "",
+    @PropertyName("id_user")      var userId:String = "",
     @PropertyName("description")  var myDescription:String = "",
     @PropertyName("experience")   var experience:String = "",
     @PropertyName("education")    var education:String = "",

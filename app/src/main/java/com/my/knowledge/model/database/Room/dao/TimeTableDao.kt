@@ -11,18 +11,18 @@ import com.my.knowledge.model.database.Room.entity.TimeTableEntity
 interface TimeTableDao {
 
     @Query("SELECT * FROM TimeTableEntity WHERE day_week = :dayOfWeek AND user_id = :userId")
-    fun getListTimeTableByDayOfWeek(dayOfWeek: String,userId:String): List<TimeTableEntity>
+    fun getListTimeTableByDayOfWeek(dayOfWeek : String , userId : String) : List <TimeTableEntity>
 
     @Query("SELECT COUNT(*) FROM TimeTableEntity WHERE day_week = :dayOfWeek")
-    fun getCountTimeTableByDayOfWeek(dayOfWeek: String): Int
+    fun getCountTimeTableByDayOfWeek(dayOfWeek : String) : Int
 
     @Insert
-    fun insertTimeTableItem(item: TimeTableEntity):Long
+    fun insertTimeTableItem(item : TimeTableEntity) : Long
 
     @Delete
-    fun deleteTimeTableItem(item: TimeTableEntity)
+    fun deleteTimeTableItem(item : TimeTableEntity)
 
     @Update
-    fun updateTimeTableItem(item: TimeTableEntity)
+    fun updateTimeTableItem(item : TimeTableEntity)
 
 }

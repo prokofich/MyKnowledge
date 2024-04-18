@@ -61,6 +61,9 @@
         <action
             android:id="@+id/action_accountTeacherFragment_to_teacherMenuFragment"
             app:destination="@id/teacherMenuFragment" />
+        <action
+            android:id="@+id/action_accountTeacherFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
     </fragment>
     <fragment
         android:id="@+id/studentMenuFragment"
@@ -123,5 +126,14 @@
         <action
             android:id="@+id/action_tableFragment_to_daysWeekFragment"
             app:destination="@id/daysWeekFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.my.knowledge.view.fragments.studentAndTeacherFragments.SettingsFragment"
+        android:label="fragment_settings"
+        tools:layout="@layout/fragment_settings" >
+        <action
+            android:id="@+id/action_settingsFragment_to_accountTeacherFragment"
+            app:destination="@id/accountTeacherFragment" />
     </fragment>
 </navigation>

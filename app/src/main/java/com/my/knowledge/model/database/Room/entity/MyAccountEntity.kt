@@ -20,7 +20,7 @@ data class MyAccountEntity(
 
     fun toHashMap() : HashMap<String , Any?> {
         return hashMapOf(
-            "user_id"     to idUser, 
+            "id_user"     to idUser,
             "first_name"  to firstName,
             "last_name"   to lastName,
             "status"      to status,

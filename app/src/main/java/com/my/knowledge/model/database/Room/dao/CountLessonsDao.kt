@@ -11,15 +11,15 @@ import com.my.knowledge.model.database.Room.entity.CountLessonsEntity
 interface CountLessonsDao {
 
     @Query("SELECT * FROM CountLessonsEntity WHERE id_user = :id")
-    fun getCountLessonsByIdUser(id: String): CountLessonsEntity
+    fun getCountLessonsByIdUser(id : String) : CountLessonsEntity
 
     @Insert
-    fun insertCountLessons(item: CountLessonsEntity)
+    fun insertCountLessons(item : CountLessonsEntity)
 
     @Delete
-    fun deleteCountLessons(item: CountLessonsEntity)
+    fun deleteCountLessons(item : CountLessonsEntity)
 
     @Update
-    fun updateCountLessons(item: CountLessonsEntity)
+    fun updateCountLessons(item : CountLessonsEntity)
 
 }

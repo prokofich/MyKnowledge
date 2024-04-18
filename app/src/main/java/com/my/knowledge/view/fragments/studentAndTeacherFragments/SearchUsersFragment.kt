@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.addCallback
+import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import com.my.knowledge.databinding.FragmentSearchUsersBinding
@@ -47,16 +48,12 @@ class SearchUsersFragment : Fragment() {
         searchStudentsAdapter = SearchUsersStudentsAdapter()
         searchTeachersAdapter = SearchUsersTeachersAdapter()
 
-        recyclerView?.adapter = searchTeachersAdapter
-
-        //getAllTeachers()
-
         // показ всех учителей
         binding?.idSearchButtonAllTeachers?.setOnClickListener {
             if(listAllTeachers.isNotEmpty() && listNamePredmetsAllTeachers.isNotEmpty() && listNamePredmetsAllTeachers.size == listAllTeachers.size){
                 setDataInTeachersAdapter()
             }else{
-               getAllTeachers()
+                 getAllTeachers()
             }
         }
 
@@ -70,6 +67,7 @@ class SearchUsersFragment : Fragment() {
         }
 
         searchUsersViewModel?.listStudents?.observe(viewLifecycleOwner){
+            showOrHideProgressBar(false)
             if(it.isNotEmpty()){
                 setDataInStudentsAdapter(it)
             }else{
@@ -79,23 +77,22 @@ class SearchUsersFragment : Fragment() {
 
         searchUsersViewModel?.listTeachers?.observe(viewLifecycleOwner){
             if(it.isNotEmpty()){
+                listAllTeachers = it
                 repository?.showToast("получены учителя",requireContext())
-                for (i in it){
-                    searchUsersViewModel?.getAllNamePredmetsByIdTeacher(i.userId)
+                for (teacher in it){
+                    searchUsersViewModel?.getAllNamePredmetsByIdTeacher(teacher.userId)
                 }
             }else{
+                showOrHideProgressBar(false)
                 repository?.showToast("ошибка" , requireContext())
             }
         }
 
         searchUsersViewModel?.listNamePredmets?.observe(viewLifecycleOwner){
-            repository?.showToast(it.toString(),requireContext())
-            if(it.isNotEmpty()){
-                listNamePredmetsAllTeachers.add(it)
-                if(listNamePredmetsAllTeachers.size == listAllTeachers.size){
-                    setDataInTeachersAdapter()
-                    repository?.showToast("отправлено в адаптер",requireContext())
-                }
+            listNamePredmetsAllTeachers.add(it)
+            if(listNamePredmetsAllTeachers.size == listAllTeachers.size){
+                setDataInTeachersAdapter()
+                showOrHideProgressBar(false)
             }
         }
 
@@ -115,6 +112,7 @@ class SearchUsersFragment : Fragment() {
     // функция получения всех учеников
     private fun getAllStudents(){
         if(repository?.checkNetworkState() == true){
+            showOrHideProgressBar(true)
             searchUsersViewModel?.getAllStudentsInFirestore()
         }else{
             repository?.showToast("проверьте соединение с интернетом" , requireContext())
@@ -124,6 +122,7 @@ class SearchUsersFragment : Fragment() {
     // функция получения всех учителей
     private fun getAllTeachers(){
         if(repository?.checkNetworkState() == true){
+            showOrHideProgressBar(true)
             searchUsersViewModel?.getAllTeachersInFirestore()
         }else{
             repository?.showToast("проверьте соединение с интернетом" , requireContext())
@@ -132,7 +131,6 @@ class SearchUsersFragment : Fragment() {
 
     // функция отправки всех данных в адаптер
     private fun setDataInTeachersAdapter(){
-        repository?.showToast("все данные получены",requireContext())
         recyclerView?.adapter = searchTeachersAdapter
         searchTeachersAdapter?.setListTeachers(listAllTeachers)
         searchTeachersAdapter?.setListPredmets(listNamePredmetsAllTeachers)
@@ -142,6 +140,11 @@ class SearchUsersFragment : Fragment() {
     private fun setDataInStudentsAdapter(list : MutableList<ModelStudent>){
         recyclerView?.adapter = searchStudentsAdapter
         searchStudentsAdapter?.setListStudents(list)
+    }
+
+    // функция показа или сокрытия прогресса
+    private fun showOrHideProgressBar(flag : Boolean){
+        binding?.idSearchPb?.isVisible = flag
     }
 
 }

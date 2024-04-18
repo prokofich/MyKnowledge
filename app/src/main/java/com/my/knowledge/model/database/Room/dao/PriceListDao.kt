@@ -10,16 +10,16 @@ import com.my.knowledge.model.database.Room.entity.PriceListEntity
 @Dao
 interface PriceListDao {
 
-    @Query("SELECT * FROM PriceListEntity WHERE idUser = :userId")
-    fun getAllPriceList(userId:String):List<PriceListEntity>
+    @Query("SELECT * FROM PriceListEntity WHERE id_user = :userId")
+    fun getAllPriceList(userId : String) : List <PriceListEntity>
 
     @Delete
-    fun deletePrice(item: PriceListEntity)
+    fun deletePrice(item : PriceListEntity)
 
     @Update
-    fun updatePrice(item: PriceListEntity)
+    fun updatePrice(item : PriceListEntity)
 
     @Insert
-    fun insertPrice(item: PriceListEntity) : Long
+    fun insertPrice(item : PriceListEntity) : Long
 
 }

@@ -35,10 +35,8 @@ class PriceListViewModel(application: Application):AndroidViewModel(application)
             val answer = databaseRoom?.databasePriceListDao()?.insertPrice(item)
             withContext(Dispatchers.Main){
                 answer?.let {
-                    item.id = answer
-                    synchronized(lock){
-                        isSuccessfulInsertInRoom.value = item
-                    }
+                    item.id = it
+                    synchronized(lock){ isSuccessfulInsertInRoom.value = item }
                 }
             }
 
@@ -60,9 +58,7 @@ class PriceListViewModel(application: Application):AndroidViewModel(application)
             userId?.let {
                 val answer = firestoreRepository.setDataInPriceListInFirestore(item , it)
                 withContext(Dispatchers.Main){
-                    synchronized(lock){
-                        isSuccessfulInsertInFirestore.value = answer
-                    }
+                    synchronized(lock){ isSuccessfulInsertInFirestore.value = answer }
                 }
             }
 
@@ -76,9 +72,7 @@ class PriceListViewModel(application: Application):AndroidViewModel(application)
             userId?.let {
                 val answer = firestoreRepository.updateDataInPriceListInFirestore(item , it)
                 withContext(Dispatchers.Main){
-                    synchronized(lock){
-                        isSuccessfulUpdateInFirestore.value = answer
-                    }
+                    synchronized(lock){ isSuccessfulUpdateInFirestore.value = answer }
                 }
             }
 
@@ -100,9 +94,7 @@ class PriceListViewModel(application: Application):AndroidViewModel(application)
             userId?.let {
                 val answer = firestoreRepository.deleteDataInPriceListInFirestore(item , it)
                 withContext(Dispatchers.Main){
-                    synchronized(lock){
-                        isSuccessfulDeleteInFirestore.value = answer
-                    }
+                    synchronized(lock){ isSuccessfulDeleteInFirestore.value = answer }
                 }
             }
 
@@ -117,9 +109,7 @@ class PriceListViewModel(application: Application):AndroidViewModel(application)
                 databaseRoom = RoomRepository(getApplication()).database
                 val answer = databaseRoom?.databasePriceListDao()?.getAllPriceList(it)
                 withContext(Dispatchers.Main){
-                    synchronized(lock){
-                        priceList.value = answer
-                    }
+                    synchronized(lock){ priceList.value = answer }
                 }
             }
 

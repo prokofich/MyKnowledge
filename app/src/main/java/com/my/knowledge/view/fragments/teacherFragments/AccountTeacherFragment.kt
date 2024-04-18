@@ -13,7 +13,9 @@ import android.view.ViewGroup
 import androidx.activity.addCallback
 import androidx.lifecycle.ViewModelProvider
 import coil.load
+import com.my.knowledge.R
 import com.my.knowledge.databinding.FragmentAccountTeacherBinding
+import com.my.knowledge.model.constant.MAIN
 import com.my.knowledge.model.constant.UserType
 import com.my.knowledge.model.database.Room.entity.MyAccountEntity
 import com.my.knowledge.model.database.sharedpreferences.SharedPreferences
@@ -189,6 +191,11 @@ class AccountTeacherFragment : Fragment() {
         // выход из приложения
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner){
             repository?.exitTheApplication()
+        }
+
+        // переход к настройкам
+        binding?.idAccountButtonSettings?.setOnClickListener {
+            MAIN?.navController?.navigate(R.id.action_accountTeacherFragment_to_settingsFragment)
         }
 
     }

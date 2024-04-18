@@ -2,13 +2,13 @@ package com.my.knowledge.model.database.firebase
 
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
 import com.google.firebase.storage.FirebaseStorage
 import com.my.knowledge.model.constant.OperationStatus
 import com.my.knowledge.model.constant.Teachers
 import com.my.knowledge.model.constant.Teachers_and_Students
+import com.my.knowledge.model.modelData.ModelTeacher
 import java.io.ByteArrayOutputStream
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
@@ -108,6 +108,31 @@ class FirestoreProfileManager {
         firestore.collection(Teachers_and_Students).document(userId).update(data)
         firestore.collection(Teachers).document(userId).update(data)
 
+    }
+
+    // функция получения данных из профиля выбранного учителя
+    suspend fun getDataFromProfileTeacherById(idTeacher : String) : ModelTeacher {
+        return suspendCoroutine { continuation ->
+
+            val modelTeacher = ModelTeacher()
+
+            firestore.collection(Teachers).document(idTeacher).get()
+                .addOnSuccessListener {
+                    modelTeacher.firstName = it.getString("first_name").toString()
+                    modelTeacher.lastName = it.getString("last_name").toString()
+                    modelTeacher.status = it.getString("status").toString()
+                    modelTeacher.userId = it.getString("id_user").toString()
+                    modelTeacher.myDescription = it.getString("description").toString()
+                    modelTeacher.experience = it.getString("experience").toString()
+                    modelTeacher.education = it.getString("education").toString()
+                    modelTeacher.urlPhoto = it.getString("url_photo").toString()
+                    continuation.resume(modelTeacher)
+                }
+                .addOnFailureListener {
+                    continuation.resume(modelTeacher)
+                }
+
+        }
     }
 
 

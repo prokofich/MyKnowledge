@@ -17,11 +17,11 @@ import com.my.knowledge.model.network.NetworkBroadcastReceiver
 
 class MainActivity : AppCompatActivity(),InterfaceNetworkBroadcastReceiver {
 
-    var navController:NavController? = null
-    private var stateNetwork:Boolean? = null
-    private var alertDialog:AlertDialog? = null
-    private var networkBroadcast: NetworkBroadcastReceiver? = null
-    private var binding:ActivityMainBinding? = null
+    var navController : NavController? = null
+    private var stateNetwork : Boolean? = null
+    private var alertDialog : AlertDialog? = null
+    private var networkBroadcast : NetworkBroadcastReceiver? = null
+    private var binding : ActivityMainBinding? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

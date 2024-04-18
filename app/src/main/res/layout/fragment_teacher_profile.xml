@@ -81,8 +81,22 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@id/id_profile_teacher_iv_photo"/>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:text="добавить в друзья"
+            app:layout_constraintHeight_percent="0.2"
+            android:layout_marginTop="10dp"
+            android:textSize="13sp"
+            style="@style/LoginButtonMenuStyle"
+            app:layout_constraintWidth_percent="0.4"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@id/id_profile_teacher_tv_first_name"
+            app:layout_constraintStart_toStartOf="@id/id_profile_teacher_tv_last_name"
+            app:layout_constraintEnd_toEndOf="@id/id_profile_teacher_tv_last_name"/>
 
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <ScrollView
         android:layout_width="match_parent"

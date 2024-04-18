@@ -12,33 +12,21 @@ class SharedPreferences(context: Context) {
     private var sharedPreferences:SharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
 
     // функция получения url адреса аватарки
-    fun getUrlPhotoFromProfile() : String {
-        return sharedPreferences.getString(URL_PHOTO_FROM_PROFILE,"").toString()
-    }
+    fun getUrlPhotoFromProfile() : String  = sharedPreferences.getString(URL_PHOTO_FROM_PROFILE,"").toString()
 
     // функция установки url адреса для аватарки
-    fun setUrlPhotoFromProfile(url:String) {
-        sharedPreferences.edit().putString(URL_PHOTO_FROM_PROFILE,url).apply()
-    }
+    fun setUrlPhotoFromProfile(url : String) = sharedPreferences.edit().putString(URL_PHOTO_FROM_PROFILE,url).apply()
 
     // функция сохранения ID пользователя
-    fun saveUserId(userId:String){
-        sharedPreferences.edit().putString(USER_ID,userId).apply()
-    }
+    fun saveUserId(userId : String) = sharedPreferences.edit().putString(USER_ID,userId).apply()
 
     // функция получения ID пользователя
-    fun getUserId():String{
-        return sharedPreferences.getString(USER_ID,"").toString()
-    }
+    fun getUserId() : String = sharedPreferences.getString(USER_ID,"").toString()
 
     // функция проверки типа пользователя при последней сессии
-    fun getTypeUserInLastSession():String{
-        return sharedPreferences.getString(USER_TYPE,"").toString()
-    }
+    fun getTypeUserInLastSession() : String = sharedPreferences.getString(USER_TYPE,"").toString()
 
     // функция установки типа пользователя в последней сессии
-    fun setTypeUserInLastSession(userType:String){
-        sharedPreferences.edit().putString(USER_TYPE,userType).apply()
-    }
+    fun setTypeUserInLastSession(userType : String) = sharedPreferences.edit().putString(USER_TYPE,userType).apply()
 
 }

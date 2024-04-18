@@ -9,14 +9,10 @@ import com.my.knowledge.model.constant.alfavit
 class Repository{
 
     //функция проверки интернет соединения
-    fun checkNetworkState():Boolean? {
-        return MAIN?.getStateNetwork()
-    }
+    fun checkNetworkState():Boolean? = MAIN?.getStateNetwork()
 
     // функция выхода из приложения
-    fun exitTheApplication(){
-        MAIN?.exitApplication()
-    }
+    fun exitTheApplication() = MAIN?.exitApplication()
 
     // функция проверки правильности введенных данных
     fun checkInputPriceData(name:String,price:String,desc:String):String{
@@ -51,9 +47,7 @@ class Repository{
     }
 
     // функция показа всплывающего сообщения
-    fun showToast(message:String?,context:Context){
-        Toast.makeText(context,message,Toast.LENGTH_SHORT).show()
-    }
+    fun showToast(message:String?,context:Context) = Toast.makeText(context,message,Toast.LENGTH_SHORT).show()
 
     // функция проверки правильности введенных данных
     fun checkInputData(email:String?,password:String?,firstName:String?,lastName:String?,status:String?,networkState:Boolean?):String{
