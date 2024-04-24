@@ -50,6 +50,16 @@ class MainActivity : AppCompatActivity(),InterfaceNetworkBroadcastReceiver {
             true
         }
 
+        binding?.bottomNavigationStudent?.setOnNavigationItemSelectedListener{
+            when(it.itemId){
+                R.id.id_bottom_menu_student_profile    -> navController?.navigate(R.id.accountStudentFragment)
+                R.id.id_bottom_menu_student_search     -> navController?.navigate(R.id.searchUsersFragment)
+                R.id.id_bottom_menu_student_table      -> navController?.navigate(R.id.daysWeekFragment)
+                R.id.id_bottom_menu_teacher_price_list -> navController?.navigate(R.id.priceListFragment)
+            }
+            true
+        }
+
     }
 
     // функция показа диалога о выходе из приложения

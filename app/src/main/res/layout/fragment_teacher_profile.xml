@@ -303,6 +303,7 @@
 
             <androidx.recyclerview.widget.RecyclerView
                 android:layout_width="match_parent"
+                android:id="@+id/id_profile_teacher_rv_price_list"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toBottomOf="@id/id_profile_teacher_tv_title_4"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"

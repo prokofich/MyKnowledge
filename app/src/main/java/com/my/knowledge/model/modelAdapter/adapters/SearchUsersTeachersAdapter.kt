@@ -33,7 +33,7 @@ class SearchUsersTeachersAdapter() : RecyclerView.Adapter<SearchUsersTeachersAda
 
         textViewFirstName.text = listTeachers[position].firstName
         textViewLastName.text  = listTeachers[position].lastName
-        textViewPredmets.text  = listPredmets[position].joinToString { " + " }
+        textViewPredmets.text  = listPredmets[position].joinToString(" + ")
 
     }
 

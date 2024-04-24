@@ -177,6 +177,22 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/id_account_tv_my_desc"/>
 
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:text="настройки"
+            android:textStyle="bold"
+            android:id="@+id/id_account_button_settings"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/white"
+            style="@style/LoginButtonMenuStyle"
+            app:layout_constraintWidth_percent="0.3"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginBottom="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/id_account_tv_redact_desc"/>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     </ScrollView>

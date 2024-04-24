@@ -6,8 +6,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.RecyclerView
 import com.my.knowledge.databinding.FragmentTeacherProfileBinding
 import com.my.knowledge.model.constant.SELECTED_TEACHER
+import com.my.knowledge.model.modelAdapter.adapters.PriceListAdapter
+import com.my.knowledge.model.modelAdapter.adapters.PriceListInProfileAdapter
 import com.my.knowledge.model.modelData.ModelTeacher
 import com.my.knowledge.viewmodel.studentsviewmodel.TeacherProfileViewModel
 
@@ -15,6 +18,8 @@ class TeacherProfileFragment : Fragment() {
 
     private var binding : FragmentTeacherProfileBinding? = null
     private var teacherProfileViewModel : TeacherProfileViewModel? = null
+    private var recyclerView: RecyclerView? = null
+    private var priceListInProfileAdapter: PriceListInProfileAdapter? = null
     private var idTeacher = ""
 
     override fun onCreateView(
@@ -32,12 +37,24 @@ class TeacherProfileFragment : Fragment() {
 
         teacherProfileViewModel = ViewModelProvider(this)[TeacherProfileViewModel::class.java]
 
-        teacherProfileViewModel?.getDataFromProfileTeacherById(idTeacher)
+        // подключение адаптера для списка
+        recyclerView = binding?.idProfileTeacherRvPriceList
+        priceListInProfileAdapter = PriceListInProfileAdapter()
+        recyclerView?.adapter = priceListInProfileAdapter
+
+        teacherProfileViewModel?.getDataFromProfileTeacherById(idTeacher) // запрос получение данных из профиля
+        teacherProfileViewModel?.getPriceListByIdTeacherInFirestore(idTeacher) // запрос получения прайс-листа
 
         // показ основной информации из профиля учителя
         teacherProfileViewModel?.teacher?.observe(viewLifecycleOwner){
             if(teacherProfileViewModel?.checkEmptyModelTeacher(it) == true){
                 showInfoTeacher(it)
+            }
+        }
+
+        teacherProfileViewModel?.priceList?.observe(viewLifecycleOwner){
+            if(it.isNotEmpty()){
+                priceListInProfileAdapter?.setList(it)
             }
         }
 

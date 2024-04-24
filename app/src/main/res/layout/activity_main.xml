@@ -18,7 +18,23 @@
         app:itemBackground="@drawable/selector_bottom_navigation_view"
         android:background="#163919"
         app:itemIconTint="@color/white"
-        app:itemIconSize="33sp"
+        app:itemIconSize="30sp"
+        app:itemTextColor="@color/white"
+        android:layout_height="80dp"/>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:layout_width="match_parent"
+        android:id="@+id/bottom_navigation_student"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:menu="@menu/menu_student"
+        android:visibility="gone"
+        style="@style/Widget.MaterialComponents.BottomNavigationView.Colored"
+        app:itemBackground="@drawable/selector_bottom_navigation_view"
+        android:background="#163919"
+        app:itemIconTint="@color/white"
+        app:itemIconSize="30sp"
         app:itemTextColor="@color/white"
         android:layout_height="80dp"/>
 

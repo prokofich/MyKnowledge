@@ -13,12 +13,6 @@
         <action
             android:id="@+id/action_loginFragment_to_registrationFragment"
             app:destination="@id/registrationFragment" />
-        <action
-            android:id="@+id/action_loginFragment_to_teacherMenuFragment"
-            app:destination="@id/teacherMenuFragment" />
-        <action
-            android:id="@+id/action_loginFragment_to_studentMenuFragment"
-            app:destination="@id/studentMenuFragment" />
     </fragment>
     <fragment
         android:id="@+id/registrationFragment"
@@ -28,30 +22,6 @@
         <action
             android:id="@+id/action_registrationFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
-        <action
-            android:id="@+id/action_registrationFragment_to_teacherMenuFragment"
-            app:destination="@id/teacherMenuFragment" />
-        <action
-            android:id="@+id/action_registrationFragment_to_studentMenuFragment"
-            app:destination="@id/studentMenuFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/teacherMenuFragment"
-        android:name="com.my.knowledge.view.fragments.teacherFragments.TeacherMenuFragment"
-        android:label="fragment_teacher_menu"
-        tools:layout="@layout/fragment_teacher_menu" >
-        <action
-            android:id="@+id/action_teacherMenuFragment_to_accountTeacherFragment"
-            app:destination="@id/accountTeacherFragment" />
-        <action
-            android:id="@+id/action_teacherMenuFragment_to_priceListFragment"
-            app:destination="@id/priceListFragment" />
-        <action
-            android:id="@+id/action_teacherMenuFragment_to_searchUsersFragment"
-            app:destination="@id/searchUsersFragment" />
-        <action
-            android:id="@+id/action_teacherMenuFragment_to_daysWeekFragment"
-            app:destination="@id/daysWeekFragment" />
     </fragment>
     <fragment
         android:id="@+id/accountTeacherFragment"
@@ -59,17 +29,9 @@
         android:label="fragment_account_teacher"
         tools:layout="@layout/fragment_account_teacher" >
         <action
-            android:id="@+id/action_accountTeacherFragment_to_teacherMenuFragment"
-            app:destination="@id/teacherMenuFragment" />
-        <action
             android:id="@+id/action_accountTeacherFragment_to_settingsFragment"
             app:destination="@id/settingsFragment" />
     </fragment>
-    <fragment
-        android:id="@+id/studentMenuFragment"
-        android:name="com.my.knowledge.view.fragments.studentFragments.StudentMenuFragment"
-        android:label="fragment_student_menu"
-        tools:layout="@layout/fragment_student_menu" />
     <fragment
         android:id="@+id/splashFragment"
         android:name="com.my.knowledge.view.fragments.studentAndTeacherFragments.SplashFragment"
@@ -81,39 +43,22 @@
         <action
             android:id="@+id/action_splashFragment_to_registrationFragment"
             app:destination="@id/registrationFragment" />
-        <action
-            android:id="@+id/action_splashFragment_to_studentMenuFragment"
-            app:destination="@id/studentMenuFragment" />
-        <action
-            android:id="@+id/action_splashFragment_to_teacherMenuFragment"
-            app:destination="@id/teacherMenuFragment" />
     </fragment>
     <fragment
         android:id="@+id/priceListFragment"
         android:name="com.my.knowledge.view.fragments.teacherFragments.PriceListFragment"
         android:label="fragment_price_list"
-        tools:layout="@layout/fragment_price_list" >
-        <action
-            android:id="@+id/action_priceListFragment_to_teacherMenuFragment"
-            app:destination="@id/teacherMenuFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_price_list" />
     <fragment
         android:id="@+id/searchUsersFragment"
         android:name="com.my.knowledge.view.fragments.studentAndTeacherFragments.SearchUsersFragment"
         android:label="fragment_search_users"
-        tools:layout="@layout/fragment_search_users" >
-        <action
-            android:id="@+id/action_searchUsersFragment_to_teacherMenuFragment"
-            app:destination="@id/teacherMenuFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_search_users" />
     <fragment
         android:id="@+id/daysWeekFragment"
         android:name="com.my.knowledge.view.fragments.studentAndTeacherFragments.DaysWeekFragment"
         android:label="fragment_days_week"
         tools:layout="@layout/fragment_days_week" >
-        <action
-            android:id="@+id/action_daysWeekFragment_to_teacherMenuFragment"
-            app:destination="@id/teacherMenuFragment" />
         <action
             android:id="@+id/action_daysWeekFragment_to_tableFragment"
             app:destination="@id/tableFragment" />
@@ -135,5 +80,22 @@
         <action
             android:id="@+id/action_settingsFragment_to_accountTeacherFragment"
             app:destination="@id/accountTeacherFragment" />
+        <action
+            android:id="@+id/action_settingsFragment_to_accountStudentFragment"
+            app:destination="@id/accountStudentFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/accountStudentFragment"
+        android:name="com.my.knowledge.view.fragments.studentFragments.AccountStudentFragment"
+        android:label="fragment_account_student"
+        tools:layout="@layout/fragment_account_student" >
+        <action
+            android:id="@+id/action_accountStudentFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/chatMessageFragment"
+        android:name="com.my.knowledge.view.fragments.studentAndTeacherFragments.ChatMessageFragment"
+        android:label="fragment_chat_message"
+        tools:layout="@layout/fragment_chat_message" />
 </navigation>

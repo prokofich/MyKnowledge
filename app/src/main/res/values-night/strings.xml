@@ -6,4 +6,10 @@
     <string name="title_text_account_teacher_4">нажмите ИЗМЕНИТЬ,чтобы отредактировать текст</string>
     <string name="title_text_account_teacher_6">Опыт работы:</string>
     <string name="title_text_account_teacher_7">Моё образование:</string>
+    <string name="profile">профиль</string>
+    <string name="search">поиск</string>
+    <string name="table">расписание</string>
+    <string name="priceList">прайс-лист</string>
+    <string name="friends">друзья</string>
+    <string name="chat">сообщения</string>
 </resources>

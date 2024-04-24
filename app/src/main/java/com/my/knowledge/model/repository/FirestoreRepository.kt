@@ -10,6 +10,7 @@ import com.my.knowledge.model.database.firebase.FirestoreProfileManager
 import com.my.knowledge.model.database.firebase.FirestoreRegistrationManager
 import com.my.knowledge.model.database.firebase.FirestoreSearchManager
 import com.my.knowledge.model.database.firebase.FirestoreTableManager
+import com.my.knowledge.model.modelData.ModelPriceList
 import com.my.knowledge.model.modelData.ModelResponseLogin
 import com.my.knowledge.model.modelData.ModelStudent
 import com.my.knowledge.model.modelData.ModelTeacher
@@ -59,6 +60,11 @@ class FirestoreRepository {
     // асинхронная функция удаления данных их прайс-листа в Firestore
     suspend fun deleteDataInPriceListInFirestore(item : PriceListEntity, userId : String) : Boolean {
         return FirestorePriceListManager().delete(item, userId)
+    }
+
+    // асинхронная функция получения данных из прайс-листа выбранного учителя в Firestore
+    suspend fun getPriceListByIdTeacherInFirestore(idTeacher : String) : MutableList<ModelPriceList> {
+        return FirestorePriceListManager().get(idTeacher)
     }
 
     // асинхронная функция отправки данных из профиля учителя
